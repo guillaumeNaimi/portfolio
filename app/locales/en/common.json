@@ -1,0 +1,45 @@
+{
+  "languages": {
+    "label": "Language",
+    "values": {
+      "en": "English",
+      "fr": "French"
+    }
+  },
+  "themes": {
+    "label": "Theme",
+    "values": {
+      "system": "System (auto)",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "actions": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "hero": {
+    "title": "Hello, I am Guillaume Naimi",
+    "subtitle": "My name is Guillaume NAIMI, a front-end developer specializing in React, TypeScript, and Next.js. I enjoy creating powerful, clean, and user-centric interfaces. I'm curious, rigorous, and always looking for best practices and challenging projects.",
+    "viewCV": "See my CV",
+    "contact": "Contact Me"
+  },
+  "skills": {
+    "title": "Skills & Technologies"
+  },
+  "quickActions": {
+    "title": "Connect With Me",
+    "github": {
+      "title": "GitHub",
+      "description": "Check out my open source projects and contributions",
+      "button": "View Profile"
+    },
+    "linkedin": {
+      "title": "LinkedIn",
+      "description": "Connect with me professionally and see my experience",
+      "button": "Connect"
+    }
+  }
+}

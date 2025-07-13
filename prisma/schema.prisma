@@ -1,0 +1,195 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  user
+  admin
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  role        UserRole?
+  banned      Boolean?
+  banReason   String?
+  banExpires  DateTime?
+  onboardedAt DateTime?
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  impersonatedBy String?
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
+
+  @@map("verification")
+}
+
+
+
+// CV Models
+enum TechnologyCategory {
+  frontend
+  backend
+  devops
+  design
+  other
+}
+
+enum ExperienceType {
+  full_time
+  part_time
+  contract
+  freelance
+}
+
+model Technology {
+  id       String             @id @default(cuid())
+  name     String
+  icon     String?
+  color    String?
+  category TechnologyCategory
+  skills   Skill[]
+  experiences ExperienceTechnology[]
+  projects ProjectTechnology[]
+
+  @@map("technology")
+}
+
+model Skill {
+  id         String     @id @default(cuid())
+  level      Int        @default(0)
+  technology Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  technologyId String
+
+  @@unique([technologyId])
+  @@map("skill")
+}
+
+model Experience {
+  id            String         @id @default(cuid())
+  company       String
+  position      String
+  startDate     DateTime
+  endDate       DateTime?
+  description   String
+  achievements  String[]       // Array of strings
+  location      String?
+  type          ExperienceType
+  image         String?
+  primaryColor  String?
+  secondaryColor String?
+  technologies  ExperienceTechnology[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@map("experience")
+}
+
+model ExperienceTechnology {
+  experienceId String
+  technologyId String
+  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  @@id([experienceId, technologyId])
+  @@map("experience_technology")
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  institution String
+  degree      String
+  field       String
+  startDate   DateTime
+  endDate     DateTime?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("education")
+}
+
+model Project {
+  id          String           @id @default(cuid())
+  title       String
+  description String
+  image       String?
+  githubUrl   String?
+  liveUrl     String?
+  featured    Boolean          @default(false)
+  technologies ProjectTechnology[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@map("project")
+}
+
+model ProjectTechnology {
+  projectId   String
+  technologyId String
+  project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  technology  Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, technologyId])
+  @@map("project_technology")
+}
+

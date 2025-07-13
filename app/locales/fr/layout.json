@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "application": "Application",
+    "configuration": "Configuration",
+    "users": "Utilisateurs",
+    "account": "Compte",
+    "home": "Accueil",
+    "apiDocumentation": "Documentation API",
+    "openApp": "Ouvrir l'application",
+    "cv": "CV"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "title": "Interactive CV",
+  "subtitle": "Explore my professional journey through an interactive experience",
+  "tabs": {
+    "experience": "Experience",
+    "skills": "Skills",
+    "projects": "Projects",
+    "education": "Education"
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "subtitle": "Some of my recent work and personal projects",
+    "featured": "Featured",
+    "buttons": {
+      "code": "Code",
+      "live": "Live",
+      "viewCode": "View Code",
+      "viewLive": "View Live"
+    },
+    "modal": {
+      "technologiesUsed": "Technologies Used"
+    }
+  },
+  "education": {
+    "title": "Education",
+    "subtitle": "My academic background",
+    "badges": {
+      "academic": "Academic",
+      "professional": "Professional"
+    },
+    "present": "Present"
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "subtitle": "My journey through the tech industry",
+    "present": "Present",
+    "keyAchievements": "Key Achievements",
+    "technologies": "Technologies"
+  },
+  "skills": {
+    "title": "Skills & Expertise",
+    "subtitle": "My technical skills across different domains",
+    "categories": {
+      "frontend": "Frontend",
+      "design": "Design",
+      "devops": "DevOps",
+      "backend": "Backend",
+      "other": "Other"
+    }
+  }
+}

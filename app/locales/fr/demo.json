@@ -1,0 +1,17 @@
+{
+  "welcome": {
+    "title": "Bienvenue sur Guillaume Naimi Portfolio [web]",
+    "description": "Un starter frontend \"opinionné\", conçu et maintenu par l’équipe BearStudio et d’autres contributeurs. Il reflète la stack actuelle que notre équipe privilégie pour développer des applications web pour nos clients.",
+    "documentation": "Documentation",
+    "openIssue": "Ouvrir un ticket"
+  },
+  "appSwitch": {
+    "youAreHere": "Vous êtes ici",
+    "noAccess": "Accès refusé",
+    "app": {
+      "title": "App",
+      "description": "Une application simple, mobile-first",
+      "goTo": "Aller à /app"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "common": {
+    "email": {
+      "label": "Email",
+      "required": "Email is required",
+      "invalid": "Email is invalid"
+    },
+    "name": {
+      "onboardingLabel": "What is your name?",
+      "label": "Name",
+      "required": "Name is required",
+      "invalid": "Name is invalid",
+      "notAvailable": "N/A"
+    },
+    "onboardingStatus": {
+      "notOnboarded": "Not onboarded",
+      "onboardedAt": "Onboarded {{time}}"
+    }
+  }
+}

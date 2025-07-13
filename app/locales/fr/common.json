@@ -1,0 +1,45 @@
+{
+  "languages": {
+    "label": "Langue",
+    "values": {
+      "en": "Anglais",
+      "fr": "Français"
+    }
+  },
+  "themes": {
+    "label": "Thème",
+    "values": {
+      "system": "Système (auto)",
+      "light": "Clair",
+      "dark": "Sombre"
+    }
+  },
+  "actions": {
+    "back": "Retour",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier"
+  },
+  "hero": {
+    "title": "Bonjour,",
+    "subtitle": "Je m'apelle Guillaume NAIMI, Développeur front-end spécialisé en React, TypeScript et Next.js. J’aime créer des interfaces performantes, propres et centrées utilisateur. Curieux, rigoureux, toujours en quête de bonnes pratiques et de projets stimulants.",
+    "viewCV": "Voir mon CV",
+    "contact": "Me Contacter"
+  },
+  "skills": {
+    "title": "Compétences & Technologies"
+  },
+  "quickActions": {
+    "title": "Me Contacter",
+    "github": {
+      "title": "GitHub",
+      "description": "Découvrez mes projets open source et contributions",
+      "button": "Voir mon profil"
+    },
+    "linkedin": {
+      "title": "LinkedIn",
+      "description": "Connectez-vous avec moi professionnellement et découvrez mon expérience",
+      "button": "Se Connecter"
+    }
+  }
+}
