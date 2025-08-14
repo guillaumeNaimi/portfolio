@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => {
         projects: ['./tsconfig.json'],
       }),
       tanstackStart({
+        target: 'vercel',
         tsr: {
           srcDirectory: 'app',
           routesDirectory: 'app/routes',
