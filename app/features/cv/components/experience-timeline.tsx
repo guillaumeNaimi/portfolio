@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import { AlertCircleIcon, CalendarIcon, MapPinIcon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
@@ -17,6 +18,7 @@ import { IconComponent } from './technology-icon';
 export const ExperienceTimeline = () => {
   const { t } = useTranslation(['cv']);
   const experiencesQuery = useQuery(orpc.cv.getExperiences.queryOptions({}));
+  const { resolvedTheme } = useTheme();
 
   const ui = getUiState((set) => {
     if (experiencesQuery.status === 'pending') return set('pending');
@@ -78,7 +80,14 @@ export const ExperienceTimeline = () => {
                     <Card
                       className="transition-shadow hover:shadow-lg"
                       style={{
-                        color: experience.primaryColor,
+                        color:
+                          resolvedTheme === 'dark'
+                            ? 'white'
+                            : experience.primaryColor,
+                        backgroundColor:
+                          resolvedTheme === 'dark'
+                            ? experience.primaryColor
+                            : undefined,
                         boxShadow: `0 0 10px 0 ${experience.secondaryColor}`,
                       }}
                     >

@@ -2,6 +2,9 @@ import { Link, ValidateLinkOptions } from '@tanstack/react-router';
 import { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { LocalSwitcher } from '@/components/ui/local-switcher';
+import { ThemeSwitcher } from '@/components/ui/theme-switcher';
+
 import { MAIN_NAV_LINKS } from '@/layout/app/main-nav-config';
 
 const HEIGHT = 'calc(64px + env(safe-area-inset-bottom))';
@@ -24,6 +27,12 @@ export const MainNavMobile = () => {
             {t(labelTranslationKey)}
           </Item>
         ))}
+        <div className="flex flex-1 flex-col items-center justify-center">
+          <div className="flex items-center gap-1">
+            <LocalSwitcher iconOnly />
+            <ThemeSwitcher iconOnly />
+          </div>
+        </div>
       </nav>
     </div>
   );

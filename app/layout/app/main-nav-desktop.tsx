@@ -2,6 +2,9 @@ import { Link, ValidateLinkOptions } from '@tanstack/react-router';
 import { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { LocalSwitcher } from '@/components/ui/local-switcher';
+import { ThemeSwitcher } from '@/components/ui/theme-switcher';
+
 import { MAIN_NAV_LINKS } from '@/layout/app/main-nav-config';
 
 export const MainNavDesktop = () => {
@@ -26,6 +29,10 @@ export const MainNavDesktop = () => {
               </Item>
             ))}
           </nav>
+          <div className="flex items-center gap-1">
+            <LocalSwitcher iconOnly />
+            <ThemeSwitcher iconOnly />
+          </div>
         </div>
       </header>
     </div>
