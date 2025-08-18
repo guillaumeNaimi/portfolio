@@ -18,7 +18,6 @@ import { Route as AppLayoutRouteImport } from './routes/app/_layout'
 import { Route as AppLayoutIndexRouteImport } from './routes/app/_layout/index'
 import { Route as AppLayoutCvIndexRouteImport } from './routes/app/_layout/cv.index'
 import { ServerRoute as ApiRpcSplatServerRouteImport } from './routes/api/rpc.$'
-import { ServerRoute as ApiDevEmailTemplateServerRouteImport } from './routes/api/dev.email.$template'
 
 const rootServerRouteImport = createServerRootRoute()
 
@@ -55,12 +54,6 @@ const ApiRpcSplatServerRoute = ApiRpcSplatServerRouteImport.update({
   path: '/api/rpc/$',
   getParentRoute: () => rootServerRouteImport,
 } as any)
-const ApiDevEmailTemplateServerRoute =
-  ApiDevEmailTemplateServerRouteImport.update({
-    id: '/api/dev/email/$template',
-    path: '/api/dev/email/$template',
-    getParentRoute: () => rootServerRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,28 +96,24 @@ export interface RootRouteChildren {
 }
 export interface FileServerRoutesByFullPath {
   '/api/rpc/$': typeof ApiRpcSplatServerRoute
-  '/api/dev/email/$template': typeof ApiDevEmailTemplateServerRoute
 }
 export interface FileServerRoutesByTo {
   '/api/rpc/$': typeof ApiRpcSplatServerRoute
-  '/api/dev/email/$template': typeof ApiDevEmailTemplateServerRoute
 }
 export interface FileServerRoutesById {
   __root__: typeof rootServerRouteImport
   '/api/rpc/$': typeof ApiRpcSplatServerRoute
-  '/api/dev/email/$template': typeof ApiDevEmailTemplateServerRoute
 }
 export interface FileServerRouteTypes {
   fileServerRoutesByFullPath: FileServerRoutesByFullPath
-  fullPaths: '/api/rpc/$' | '/api/dev/email/$template'
+  fullPaths: '/api/rpc/$'
   fileServerRoutesByTo: FileServerRoutesByTo
-  to: '/api/rpc/$' | '/api/dev/email/$template'
-  id: '__root__' | '/api/rpc/$' | '/api/dev/email/$template'
+  to: '/api/rpc/$'
+  id: '__root__' | '/api/rpc/$'
   fileServerRoutesById: FileServerRoutesById
 }
 export interface RootServerRouteChildren {
   ApiRpcSplatServerRoute: typeof ApiRpcSplatServerRoute
-  ApiDevEmailTemplateServerRoute: typeof ApiDevEmailTemplateServerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -182,13 +171,6 @@ declare module '@tanstack/react-start/server' {
       preLoaderRoute: typeof ApiRpcSplatServerRouteImport
       parentRoute: typeof rootServerRouteImport
     }
-    '/api/dev/email/$template': {
-      id: '/api/dev/email/$template'
-      path: '/api/dev/email/$template'
-      fullPath: '/api/dev/email/$template'
-      preLoaderRoute: typeof ApiDevEmailTemplateServerRouteImport
-      parentRoute: typeof rootServerRouteImport
-    }
   }
 }
 
@@ -227,7 +209,6 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 const rootServerRouteChildren: RootServerRouteChildren = {
   ApiRpcSplatServerRoute: ApiRpcSplatServerRoute,
-  ApiDevEmailTemplateServerRoute: ApiDevEmailTemplateServerRoute,
 }
 export const serverRouteTree = rootServerRouteImport
   ._addFileChildren(rootServerRouteChildren)
