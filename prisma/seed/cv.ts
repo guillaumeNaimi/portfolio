@@ -173,14 +173,29 @@ export async function createCV() {
   const experiences = [
     {
       company: 'Hipli',
-      position: 'Développeur Front-End',
+      position: 'Front-End Developer',
+      positionEn: 'Front-End Developer',
+      positionFr: 'Développeur Front-End',
       startDate: new Date('2022-07-01'),
       endDate: new Date('2025-07-01'),
-      description:
+      description: 'Development of two high-importance applications for Hipli.',
+      descriptionEn:
+        'Development of two high-importance applications for Hipli.',
+      descriptionFr:
         'Développement de deux applications de haute importance pour Hipli.',
       achievements: [
+        'Creation of two applications (b2c and b2b)',
+        'Lead of the front-end team',
+        'Close collaboration with the product teams to meet the needs of end users',
+      ],
+      achievementsEn: [
+        'Creation of two applications (b2c and b2b)',
+        'Lead of the front-end team',
+        'Close collaboration with the product teams to meet the needs of end users',
+      ],
+      achievementsFr: [
         'Création de deux applications (b2c et b2b)',
-        'Lead de la partie front-end',
+        "Lead de l'équipe front-end",
         'Collaboration étroite avec les équipes produit pour répondre aux besoins des utilisateurs finaux',
       ],
       technologies: getTechnologies([
@@ -191,6 +206,8 @@ export async function createCV() {
         'GraphQL',
       ]),
       location: 'Remote',
+      locationEn: 'Remote',
+      locationFr: 'À distance',
       type: 'full_time' as const,
       image: '/companies/hipli.png',
       primaryColor: '#083F4E',
@@ -198,11 +215,25 @@ export async function createCV() {
     },
     {
       company: 'Odigo',
-      position: 'Développeur Full Stack',
+      position: 'Full Stack Developer',
+      positionEn: 'Full Stack Developer',
+      positionFr: 'Développeur Full Stack',
       startDate: new Date('2021-07-01'),
       endDate: new Date('2022-07-01'),
-      description: "Développement d'applications pour les centres d'appels",
+      description: 'Development of applications for call centers',
+      descriptionEn: 'Development of applications for call centers',
+      descriptionFr: "Développement d'applications pour les centres d'appels",
       achievements: [
+        'Development of a web application to manage SVI and chatbots',
+        'Creation of web components integrated on client sites',
+        'Study and architecture of a new project',
+      ],
+      achievementsEn: [
+        'Development of a web application to manage SVI and chatbots',
+        'Creation of web components integrated on client sites',
+        'Study and architecture of a new project',
+      ],
+      achievementsFr: [
         "Développement d'une application web pour gérer les SVI et les chatbots",
         'Création de web components intégrés sur les sites clients',
         "Étude et architecture d'un nouveau projet",
@@ -222,12 +253,28 @@ export async function createCV() {
     },
     {
       company: 'Saagie',
-      position: 'Développeur Full Stack',
+      position: 'Full Stack Developer',
+      positionEn: 'Full Stack Developer',
+      positionFr: 'Développeur Full Stack',
       startDate: new Date('2018-09-01'),
       endDate: new Date('2021-07-01'),
       description:
+        'Development of a platform facilitating Big Data projects in enterprise.',
+      descriptionEn:
+        'Development of a platform facilitating Big Data projects in enterprise.',
+      descriptionFr:
         "Développement d'une plateforme facilitant les projets Big Data en entreprise.",
       achievements: [
+        'Implementation of GraphQL on front-end and back-end',
+        'Integration of a design system and development of interfaces based on mockups.',
+        'Use of Kubernetes for the deployment of applications.',
+      ],
+      achievementsEn: [
+        'Implementation of GraphQL on front-end and back-end',
+        'Integration of a design system and development of interfaces based on mockups.',
+        'Use of Kubernetes for the deployment of applications.',
+      ],
+      achievementsFr: [
         'Implémentation de GraphQL côté front-end et back-end',
         "Intégration d'un design system et développement d'interfaces basées sur des maquettes.",
         'Utilisation de Kubernetes pour le déploiement des applications.',
@@ -252,7 +299,6 @@ export async function createCV() {
 
   for (const exp of experiences) {
     const { technologies: techIds, ...expData } = exp;
-    console.log(techIds);
     const experience = await db.experience.create({ data: expData });
 
     // Create experience-technology relationships
@@ -275,28 +321,50 @@ export async function createCV() {
   const education = [
     {
       id: '1',
-      institution: 'Université de Rouen Faculté des sciences et techniques',
+      institution: 'University of Rouen Faculty of Sciences and Techniques',
+      institutionEn: 'University of Rouen Faculty of Sciences and Techniques',
+      institutionFr: 'Université de Rouen Faculté des sciences et techniques',
       degree: 'Master GIL',
       field: 'Full Stack Web Development',
+      fieldEn: 'Full Stack Web Development',
+      fieldFr: 'Développement Full Stack',
       startDate: new Date('2016-09-01'),
       endDate: new Date('2018-09-01'),
       description:
         'Focused on software engineering, algorithms, and web development.',
+      descriptionEn:
+        'Focused on software engineering, algorithms, and web development.',
+      descriptionFr:
+        "Focus sur l'ingénierie logicielle, les algorithmes et le développement web.",
     },
     {
       id: '2',
-      institution: 'Université de Rouen Faculté des sciences et techniques',
-      degree: 'Licence Informatique',
+      institution: 'University of Rouen Faculty of Sciences and Techniques',
+      institutionEn: 'University of Rouen Faculty of Sciences and Techniques',
+      institutionFr: 'Université de Rouen Faculté des sciences et techniques',
+      degree: 'Computer science degree',
+      degreeEn: 'Computer science degree',
+      degreeFr: 'Licence Informatique',
       field: 'Full Stack Web Development',
+      fieldEn: 'Full Stack Web Development',
+      fieldFr: 'Développement Full Stack',
       startDate: new Date('2013-09-01'),
       endDate: new Date('2016-06-01'),
       description:
         'Focused on software engineering, algorithms, and web development.',
+      descriptionEn:
+        'Focused on software engineering, algorithms, and web development.',
+      descriptionFr:
+        "Focus sur l'ingénierie logicielle, les algorithmes et le développement web.",
     },
     {
       id: '3',
-      institution: 'Lycée duhamel du Monceau Pithiviers, France',
-      degree: 'Baccalauréat Scientifique',
+      institution: 'High School Duhamel du Monceau Pithiviers, France',
+      institutionEn: 'High School Duhamel du Monceau Pithiviers, France',
+      institutionFr: 'Lycée duhamel du Monceau Pithiviers, France',
+      degree: 'Scientific Baccalaureate',
+      degreeEn: 'Scientific Baccalaureate',
+      degreeFr: 'Baccalauréat Scientifique',
       field: 'Sciences',
       startDate: new Date('2007-09-01'),
       endDate: new Date('2010-06-01'),
@@ -312,8 +380,14 @@ export async function createCV() {
   const projects = [
     {
       title: 'Hipli website for individuals',
+      titleEn: 'Hipli website for individuals',
+      titleFr: 'Site web Hipli pour les particuliers',
       description:
         'A website that provides parcel reuse services to individuals',
+      descriptionEn:
+        'A website that provides parcel reuse services to individuals',
+      descriptionFr:
+        'Un site web qui permet de réutiliser les colis pour les particuliers',
       image: '/companies/hipli.png',
       technologies: getTechnologies([
         'React',
@@ -326,7 +400,12 @@ export async function createCV() {
     },
     {
       title: 'Personal Portfolio',
+      titleEn: 'Personal Portfolio',
+      titleFr: 'Portfolio personnel',
       description: 'My personal portfolio with my projects and experiences.',
+      descriptionEn: 'My personal portfolio with my projects and experiences.',
+      descriptionFr:
+        'Mon portfolio personnel avec mes projets et mes expériences.',
       image: '/companies/me.jpg',
       technologies: getTechnologies([
         'React',
@@ -342,7 +421,11 @@ export async function createCV() {
     },
     {
       title: 'Dog Club Website',
+      titleEn: 'Dog Club Website',
+      titleFr: 'Site web du club canin',
       description: 'A showcase website for my dog club',
+      descriptionEn: 'A showcase website for my dog club',
+      descriptionFr: 'Un site web de présentation pour mon club canin',
       image: '/companies/club.avif',
       technologies: getTechnologies([
         'React',

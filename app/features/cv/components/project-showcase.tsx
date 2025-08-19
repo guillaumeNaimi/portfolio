@@ -21,10 +21,16 @@ import { IconComponent } from './technology-icon';
 import { Project } from '../schema';
 
 export const ProjectShowcase = () => {
-  const { t } = useTranslation(['cv']);
+  const { i18n, t } = useTranslation(['cv']);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const projectsQuery = useQuery(orpc.cv.getProjects.queryOptions({}));
+  const locale = i18n?.language ?? 'en';
+
+  const projectsQuery = useQuery(
+    orpc.cv.getProjects.queryOptions({
+      input: { locale: locale as 'en' | 'fr' },
+    })
+  );
 
   const ui = getUiState((set) => {
     if (projectsQuery.status === 'pending') return set('pending');

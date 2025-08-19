@@ -10,81 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserRole {
-  user
-  admin
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String
-  email         String
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-
-  role        UserRole?
-  banned      Boolean?
-  banReason   String?
-  banExpires  DateTime?
-  onboardedAt DateTime?
-
-  @@unique([email])
-  @@map("user")
-}
-
-model Session {
-  id        String   @id @default(cuid())
-  expiresAt DateTime
-  token     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  impersonatedBy String?
-
-  @@unique([token])
-  @@map("session")
-}
-
-model Account {
-  id                    String    @id @default(cuid())
-  accountId             String
-  providerId            String
-  userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
-
-  @@map("account")
-}
-
-model Verification {
-  id         String    @id @default(cuid())
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime? @default(now())
-  updatedAt  DateTime? @updatedAt
-
-  @@map("verification")
-}
-
-
-
 // CV Models
 enum TechnologyCategory {
   frontend
@@ -128,11 +53,19 @@ model Experience {
   id            String         @id @default(cuid())
   company       String
   position      String
+  positionEn    String?
+  positionFr    String?
   startDate     DateTime
   endDate       DateTime?
   description   String
+  descriptionEn String?
+  descriptionFr String?
   achievements  String[]       // Array of strings
+  achievementsEn String[]      // Array of strings in English
+  achievementsFr String[]      // Array of strings in French
   location      String?
+  locationEn    String?
+  locationFr    String?
   type          ExperienceType
   image         String?
   primaryColor  String?
@@ -157,11 +90,19 @@ model ExperienceTechnology {
 model Education {
   id          String   @id @default(cuid())
   institution String
+  institutionEn String?
+  institutionFr String?
   degree      String
+  degreeEn    String?
+  degreeFr    String?
   field       String
+  fieldEn     String?
+  fieldFr     String?
   startDate   DateTime
   endDate     DateTime?
   description String?
+  descriptionEn String?
+  descriptionFr String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -171,7 +112,11 @@ model Education {
 model Project {
   id          String           @id @default(cuid())
   title       String
+  titleEn     String?
+  titleFr     String?
   description String
+  descriptionEn String?
+  descriptionFr String?
   image       String?
   githubUrl   String?
   liveUrl     String?
