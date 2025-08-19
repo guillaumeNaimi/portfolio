@@ -9,6 +9,28 @@ import {
 
 import { publicProcedure } from '../orpc';
 
+type dataType = string | string[] | undefined;
+
+// Helper function to get localized content
+function getLocalizedField<T extends Record<string, unknown>>(
+  data: T,
+  fieldName: string,
+  locale: 'en' | 'fr'
+): dataType {
+  const localizedField = `${fieldName}${locale === 'en' ? 'En' : 'Fr'}`;
+  const fallbackField = fieldName;
+
+  // Return the localized field if it exists and is not empty, otherwise fallback to the default field
+  const localizedValue = data[localizedField] as dataType;
+  const fallbackValue = data[fallbackField] as dataType;
+
+  if (Array.isArray(localizedValue)) {
+    return localizedValue.length > 0 ? localizedValue : fallbackValue;
+  }
+
+  return localizedValue || fallbackValue;
+}
+
 type TechnologyCategory =
   | 'frontend'
   | 'backend'
@@ -26,8 +48,18 @@ export default {
       path: '/experience',
       tags,
     })
+    .input(
+      z
+        .object({
+          locale: z.enum(['en', 'fr']),
+        })
+        .optional()
+        .default({ locale: 'en' })
+    )
     .output(z.array(zExperience()))
-    .handler(async ({ context }) => {
+    .handler(async ({ context, input }) => {
+      const { locale } = input;
+      context.logger.info(locale);
       context.logger.info('Getting experiences from database');
       const experiences = await context.db.experience.findMany({
         include: {
@@ -52,18 +84,28 @@ export default {
         return {
           id: experience.id,
           company: experience.company,
-          position: experience.position,
+          position: getLocalizedField(experience, 'position', locale) as string,
           startDate: experience.startDate.toISOString().split('T')[0] as string, // Convert to YYYY-MM-DD format
           endDate: experience.endDate?.toISOString().split('T')[0],
-          description: experience.description,
-          achievements: experience.achievements,
+          description: getLocalizedField(
+            experience,
+            'description',
+            locale
+          ) as string,
+          achievements: getLocalizedField(
+            experience,
+            'achievements',
+            locale
+          ) as string[],
           technologies: experience.technologies.map((et) => ({
             name: et.technology.name,
             icon: et.technology.icon || undefined,
             color: et.technology.color || undefined,
             category: et.technology.category as TechnologyCategory,
           })),
-          location: experience.location || undefined,
+          location:
+            (getLocalizedField(experience, 'location', locale) as string) ||
+            undefined,
           type: experience.type.replace('_', '-') as ExperienceType,
           image: experience.image || undefined,
           primaryColor: experience.primaryColor || undefined,
@@ -77,6 +119,14 @@ export default {
       path: '/skills',
       tags,
     })
+    .input(
+      z
+        .object({
+          locale: z.enum(['en', 'fr']),
+        })
+        .optional()
+        .default({ locale: 'en' })
+    )
     .output(z.array(zSkill()))
     .handler(async ({ context }) => {
       context.logger.info('Getting skills from database');
@@ -99,7 +149,6 @@ export default {
 
       return skills.map((skill) => {
         return {
-          id: skill.id,
           level: skill.level,
           technology: {
             name: skill.technology.name,
@@ -116,8 +165,17 @@ export default {
       path: '/projects',
       tags,
     })
+    .input(
+      z
+        .object({
+          locale: z.enum(['en', 'fr']),
+        })
+        .optional()
+        .default({ locale: 'en' })
+    )
     .output(z.array(zProject()))
-    .handler(async ({ context }) => {
+    .handler(async ({ context, input }) => {
+      const { locale } = input;
       context.logger.info('Getting projects from database');
       const projects = await context.db.project.findMany({
         include: {
@@ -146,8 +204,12 @@ export default {
       return projects.map((project) => {
         return {
           id: project.id,
-          title: project.title,
-          description: project.description,
+          title: getLocalizedField(project, 'title', locale) as string,
+          description: getLocalizedField(
+            project,
+            'description',
+            locale
+          ) as string,
           image: project.image || undefined,
           liveUrl: project.liveUrl || undefined,
           githubUrl: project.githubUrl || undefined,
@@ -167,8 +229,17 @@ export default {
       path: '/education',
       tags,
     })
+    .input(
+      z
+        .object({
+          locale: z.enum(['en', 'fr']),
+        })
+        .optional()
+        .default({ locale: 'en' })
+    )
     .output(z.array(zEducation()))
-    .handler(async ({ context }) => {
+    .handler(async ({ context, input }) => {
+      const { locale } = input;
       context.logger.info('Getting education from database');
       const education = await context.db.education.findMany({
         // Sort by start date (most recent first)
@@ -179,12 +250,14 @@ export default {
       return education.map((edu) => {
         return {
           id: edu.id,
-          institution: edu.institution,
-          degree: edu.degree,
-          field: edu.field,
+          institution: getLocalizedField(edu, 'institution', locale) as string,
+          degree: getLocalizedField(edu, 'degree', locale) as string,
+          field: getLocalizedField(edu, 'field', locale) as string,
           startDate: edu.startDate.toISOString().split('T')[0] as string,
           endDate: edu.endDate?.toISOString().split('T')[0],
-          description: edu.description || undefined,
+          description:
+            (getLocalizedField(edu, 'description', locale) as string) ||
+            undefined,
         };
       });
     }),

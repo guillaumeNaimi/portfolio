@@ -12,9 +12,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export const EducationSection = () => {
-  const { t } = useTranslation(['cv']);
+  const { i18n, t } = useTranslation(['cv']);
 
-  const educationQuery = useQuery(orpc.cv.getEducation.queryOptions({}));
+  const locale = i18n?.language ?? 'en';
+
+  const educationQuery = useQuery(
+    orpc.cv.getEducation.queryOptions({
+      input: { locale: locale as 'en' | 'fr' },
+    })
+  );
 
   const ui = getUiState((set) => {
     if (educationQuery.status === 'pending') return set('pending');

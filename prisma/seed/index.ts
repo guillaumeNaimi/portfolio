@@ -1,10 +1,8 @@
 import { db } from '@/server/db';
 
 import { createCV } from './cv';
-import { createUsers } from './user';
 
 async function main() {
-  await createUsers();
   await createCV();
 }
 

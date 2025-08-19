@@ -14,9 +14,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { IconComponent } from './technology-icon';
 
 export const SkillsRadar = () => {
-  const { t } = useTranslation(['cv']);
+  const { i18n, t } = useTranslation(['cv']);
 
-  const skillsQuery = useQuery(orpc.cv.getSkills.queryOptions({}));
+  const locale = i18n?.language ?? 'en';
+
+  const skillsQuery = useQuery(
+    orpc.cv.getSkills.queryOptions({ input: { locale: locale as 'en' | 'fr' } })
+  );
 
   const ui = getUiState((set) => {
     if (skillsQuery.status === 'pending') return set('pending');

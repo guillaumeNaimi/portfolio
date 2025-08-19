@@ -16,8 +16,15 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { IconComponent } from './technology-icon';
 
 export const ExperienceTimeline = () => {
-  const { t } = useTranslation(['cv']);
-  const experiencesQuery = useQuery(orpc.cv.getExperiences.queryOptions({}));
+  const { i18n, t } = useTranslation(['cv']);
+
+  const locale = i18n?.language ?? 'en';
+
+  const experiencesQuery = useQuery(
+    orpc.cv.getExperiences.queryOptions({
+      input: { locale: locale as 'en' | 'fr' },
+    })
+  );
   const { resolvedTheme } = useTheme();
 
   const ui = getUiState((set) => {
