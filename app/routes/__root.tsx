@@ -7,6 +7,7 @@ import {
   Scripts,
 } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -117,6 +118,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <body className="flex min-h-dvh flex-col">
         {children}
         <EnvHint />
+        <SpeedInsights />
         <Scripts />
       </body>
     </html>
