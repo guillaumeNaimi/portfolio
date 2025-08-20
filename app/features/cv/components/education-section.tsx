@@ -79,9 +79,9 @@ export const EducationSection = () => {
 
                     <CardContent className="space-y-4">
                       <div>
-                        <h4 className="font-semibold text-primary">
+                        <h3 className="font-semibold text-primary">
                           {edu.field}
-                        </h4>
+                        </h3>
                         {edu.description && (
                           <p className="mt-1 text-sm text-muted-foreground">
                             {edu.description}

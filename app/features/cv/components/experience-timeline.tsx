@@ -73,6 +73,7 @@ export const ExperienceTimeline = () => {
                     <Avatar className="size-16 border bg-white">
                       <AvatarImage
                         src={experience.image}
+                        alt={experience.company}
                         className="object-contain"
                       />
                       <AvatarFallback
@@ -119,7 +120,6 @@ export const ExperienceTimeline = () => {
                               )}
                             </div>
                           </div>
-                          <Badge variant="secondary">{experience.type}</Badge>
                         </div>
 
                         <div className="mt-2 flex items-center gap-2 text-sm">
@@ -137,9 +137,9 @@ export const ExperienceTimeline = () => {
 
                         <div className="space-y-4">
                           <div>
-                            <h4 className="mb-2 font-semibold">
+                            <h3 className="mb-2 font-semibold">
                               {t('cv:experience.keyAchievements')}
-                            </h4>
+                            </h3>
                             <ul className="space-y-1">
                               {experience.achievements.map((achievement) => (
                                 <li
@@ -154,9 +154,9 @@ export const ExperienceTimeline = () => {
                           </div>
 
                           <div>
-                            <h4 className="mb-2 font-semibold">
+                            <h3 className="mb-2 font-semibold">
                               {t('cv:experience.technologies')}
-                            </h4>
+                            </h3>
                             <div className="flex flex-wrap gap-2">
                               {experience.technologies.map((tech) => {
                                 return (
