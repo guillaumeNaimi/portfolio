@@ -21,98 +21,119 @@ export const PageCV = () => {
   return (
     <PageLayout>
       <PageLayoutContent>
-        <div className="mx-auto w-full max-w-6xl p-6">
+        <main id="main-content" className="mx-auto w-full max-w-6xl p-6">
           {/* Hero Section */}
-          <motion.div
+          <motion.header
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-8 text-center"
           >
             <h1 className="mb-4 text-4xl font-bold">{t('cv:title')}</h1>
             <p className="text-lg text-muted-foreground">{t('cv:subtitle')}</p>
-          </motion.div>
+          </motion.header>
 
           {/* Main Content */}
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full"
-          >
-            <TabsList className={`mb-8 grid w-full grid-cols-4`}>
-              <TabsTrigger
-                value="experience"
-                className={isMobile ? 'text-xs' : ''}
-              >
-                {t('cv:tabs.experience')}
-              </TabsTrigger>
-              <TabsTrigger value="skills" className={isMobile ? 'text-xs' : ''}>
-                {t('cv:tabs.skills')}
-              </TabsTrigger>
-              <TabsTrigger
-                value="projects"
-                className={isMobile ? 'text-xs' : ''}
-              >
-                {t('cv:tabs.projects')}
-              </TabsTrigger>
-              <TabsTrigger
-                value="education"
-                className={isMobile ? 'text-xs' : ''}
-              >
-                {t('cv:tabs.education')}
-              </TabsTrigger>
-            </TabsList>
-
-            <AnimatePresence mode="wait">
-              <TabsContent value="experience" className="mt-0">
-                <motion.div
-                  key="experience"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
+          <section aria-labelledby="cv-tabs" aria-describedby="cv-description">
+            <Tabs
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="w-full"
+            >
+              <div className="sr-only" id="cv-description">
+                Interactive CV sections with experience, skills, projects, and
+                education tabs
+              </div>
+              <TabsList id="cv-tabs" className={`mb-8 grid w-full grid-cols-4`}>
+                <TabsTrigger
+                  id="cv-tabs-experience"
+                  value="experience"
+                  className={isMobile ? 'text-xs' : ''}
                 >
-                  <ExperienceTimeline />
-                </motion.div>
-              </TabsContent>
-
-              <TabsContent value="skills" className="mt-0">
-                <motion.div
-                  key="skills"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
+                  {t('cv:tabs.experience')}
+                </TabsTrigger>
+                <TabsTrigger
+                  id="cv-tabs-skills"
+                  value="skills"
+                  className={isMobile ? 'text-xs' : ''}
                 >
-                  <SkillsRadar />
-                </motion.div>
-              </TabsContent>
-
-              <TabsContent value="projects" className="mt-0">
-                <motion.div
-                  key="projects"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
+                  {t('cv:tabs.skills')}
+                </TabsTrigger>
+                <TabsTrigger
+                  id="cv-tabs-projects"
+                  value="projects"
+                  className={isMobile ? 'text-xs' : ''}
                 >
-                  <ProjectShowcase />
-                </motion.div>
-              </TabsContent>
-
-              <TabsContent value="education" className="mt-0">
-                <motion.div
-                  key="education"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
+                  {t('cv:tabs.projects')}
+                </TabsTrigger>
+                <TabsTrigger
+                  id="cv-tabs-education"
+                  value="education"
+                  className={isMobile ? 'text-xs' : ''}
                 >
-                  <EducationSection />
-                </motion.div>
-              </TabsContent>
-            </AnimatePresence>
-          </Tabs>
-        </div>
+                  {t('cv:tabs.education')}
+                </TabsTrigger>
+              </TabsList>
+
+              <AnimatePresence mode="wait">
+                <TabsContent value="experience" className="mt-0">
+                  <motion.div
+                    key="experience"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3 }}
+                    role="tabpanel"
+                    aria-labelledby="cv-tabs-experience"
+                  >
+                    <ExperienceTimeline />
+                  </motion.div>
+                </TabsContent>
+
+                <TabsContent value="skills" className="mt-0">
+                  <motion.div
+                    key="skills"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3 }}
+                    role="tabpanel"
+                    aria-labelledby="cv-tabs-skills"
+                  >
+                    <SkillsRadar />
+                  </motion.div>
+                </TabsContent>
+
+                <TabsContent value="projects" className="mt-0">
+                  <motion.div
+                    key="projects"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3 }}
+                    role="tabpanel"
+                    aria-labelledby="cv-tabs-projects"
+                  >
+                    <ProjectShowcase />
+                  </motion.div>
+                </TabsContent>
+
+                <TabsContent value="education" className="mt-0">
+                  <motion.div
+                    key="education"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3 }}
+                    role="tabpanel"
+                    aria-labelledby="cv-tabs-education"
+                  >
+                    <EducationSection />
+                  </motion.div>
+                </TabsContent>
+              </AnimatePresence>
+            </Tabs>
+          </section>
+        </main>
       </PageLayoutContent>
     </PageLayout>
   );

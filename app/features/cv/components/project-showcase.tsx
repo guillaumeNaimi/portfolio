@@ -201,9 +201,9 @@ export const ProjectShowcase = () => {
                         </p>
 
                         <div>
-                          <h4 className="mb-2 font-semibold">
+                          <h3 className="mb-2 font-semibold">
                             {t('cv:projects.modal.technologiesUsed')}
-                          </h4>
+                          </h3>
                           <div className="flex flex-wrap gap-2">
                             {selectedProject.technologies.map((tech) => (
                               <Badge
