@@ -1,10 +1,10 @@
 <svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
-  <!-- Fond avec coins arrondis -->
-  <rect width="96" height="96" fill="#2563eb" rx="16"/>
+  <!-- Fond avec coins arrondis pour thème sombre -->
+  <rect width="96" height="96" fill="#1e40af" rx="16"/>
   
   <!-- Texte "GN" en blanc -->
   <text x="48" y="62" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="white" letter-spacing="-0.5">GN</text>
   
   <!-- Accent décoratif subtil -->
-  <circle cx="48" cy="72" r="2" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="48" cy="72" r="2" fill="rgba(255,255,255,0.4)"/>
 </svg>

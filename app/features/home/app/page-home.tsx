@@ -7,7 +7,6 @@ import {
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { Logo } from '@/components/brand/logo';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -17,20 +16,13 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-import {
-  PageLayout,
-  PageLayoutContent,
-  PageLayoutTopBar,
-} from '@/layout/app/page-layout';
+import { PageLayout, PageLayoutContent } from '@/layout/app/page-layout';
 
 export const PageHome = () => {
   const { t } = useTranslation(['common']);
 
   return (
     <PageLayout>
-      <PageLayoutTopBar className="md:hidden">
-        <Logo className="mx-auto w-24" />
-      </PageLayoutTopBar>
       <PageLayoutContent>
         <div className="mx-auto flex max-w-4xl flex-1 flex-col gap-8">
           {/* Hero Section */}
