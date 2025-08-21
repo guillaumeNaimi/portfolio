@@ -2,13 +2,13 @@ import { createFileRoute, Outlet } from '@tanstack/react-router';
 
 import { Layout } from '@/layout/app/layout';
 
-export const Route = createFileRoute('/app/_layout-desktop-only')({
+export const Route = createFileRoute('/_layout')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
   return (
-    <Layout hideMobileNav>
+    <Layout>
       <Outlet />
     </Layout>
   );

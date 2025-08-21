@@ -14,7 +14,7 @@ export const MAIN_NAV_LINKS = [
     icon: IconHouseDuotone,
     iconActive: IconHouseFill,
     linkOptions: {
-      to: '/app',
+      to: '/',
     },
     exact: true,
   } as const,
@@ -23,7 +23,7 @@ export const MAIN_NAV_LINKS = [
     icon: IconUserCircleDuotone,
     iconActive: IconUserCircleFill,
     linkOptions: {
-      to: '/app/cv',
+      to: '/cv',
     },
   } as const,
 ] satisfies Array<{

@@ -58,7 +58,7 @@ export const PageHome = () => {
 
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg">
-                <a href="/app/cv">
+                <a href="/cv">
                   {t('common:hero.viewCV')}
                   <ArrowRightIcon className="ml-2 h-4 w-4" />
                 </a>

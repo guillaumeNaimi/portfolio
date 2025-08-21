@@ -11,43 +11,26 @@
 import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AppRouteImport } from './routes/app'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AppLayoutDesktopOnlyRouteImport } from './routes/app/_layout-desktop-only'
-import { Route as AppLayoutRouteImport } from './routes/app/_layout'
-import { Route as AppLayoutIndexRouteImport } from './routes/app/_layout/index'
-import { Route as AppLayoutCvIndexRouteImport } from './routes/app/_layout/cv.index'
+import { Route as LayoutRouteImport } from './routes/_layout'
+import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutCvRouteImport } from './routes/_layout/cv'
 import { ServerRoute as ApiRpcSplatServerRouteImport } from './routes/api/rpc.$'
 
 const rootServerRouteImport = createServerRootRoute()
 
-const AppRoute = AppRouteImport.update({
-  id: '/app',
-  path: '/app',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppLayoutDesktopOnlyRoute = AppLayoutDesktopOnlyRouteImport.update({
-  id: '/_layout-desktop-only',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppLayoutRoute = AppLayoutRouteImport.update({
+const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AppLayoutIndexRoute = AppLayoutIndexRouteImport.update({
+const LayoutIndexRoute = LayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => LayoutRoute,
 } as any)
-const AppLayoutCvIndexRoute = AppLayoutCvIndexRouteImport.update({
-  id: '/cv/',
-  path: '/cv/',
-  getParentRoute: () => AppLayoutRoute,
+const LayoutCvRoute = LayoutCvRouteImport.update({
+  id: '/cv',
+  path: '/cv',
+  getParentRoute: () => LayoutRoute,
 } as any)
 const ApiRpcSplatServerRoute = ApiRpcSplatServerRouteImport.update({
   id: '/api/rpc/$',
@@ -56,43 +39,29 @@ const ApiRpcSplatServerRoute = ApiRpcSplatServerRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/app': typeof AppLayoutDesktopOnlyRoute
-  '/app/': typeof AppLayoutIndexRoute
-  '/app/cv': typeof AppLayoutCvIndexRoute
+  '/cv': typeof LayoutCvRoute
+  '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/app': typeof AppLayoutIndexRoute
-  '/app/cv': typeof AppLayoutCvIndexRoute
+  '/cv': typeof LayoutCvRoute
+  '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/app': typeof AppRouteWithChildren
-  '/app/_layout': typeof AppLayoutRouteWithChildren
-  '/app/_layout-desktop-only': typeof AppLayoutDesktopOnlyRoute
-  '/app/_layout/': typeof AppLayoutIndexRoute
-  '/app/_layout/cv/': typeof AppLayoutCvIndexRoute
+  '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/cv': typeof LayoutCvRoute
+  '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/app/' | '/app/cv'
+  fullPaths: '/cv' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app' | '/app/cv'
-  id:
-    | '__root__'
-    | '/'
-    | '/app'
-    | '/app/_layout'
-    | '/app/_layout-desktop-only'
-    | '/app/_layout/'
-    | '/app/_layout/cv/'
+  to: '/cv' | '/'
+  id: '__root__' | '/_layout' | '/_layout/cv' | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AppRoute: typeof AppRouteWithChildren
+  LayoutRoute: typeof LayoutRouteWithChildren
 }
 export interface FileServerRoutesByFullPath {
   '/api/rpc/$': typeof ApiRpcSplatServerRoute
@@ -118,47 +87,26 @@ export interface RootServerRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/app': {
-      id: '/app'
-      path: '/app'
-      fullPath: '/app'
-      preLoaderRoute: typeof AppRouteImport
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_layout/': {
+      id: '/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof LayoutIndexRouteImport
+      parentRoute: typeof LayoutRoute
     }
-    '/app/_layout-desktop-only': {
-      id: '/app/_layout-desktop-only'
-      path: ''
-      fullPath: '/app'
-      preLoaderRoute: typeof AppLayoutDesktopOnlyRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/app/_layout': {
-      id: '/app/_layout'
-      path: ''
-      fullPath: '/app'
-      preLoaderRoute: typeof AppLayoutRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/app/_layout/': {
-      id: '/app/_layout/'
-      path: '/'
-      fullPath: '/app/'
-      preLoaderRoute: typeof AppLayoutIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
-    }
-    '/app/_layout/cv/': {
-      id: '/app/_layout/cv/'
+    '/_layout/cv': {
+      id: '/_layout/cv'
       path: '/cv'
-      fullPath: '/app/cv'
-      preLoaderRoute: typeof AppLayoutCvIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      fullPath: '/cv'
+      preLoaderRoute: typeof LayoutCvRouteImport
+      parentRoute: typeof LayoutRoute
     }
   }
 }
@@ -174,35 +122,21 @@ declare module '@tanstack/react-start/server' {
   }
 }
 
-interface AppLayoutRouteChildren {
-  AppLayoutIndexRoute: typeof AppLayoutIndexRoute
-  AppLayoutCvIndexRoute: typeof AppLayoutCvIndexRoute
+interface LayoutRouteChildren {
+  LayoutCvRoute: typeof LayoutCvRoute
+  LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
-const AppLayoutRouteChildren: AppLayoutRouteChildren = {
-  AppLayoutIndexRoute: AppLayoutIndexRoute,
-  AppLayoutCvIndexRoute: AppLayoutCvIndexRoute,
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutCvRoute: LayoutCvRoute,
+  LayoutIndexRoute: LayoutIndexRoute,
 }
 
-const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
-  AppLayoutRouteChildren,
-)
-
-interface AppRouteChildren {
-  AppLayoutRoute: typeof AppLayoutRouteWithChildren
-  AppLayoutDesktopOnlyRoute: typeof AppLayoutDesktopOnlyRoute
-}
-
-const AppRouteChildren: AppRouteChildren = {
-  AppLayoutRoute: AppLayoutRouteWithChildren,
-  AppLayoutDesktopOnlyRoute: AppLayoutDesktopOnlyRoute,
-}
-
-const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AppRoute: AppRouteWithChildren,
+  LayoutRoute: LayoutRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
