@@ -7,6 +7,8 @@ import { useTheme } from 'next-themes';
 import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
+import { cn } from '@/lib/tailwind/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -14,8 +16,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { IconComponent } from './technology-icon';
-import { cn } from '@/lib/tailwind/utils';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 export const ExperienceTimeline = () => {
   const { i18n, t } = useTranslation(['cv']);
