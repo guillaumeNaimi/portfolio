@@ -14,11 +14,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { IconComponent } from './technology-icon';
+import { cn } from '@/lib/tailwind/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export const ExperienceTimeline = () => {
   const { i18n, t } = useTranslation(['cv']);
 
   const locale = i18n?.language ?? 'en';
+
+  const isMobile = useIsMobile();
 
   const experiencesQuery = useQuery(
     orpc.cv.getExperiences.queryOptions({
@@ -58,7 +62,12 @@ export const ExperienceTimeline = () => {
 
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute top-0 bottom-0 left-8 w-0.5 bg-border" />
+              <div
+                className={cn(
+                  'absolute top-0 bottom-0 left-8 w-0.5 bg-border',
+                  isMobile ? 'left-5' : 'left-8'
+                )}
+              />
 
               {experiences.map((experience, index) => (
                 <motion.div
@@ -70,7 +79,12 @@ export const ExperienceTimeline = () => {
                 >
                   {/* Timeline dot */}
                   <div>
-                    <Avatar className="size-16 border bg-white">
+                    <Avatar
+                      className={cn(
+                        'border bg-white',
+                        isMobile ? 'size-10' : 'size-16'
+                      )}
+                    >
                       <AvatarImage
                         src={experience.image}
                         alt={experience.company}
