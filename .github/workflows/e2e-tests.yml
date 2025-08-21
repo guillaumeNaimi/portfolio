@@ -2,11 +2,7 @@ name: 🧪 E2E Tests
 on:
   push:
     branches:
-      - master
       - main
-      - develop
-      - staging
-      - ivan/restart # TODO remove me on final merge on main
   pull_request:
 
 jobs:
@@ -17,19 +13,16 @@ jobs:
     env:
       VITE_BASE_URL: http://localhost:3000
       VITE_ENV_NAME: tests
-      DATABASE_URL: postgres://startui:startui@localhost:5432/startui
+      DATABASE_URL: postgres://portfolio:portfolio@localhost:5432/portfolio
       VITE_IS_DEMO: false
-      BETTER_AUTH_SECRET: fyXjLxjXJowjicI2BAjxOaUsQd1QafdegZDciJE/xM8=
-      EMAIL_SERVER: smtp://username:password@localhost:1025
-      EMAIL_FROM: Guillaume Naimi Portfolio <noreply@example.com>
     services:
       postgres:
         image: postgres
 
         env:
-          POSTGRES_PASSWORD: startui
-          POSTGRES_USER: startui
-          POSTGRES_DB: startui
+          POSTGRES_PASSWORD: portfolio
+          POSTGRES_USER: portfolio
+          POSTGRES_DB: portfolio
 
         options: >-
           --health-cmd pg_isready

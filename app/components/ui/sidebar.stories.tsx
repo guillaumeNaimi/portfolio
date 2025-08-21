@@ -1,14 +1,12 @@
 import { Meta } from '@storybook/react-vite';
 import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
 
-import { Logo } from '@/components/brand/logo';
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
@@ -57,19 +55,6 @@ export function AppSidebar() {
   return (
     <SidebarProvider>
       <Sidebar>
-        <SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild className="h-auto">
-                <a href="#">
-                  <span>
-                    <Logo className="w-24" />
-                  </span>
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupLabel>Application</SidebarGroupLabel>
