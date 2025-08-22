@@ -60,6 +60,58 @@ export const Route = createRootRouteWithContext<{
         title: getPageTitle(),
       },
       {
+        name: 'description',
+        content:
+          'Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.',
+      },
+      {
+        name: 'keywords',
+        content:
+          'Guillaume Naimi, Front-end Developer, Web Development, React, TypeScript, Nextjs, Portfolio, CV',
+      },
+      {
+        name: 'author',
+        content: 'Guillaume Naimi',
+      },
+      {
+        name: 'robots',
+        content: 'index, follow',
+      },
+      {
+        property: 'og:title',
+        content: getPageTitle(),
+      },
+      {
+        property: 'og:description',
+        content:
+          'Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.',
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:url',
+        content: 'https://guillaumenaimi.dev',
+      },
+      {
+        property: 'og:image',
+        content: 'https://guillaumenaimi.dev/og-image.png',
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:title',
+        content: getPageTitle(),
+      },
+      {
+        name: 'twitter:description',
+        content:
+          'Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.',
+      },
+      {
         name: 'apple-mobile-web-app-title',
         content: getPageTitle(),
       },
