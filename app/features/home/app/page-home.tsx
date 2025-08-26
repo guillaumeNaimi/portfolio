@@ -24,7 +24,10 @@ export const PageHome = () => {
   return (
     <PageLayout>
       <PageLayoutContent>
-        <div className="mx-auto flex max-w-4xl flex-1 flex-col gap-8">
+        <main
+          className="mx-auto flex max-w-4xl flex-1 flex-col gap-8"
+          data-testid="home-page"
+        >
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -43,6 +46,7 @@ export const PageHome = () => {
                   src="/companies/me.jpg"
                   alt="Guillaume Naimi"
                   className="h-32 w-32 rounded-full border-4 border-background object-cover shadow-lg md:h-40 md:w-40"
+                  loading="lazy"
                 />
               </div>
             </motion.div>
@@ -58,13 +62,16 @@ export const PageHome = () => {
 
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg">
-                <a href="/cv">
+                <a href="/cv" data-testid="hero-cv-link">
                   {t('common:hero.viewCV')}
                   <ArrowRightIcon className="ml-2 h-4 w-4" />
                 </a>
               </Button>
               <Button asChild variant="secondary" size="lg">
-                <a href="mailto:naimi.guillaume@gmail.com">
+                <a
+                  href="mailto:naimi.guillaume@gmail.com"
+                  data-testid="hero-contact-link"
+                >
                   <MailIcon className="mr-2 h-4 w-4" />
                   {t('common:hero.contact')}
                 </a>
@@ -99,6 +106,7 @@ export const PageHome = () => {
                       href="https://github.com/guillaumeNaimi"
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-testid="github-link"
                     >
                       {t('common:quickActions.github.button')}
                     </a>
@@ -122,6 +130,7 @@ export const PageHome = () => {
                       href="https://www.linkedin.com/in/guillaume-naimi-b60737105/"
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-testid="linkedin-link"
                     >
                       {t('common:quickActions.linkedin.button')}
                     </a>
@@ -130,7 +139,7 @@ export const PageHome = () => {
               </Card>
             </div>
           </motion.div>
-        </div>
+        </main>
       </PageLayoutContent>
     </PageLayout>
   );

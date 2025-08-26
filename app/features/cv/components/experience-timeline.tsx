@@ -76,6 +76,7 @@ export const ExperienceTimeline = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   className="relative flex gap-6"
+                  data-testid={`experience-${experience.id}`}
                 >
                   {/* Timeline dot */}
                   <div>

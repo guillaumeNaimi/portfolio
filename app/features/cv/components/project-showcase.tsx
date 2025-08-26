@@ -67,6 +67,7 @@ export const ProjectShowcase = () => {
                   whileHover={{ y: -5 }}
                   className="cursor-pointer"
                   onClick={() => setSelectedProject(project)}
+                  data-testid={`project-${project.id}`}
                 >
                   <Card className="h-full pt-0 transition-all duration-300 hover:shadow-lg">
                     {project.image && (
@@ -75,6 +76,7 @@ export const ProjectShowcase = () => {
                           src={project.image}
                           alt={project.title}
                           className="h-full w-full object-cover"
+                          loading="lazy"
                         />
                         {project.featured && (
                           <Badge
@@ -193,6 +195,7 @@ export const ProjectShowcase = () => {
                             src={selectedProject.image}
                             alt={selectedProject.title}
                             className="h-64 w-full rounded-sm object-cover"
+                            loading="lazy"
                           />
                         )}
 
