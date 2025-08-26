@@ -95,6 +95,7 @@ export const SkillsRadar = () => {
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: index * 0.1 }}
                               className="space-y-2"
+                              data-testid={`skill-${skill.technology.name}`}
                             >
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2">

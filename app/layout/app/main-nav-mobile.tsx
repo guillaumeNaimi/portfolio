@@ -29,8 +29,8 @@ export const MainNavMobile = () => {
         ))}
         <div className="flex flex-1 flex-col items-center justify-center">
           <div className="flex items-center gap-1">
-            <LocalSwitcher iconOnly />
-            <ThemeSwitcher iconOnly />
+            <LocalSwitcher iconOnly data-testid="local-switcher-mobile" />
+            <ThemeSwitcher iconOnly data-testid="theme-switcher-mobile" />
           </div>
         </div>
       </nav>

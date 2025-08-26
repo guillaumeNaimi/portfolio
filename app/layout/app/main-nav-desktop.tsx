@@ -30,8 +30,8 @@ export const MainNavDesktop = () => {
             ))}
           </nav>
           <div className="flex items-center gap-1">
-            <LocalSwitcher iconOnly />
-            <ThemeSwitcher iconOnly />
+            <LocalSwitcher iconOnly data-testid="local-switcher-desktop" />
+            <ThemeSwitcher iconOnly data-testid="theme-switcher-desktop" />
           </div>
         </div>
       </header>

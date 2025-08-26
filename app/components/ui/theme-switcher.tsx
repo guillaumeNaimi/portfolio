@@ -22,7 +22,10 @@ import {
 
 export const themes = ['system', 'light', 'dark'] as const;
 
-export const ThemeSwitcher = (props: { iconOnly?: boolean }) => {
+export const ThemeSwitcher = (props: {
+  iconOnly?: boolean;
+  'data-testid'?: string;
+}) => {
   const { t } = useTranslation(['common']);
   const { theme, setTheme } = useTheme();
   const [hydrated, setHydrated] = useState(false);
@@ -42,6 +45,7 @@ export const ThemeSwitcher = (props: { iconOnly?: boolean }) => {
         <Button
           variant={props.iconOnly ? 'ghost' : 'link'}
           size={props.iconOnly ? 'icon' : 'default'}
+          data-testid={props['data-testid'] || 'theme-switcher'}
         >
           {match(theme as (typeof themes)[number])
             .with('system', () => <SunMoonIcon className="opacity-50" />)
@@ -65,6 +69,7 @@ export const ThemeSwitcher = (props: { iconOnly?: boolean }) => {
             onClick={() => {
               setTheme(item);
             }}
+            data-testid={`theme-option-${item}`}
           >
             <CheckIcon
               className={cn(
