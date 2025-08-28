@@ -12,6 +12,7 @@ import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { IconComponent } from './technology-icon';
+import { Skill } from '../schema';
 
 export const SkillsRadar = () => {
   const { i18n, t } = useTranslation(['cv']);
@@ -71,64 +72,10 @@ export const SkillsRadar = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                   >
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          {category === 'frontend' &&
-                            t('cv:skills.categories.frontend')}
-                          {category === 'design' &&
-                            t('cv:skills.categories.design')}
-                          {category === 'devops' &&
-                            t('cv:skills.categories.devops')}
-                          {category === 'backend' &&
-                            t('cv:skills.categories.backend')}
-                          {category === 'other' &&
-                            t('cv:skills.categories.other')}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          {categorySkills.map((skill, index) => (
-                            <motion.div
-                              key={skill.technology.name}
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: index * 0.1 }}
-                              className="space-y-2"
-                              data-testid={`skill-${skill.technology.name}`}
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <IconComponent
-                                    iconName={skill.technology.icon}
-                                  />
-                                  <span className="font-medium">
-                                    {skill.technology.name}
-                                  </span>
-                                </div>
-                                <span className="text-sm text-muted-foreground">
-                                  {skill.level}%
-                                </span>
-                              </div>
-                              <div
-                                className="relative"
-                                style={
-                                  {
-                                    '--progress-color':
-                                      skill.technology.color || '#3B82F6',
-                                  } as React.CSSProperties
-                                }
-                              >
-                                <Progress
-                                  value={skill.level}
-                                  className="h-2 [&_[data-slot=progress-indicator]]:bg-[var(--progress-color)]"
-                                />
-                              </div>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
+                    <SkillsCard
+                      categorySkills={categorySkills}
+                      category={category}
+                    />
                   </motion.div>
                 );
               })}
@@ -137,5 +84,66 @@ export const SkillsRadar = () => {
         ))
         .exhaustive()}
     </>
+  );
+};
+
+const SkillsCard = ({
+  categorySkills,
+  category,
+}: {
+  categorySkills: Skill[];
+  category: string;
+}) => {
+  const { t } = useTranslation(['cv']);
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          {category === 'frontend' && t('cv:skills.categories.frontend')}
+          {category === 'design' && t('cv:skills.categories.design')}
+          {category === 'devops' && t('cv:skills.categories.devops')}
+          {category === 'backend' && t('cv:skills.categories.backend')}
+          {category === 'other' && t('cv:skills.categories.other')}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          {categorySkills.map((skill, index) => (
+            <motion.div
+              key={skill.technology.name}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="space-y-2"
+              data-testid={`skill-${skill.technology.name}`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <IconComponent iconName={skill.technology.icon} />
+                  <span className="font-medium">{skill.technology.name}</span>
+                </div>
+                <span className="text-sm text-muted-foreground">
+                  {skill.level}%
+                </span>
+              </div>
+              <div
+                className="relative"
+                style={
+                  {
+                    '--progress-color': skill.technology.color || '#3B82F6',
+                  } as React.CSSProperties
+                }
+              >
+                <Progress
+                  value={skill.level}
+                  className="h-2 [&_[data-slot=progress-indicator]]:bg-[var(--progress-color)]"
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 };

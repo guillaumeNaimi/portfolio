@@ -16,6 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { IconComponent } from './technology-icon';
+import { Experience } from '../schema';
 
 export const ExperienceTimeline = () => {
   const { i18n, t } = useTranslation(['cv']);
@@ -29,7 +30,6 @@ export const ExperienceTimeline = () => {
       input: { locale: locale as 'en' | 'fr' },
     })
   );
-  const { resolvedTheme } = useTheme();
 
   const ui = getUiState((set) => {
     if (experiencesQuery.status === 'pending') return set('pending');
@@ -78,122 +78,9 @@ export const ExperienceTimeline = () => {
                   className="relative flex gap-6"
                   data-testid={`experience-${experience.id}`}
                 >
-                  {/* Timeline dot */}
-                  <div>
-                    <Avatar
-                      className={cn(
-                        'border bg-white',
-                        isMobile ? 'size-10' : 'size-16'
-                      )}
-                    >
-                      <AvatarImage
-                        src={experience.image}
-                        alt={experience.company}
-                        className="object-contain"
-                      />
-                      <AvatarFallback
-                        variant="boring"
-                        name={experience.company}
-                      />
-                    </Avatar>
-                  </div>
-
-                  {/* Content */}
+                  <TimelineDot experience={experience} />
                   <div className="flex-1 pb-8">
-                    <Card
-                      className="transition-shadow hover:shadow-lg"
-                      style={{
-                        color:
-                          resolvedTheme === 'dark'
-                            ? 'white'
-                            : experience.primaryColor,
-                        backgroundColor:
-                          resolvedTheme === 'dark'
-                            ? experience.primaryColor
-                            : undefined,
-                        boxShadow: `0 0 10px 0 ${experience.secondaryColor}`,
-                      }}
-                    >
-                      <CardHeader>
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <CardTitle className="text-xl">
-                              {experience.position}
-                            </CardTitle>
-                            <div className="mt-1 flex items-center gap-2">
-                              <span className="font-medium">
-                                {experience.company}
-                              </span>
-                              {experience.location && (
-                                <>
-                                  <span>•</span>
-                                  <div className="flex items-center gap-1">
-                                    <MapPinIcon className="h-4 w-4" />
-                                    <span>{experience.location}</span>
-                                  </div>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="mt-2 flex items-center gap-2 text-sm">
-                          <CalendarIcon className="h-4 w-4" />
-                          <span>
-                            {dayjs(experience.startDate).format('MMM YYYY')} -{' '}
-                            {dayjs(experience.endDate).format('MMM YYYY') ||
-                              t('cv:experience.present')}
-                          </span>
-                        </div>
-                      </CardHeader>
-
-                      <CardContent>
-                        <p className="mb-4">{experience.description}</p>
-
-                        <div className="space-y-4">
-                          <div>
-                            <h3 className="mb-2 font-semibold">
-                              {t('cv:experience.keyAchievements')}
-                            </h3>
-                            <ul className="space-y-1">
-                              {experience.achievements.map((achievement) => (
-                                <li
-                                  key={achievement}
-                                  className="flex items-start gap-2 text-sm"
-                                >
-                                  <span className="mt-1 text-primary">•</span>
-                                  <span>{achievement}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-
-                          <div>
-                            <h3 className="mb-2 font-semibold">
-                              {t('cv:experience.technologies')}
-                            </h3>
-                            <div className="flex flex-wrap gap-2">
-                              {experience.technologies.map((tech) => {
-                                return (
-                                  <Badge
-                                    key={tech.name}
-                                    variant="outline"
-                                    className="flex items-center gap-1 text-xs"
-                                    style={{
-                                      backgroundColor:
-                                        experience.secondaryColor,
-                                    }}
-                                  >
-                                    <IconComponent iconName={tech.icon} />
-                                    {tech.name}
-                                  </Badge>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                    <ExperienceCard experience={experience} />
                   </div>
                 </motion.div>
               ))}
@@ -202,5 +89,116 @@ export const ExperienceTimeline = () => {
         ))
         .exhaustive()}
     </>
+  );
+};
+
+const TimelineDot = ({ experience }: { experience: Experience }) => {
+  const isMobile = useIsMobile();
+
+  return (
+    <div>
+      <Avatar
+        className={cn('border bg-white', isMobile ? 'size-10' : 'size-16')}
+      >
+        <AvatarImage
+          src={experience.image}
+          alt={experience.company}
+          className="object-contain"
+        />
+        <AvatarFallback variant="boring" name={experience.company} />
+      </Avatar>
+    </div>
+  );
+};
+
+const ExperienceCard = ({ experience }: { experience: Experience }) => {
+  const { t } = useTranslation(['cv']);
+  const { resolvedTheme } = useTheme();
+
+  return (
+    <Card
+      className="transition-shadow hover:shadow-lg"
+      style={{
+        color: resolvedTheme === 'dark' ? 'white' : experience.primaryColor,
+        backgroundColor:
+          resolvedTheme === 'dark' ? experience.primaryColor : undefined,
+        boxShadow: `0 0 10px 0 ${experience.secondaryColor}`,
+      }}
+    >
+      <CardHeader>
+        <div className="flex items-start justify-between">
+          <div className="flex-1">
+            <CardTitle className="text-xl">{experience.position}</CardTitle>
+            <div className="mt-1 flex items-center gap-2">
+              <span className="font-medium">{experience.company}</span>
+              {experience.location && (
+                <>
+                  <span>•</span>
+                  <div className="flex items-center gap-1">
+                    <MapPinIcon className="h-4 w-4" />
+                    <span>{experience.location}</span>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-2 flex items-center gap-2 text-sm">
+          <CalendarIcon className="h-4 w-4" />
+          <span>
+            {dayjs(experience.startDate).format('MMM YYYY')} -{' '}
+            {dayjs(experience.endDate).format('MMM YYYY') ||
+              t('cv:experience.present')}
+          </span>
+        </div>
+      </CardHeader>
+
+      <CardContent>
+        <p className="mb-4">{experience.description}</p>
+
+        <div className="space-y-4">
+          <div>
+            <h3 className="mb-2 font-semibold">
+              {t('cv:experience.keyAchievements')}
+            </h3>
+            <ul className="space-y-1">
+              {experience.achievements.map((achievement) => (
+                <li
+                  key={achievement}
+                  className="flex items-start gap-2 text-sm"
+                >
+                  <span className="mt-1 text-primary">•</span>
+                  <span>{achievement}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-2 font-semibold">
+              {t('cv:experience.technologies')}
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {experience.technologies.map((tech) => {
+                return (
+                  <Badge
+                    key={tech.name}
+                    variant="outline"
+                    className="flex items-center gap-1 text-xs"
+                    style={{
+                      backgroundColor: experience.secondaryColor,
+                    }}
+                  >
+                    <IconComponent iconName={tech.icon} />
+                    {tech.name}
+                  </Badge>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };

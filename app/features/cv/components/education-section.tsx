@@ -11,6 +11,8 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
+import { Education } from '../schema';
+
 export const EducationSection = () => {
   const { i18n, t } = useTranslation(['cv']);
 
@@ -61,52 +63,7 @@ export const EducationSection = () => {
                   whileHover={{ scale: 1.02 }}
                   data-testid={`education-${edu.id}`}
                 >
-                  <Card className="h-full transition-shadow hover:shadow-lg">
-                    <CardHeader>
-                      <div className="flex items-start gap-3">
-                        <div className="rounded-full bg-primary/10 p-2">
-                          <GraduationCapIcon className="h-6 w-6 text-primary" />
-                        </div>
-                        <div className="flex-1">
-                          <CardTitle className="text-lg">
-                            {edu.degree}
-                          </CardTitle>
-                          <p className="font-medium text-muted-foreground">
-                            {edu.institution}
-                          </p>
-                        </div>
-                      </div>
-                    </CardHeader>
-
-                    <CardContent className="space-y-4">
-                      <div>
-                        <h3 className="font-semibold text-primary">
-                          {edu.field}
-                        </h3>
-                        {edu.description && (
-                          <p className="mt-1 text-sm text-muted-foreground">
-                            {edu.description}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <CalendarIcon className="h-4 w-4" />
-                        <span>
-                          {dayjs(edu.startDate).format('MMM YYYY')} -{' '}
-                          {edu.endDate
-                            ? dayjs(edu.endDate).format('MMM YYYY')
-                            : t('cv:education.present')}
-                        </span>
-                      </div>
-
-                      <Badge variant="outline" className="w-fit">
-                        {edu.degree === 'Certification'
-                          ? t('cv:education.badges.professional')
-                          : t('cv:education.badges.academic')}
-                      </Badge>
-                    </CardContent>
-                  </Card>
+                  <EducationCard education={edu} />
                 </motion.div>
               ))}
             </div>
@@ -114,5 +71,53 @@ export const EducationSection = () => {
         ))
         .exhaustive()}
     </>
+  );
+};
+
+const EducationCard = ({ education }: { education: Education }) => {
+  const { t } = useTranslation(['cv']);
+  return (
+    <Card className="h-full transition-shadow hover:shadow-lg">
+      <CardHeader>
+        <div className="flex items-start gap-3">
+          <div className="rounded-full bg-primary/10 p-2">
+            <GraduationCapIcon className="h-6 w-6 text-primary" />
+          </div>
+          <div className="flex-1">
+            <CardTitle className="text-lg">{education.degree}</CardTitle>
+            <p className="font-medium text-muted-foreground">
+              {education.institution}
+            </p>
+          </div>
+        </div>
+      </CardHeader>
+
+      <CardContent className="space-y-4">
+        <div>
+          <h3 className="font-semibold text-primary">{education.field}</h3>
+          {education.description && (
+            <p className="mt-1 text-sm text-muted-foreground">
+              {education.description}
+            </p>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <CalendarIcon className="h-4 w-4" />
+          <span>
+            {dayjs(education.startDate).format('MMM YYYY')} -{' '}
+            {education.endDate
+              ? dayjs(education.endDate).format('MMM YYYY')
+              : t('cv:education.present')}
+          </span>
+        </div>
+
+        <Badge variant="outline" className="w-fit">
+          {education.degree === 'Certification'
+            ? t('cv:education.badges.professional')
+            : t('cv:education.badges.academic')}
+        </Badge>
+      </CardContent>
+    </Card>
   );
 };

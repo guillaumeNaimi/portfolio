@@ -184,17 +184,17 @@ export async function createCV() {
       descriptionFr:
         'Développement de deux applications de haute importance pour Hipli.',
       achievements: [
-        'Creation of two applications (b2c and b2b)',
+        'Created two production apps used by 5000+ users/clients',
         'Lead of the front-end team',
         'Close collaboration with the product teams to meet the needs of end users',
       ],
       achievementsEn: [
-        'Creation of two applications (b2c and b2b)',
+        'Created two production apps used by 5000+ users/clients',
         'Lead of the front-end team',
         'Close collaboration with the product teams to meet the needs of end users',
       ],
       achievementsFr: [
-        'Création de deux applications (b2c et b2b)',
+        'Création de deux applications de production utilisées par plus de5000 utilisateurs/clients',
         "Lead de l'équipe front-end",
         'Collaboration étroite avec les équipes produit pour répondre aux besoins des utilisateurs finaux',
       ],
@@ -321,9 +321,9 @@ export async function createCV() {
   const education = [
     {
       id: '1',
-      institution: 'University of Rouen Faculty of Sciences and Techniques',
-      institutionEn: 'University of Rouen Faculty of Sciences and Techniques',
-      institutionFr: 'Université de Rouen Faculté des sciences et techniques',
+      institution: 'University of Rouen',
+      institutionEn: 'University of Rouen',
+      institutionFr: 'Université de Rouen',
       degree: 'Master GIL',
       field: 'Full Stack Web Development',
       fieldEn: 'Full Stack Web Development',
@@ -339,9 +339,9 @@ export async function createCV() {
     },
     {
       id: '2',
-      institution: 'University of Rouen Faculty of Sciences and Techniques',
-      institutionEn: 'University of Rouen Faculty of Sciences and Techniques',
-      institutionFr: 'Université de Rouen Faculté des sciences et techniques',
+      institution: 'University of Rouen',
+      institutionEn: 'University of Rouen',
+      institutionFr: 'Université de Rouen',
       degree: 'Computer science degree',
       degreeEn: 'Computer science degree',
       degreeFr: 'Licence Informatique',

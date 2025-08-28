@@ -69,201 +69,204 @@ export const ProjectShowcase = () => {
                   onClick={() => setSelectedProject(project)}
                   data-testid={`project-${project.id}`}
                 >
-                  <Card className="h-full pt-0 transition-all duration-300 hover:shadow-lg">
-                    {project.image && (
-                      <div className="relative h-48 overflow-hidden rounded-t-sm">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="h-full w-full object-cover"
-                          loading="lazy"
-                        />
-                        {project.featured && (
-                          <Badge
-                            className="absolute top-2 right-2"
-                            variant="default"
-                          >
-                            {t('cv:projects.featured')}
-                          </Badge>
-                        )}
-                      </div>
-                    )}
-
-                    <CardHeader>
-                      <CardTitle className="text-lg">{project.title}</CardTitle>
-                      <p className="line-clamp-2 text-sm text-muted-foreground">
-                        {project.description}
-                      </p>
-                    </CardHeader>
-
-                    <CardContent>
-                      <div className="mb-4 flex flex-wrap gap-2">
-                        {project.technologies.map((tech) => (
-                          <Badge
-                            key={tech.name}
-                            variant="outline"
-                            className="text-xs"
-                            style={{
-                              backgroundColor: tech.color,
-                              color: 'white',
-                            }}
-                          >
-                            {tech.icon && (
-                              <IconComponent iconName={tech.icon} />
-                            )}
-                            {tech.name}
-                          </Badge>
-                        ))}
-                      </div>
-
-                      <div className="flex gap-2">
-                        {project.githubUrl && (
-                          <Button
-                            size="sm"
-                            asChild
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <a
-                              href={project.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <GithubIcon className="mr-1 h-4 w-4" />
-                              {t('cv:projects.buttons.code')}
-                            </a>
-                          </Button>
-                        )}
-                        {project.liveUrl && (
-                          <Button
-                            size="sm"
-                            asChild
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <a
-                              href={project.liveUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <ExternalLinkIcon className="mr-1 h-4 w-4" />
-                              {t('cv:projects.buttons.live')}
-                            </a>
-                          </Button>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <ProjectCard project={project} />
                 </motion.div>
               ))}
             </div>
 
-            {/* Project Modal */}
-            <AnimatePresence>
-              {selectedProject && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-                  onClick={() => setSelectedProject(null)}
-                >
-                  <motion.div
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.9, opacity: 0 }}
-                    className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-background"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <Card>
-                      <CardHeader>
-                        <div className="flex items-center justify-between">
-                          <CardTitle className="text-2xl">
-                            {selectedProject.title}
-                          </CardTitle>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setSelectedProject(null)}
-                          >
-                            ×
-                          </Button>
-                        </div>
-                      </CardHeader>
-
-                      <CardContent className="space-y-4">
-                        {selectedProject.image && (
-                          <img
-                            src={selectedProject.image}
-                            alt={selectedProject.title}
-                            className="h-64 w-full rounded-sm object-cover"
-                            loading="lazy"
-                          />
-                        )}
-
-                        <p className="text-muted-foreground">
-                          {selectedProject.description}
-                        </p>
-
-                        <div>
-                          <h3 className="mb-2 font-semibold">
-                            {t('cv:projects.modal.technologiesUsed')}
-                          </h3>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedProject.technologies.map((tech) => (
-                              <Badge
-                                key={tech.name}
-                                variant="secondary"
-                                style={{
-                                  backgroundColor: tech.color,
-                                  color: 'white',
-                                }}
-                              >
-                                {tech.name}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="flex gap-2">
-                          {selectedProject.githubUrl && (
-                            <Button
-                              asChild
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <a
-                                href={selectedProject.githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <GithubIcon className="mr-2 h-4 w-4" />
-                                {t('cv:projects.buttons.viewCode')}
-                              </a>
-                            </Button>
-                          )}
-                          {selectedProject.liveUrl && (
-                            <Button
-                              asChild
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <a
-                                href={selectedProject.liveUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <EyeIcon className="mr-2 h-4 w-4" />
-                                {t('cv:projects.buttons.viewLive')}
-                              </a>
-                            </Button>
-                          )}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <ProjectModal
+              selectedProject={selectedProject}
+              setSelectedProject={setSelectedProject}
+            />
           </div>
         ))
         .exhaustive()}
     </>
+  );
+};
+
+const ProjectCard = ({ project }: { project: Project }) => {
+  const { t } = useTranslation(['cv']);
+  return (
+    <Card className="h-full pt-0 transition-all duration-300 hover:shadow-lg">
+      {project.image && (
+        <div className="relative h-48 overflow-hidden rounded-t-sm">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+          {project.featured && (
+            <Badge className="absolute top-2 right-2" variant="default">
+              {t('cv:projects.featured')}
+            </Badge>
+          )}
+        </div>
+      )}
+
+      <CardHeader>
+        <CardTitle className="text-lg">{project.title}</CardTitle>
+        <p className="line-clamp-2 text-sm text-muted-foreground">
+          {project.description}
+        </p>
+      </CardHeader>
+
+      <CardContent>
+        <div className="mb-4 flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <Badge
+              key={tech.name}
+              variant="outline"
+              className="text-xs"
+              style={{
+                backgroundColor: tech.color,
+                color: 'white',
+              }}
+            >
+              {tech.icon && <IconComponent iconName={tech.icon} />}
+              {tech.name}
+            </Badge>
+          ))}
+        </div>
+
+        <div className="flex gap-2">
+          {project.githubUrl && (
+            <Button size="sm" asChild onClick={(e) => e.stopPropagation()}>
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GithubIcon className="mr-1 h-4 w-4" />
+                {t('cv:projects.buttons.code')}
+              </a>
+            </Button>
+          )}
+          {project.liveUrl && (
+            <Button size="sm" asChild onClick={(e) => e.stopPropagation()}>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLinkIcon className="mr-1 h-4 w-4" />
+                {t('cv:projects.buttons.live')}
+              </a>
+            </Button>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+const ProjectModal = ({
+  selectedProject,
+  setSelectedProject,
+}: {
+  selectedProject: Project | null;
+  setSelectedProject: (project: Project | null) => void;
+}) => {
+  const { t } = useTranslation(['cv']);
+  return (
+    <AnimatePresence>
+      {selectedProject && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          onClick={() => setSelectedProject(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-background"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-2xl">
+                    {selectedProject.title}
+                  </CardTitle>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setSelectedProject(null)}
+                  >
+                    ×
+                  </Button>
+                </div>
+              </CardHeader>
+
+              <CardContent className="space-y-4">
+                {selectedProject.image && (
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="h-64 w-full rounded-sm object-cover"
+                    loading="lazy"
+                  />
+                )}
+
+                <p className="text-muted-foreground">
+                  {selectedProject.description}
+                </p>
+
+                <div>
+                  <h3 className="mb-2 font-semibold">
+                    {t('cv:projects.modal.technologiesUsed')}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.technologies.map((tech) => (
+                      <Badge
+                        key={tech.name}
+                        variant="secondary"
+                        style={{
+                          backgroundColor: tech.color,
+                          color: 'white',
+                        }}
+                      >
+                        {tech.name}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  {selectedProject.githubUrl && (
+                    <Button asChild onClick={(e) => e.stopPropagation()}>
+                      <a
+                        href={selectedProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <GithubIcon className="mr-2 h-4 w-4" />
+                        {t('cv:projects.buttons.viewCode')}
+                      </a>
+                    </Button>
+                  )}
+                  {selectedProject.liveUrl && (
+                    <Button asChild onClick={(e) => e.stopPropagation()}>
+                      <a
+                        href={selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <EyeIcon className="mr-2 h-4 w-4" />
+                        {t('cv:projects.buttons.viewLive')}
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
