@@ -10,9 +10,9 @@ import './preview.css';
 import {
   AVAILABLE_LANGUAGES,
   DEFAULT_LANGUAGE_KEY,
-} from '../app/lib/i18n/constants';
-import i18nGlobal from '../app/lib/i18n/index';
-import { Providers } from '../app/providers';
+} from '../src/lib/i18n/constants';
+import i18nGlobal from '../src/lib/i18n/index';
+import { Providers } from '../src/providers';
 
 const DocumentationWrapper = ({ children, isDarkMode, context }) => {
   const { i18n } = useTranslation();

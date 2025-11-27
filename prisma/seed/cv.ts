@@ -1,4 +1,4 @@
-import { db } from '@/server/db';
+import { db } from 'src/server/db';
 
 export async function createCV() {
   console.log(`⏳ Seeding CV`);
