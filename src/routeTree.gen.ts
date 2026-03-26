@@ -53,9 +53,9 @@ const LayoutManagerSkillNewRoute = LayoutManagerSkillNewRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/cv': typeof LayoutCvRoute
   '/': typeof LayoutIndexRoute
-  '/login': typeof LoginIndexRoute
+  '/cv': typeof LayoutCvRoute
+  '/login/': typeof LoginIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/manager/skill/new': typeof LayoutManagerSkillNewRoute
@@ -81,9 +81,9 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/cv'
     | '/'
-    | '/login'
+    | '/cv'
+    | '/login/'
     | '/api/auth/$'
     | '/api/rpc/$'
     | '/manager/skill/new'
@@ -118,14 +118,14 @@ declare module '@tanstack/react-router' {
     '/_layout': {
       id: '/_layout'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login/': {
       id: '/login/'
       path: '/login'
-      fullPath: '/login'
+      fullPath: '/login/'
       preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
