@@ -1,9 +1,9 @@
-import type { Meta } from '@storybook/react-vite';
+import type { Meta } from "@storybook/react-vite";
 
-import { Skeleton } from 'src/components/ui/skeleton';
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default {
-  title: 'Skeleton',
+  title: "Skeleton",
 } satisfies Meta<typeof Skeleton>;
 
 export function Default() {

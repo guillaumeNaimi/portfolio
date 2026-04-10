@@ -1,12 +1,12 @@
-import { ORPCError, os } from '@orpc/server';
-import { type ResponseHeadersPluginContext } from '@orpc/server/plugins';
-import { randomUUID } from 'node:crypto';
-import { performance } from 'node:perf_hooks';
+import { ORPCError, os } from "@orpc/server";
+import { type ResponseHeadersPluginContext } from "@orpc/server/plugins";
+import { randomUUID } from "node:crypto";
+import { performance } from "node:perf_hooks";
 
-import { envClient } from 'src/env/client';
-import { db } from 'src/server/db';
-import { logger } from 'src/server/logger';
-import { timingStore } from 'src/server/timing-store';
+import { envClient } from "@/env/client";
+import { db } from "@/server/db";
+import { logger } from "@/server/logger";
+import { timingStore } from "@/server/timing-store";
 
 const base = os
   .$context<ResponseHeadersPluginContext>()
@@ -17,8 +17,8 @@ const base = os
     const duration = performance.now() - start;
 
     context.resHeaders?.append(
-      'Server-Timing',
-      `auth;dur=${duration.toFixed(2)}`
+      "Server-Timing",
+      `auth;dur=${duration.toFixed(2)}`,
     );
 
     return await next({
@@ -32,14 +32,14 @@ const base = os
   .use(async ({ next, context, procedure, path }) => {
     const start = performance.now();
     const meta = {
-      path: path.join('.'),
-      type: procedure['~orpc'].route.method,
+      path: path.join("."),
+      type: procedure["~orpc"].route.method,
       requestId: randomUUID(),
     };
 
-    const loggerForMiddleWare = logger.child({ ...meta, scope: 'procedure' });
+    const loggerForMiddleWare = logger.child({ ...meta, scope: "procedure" });
 
-    loggerForMiddleWare.info('Before');
+    loggerForMiddleWare.info("Before");
 
     try {
       const result = await next({
@@ -47,22 +47,22 @@ const base = os
       });
 
       const duration = performance.now() - start;
-      loggerForMiddleWare.info({ durationMs: duration }, 'After');
+      loggerForMiddleWare.info({ durationMs: duration }, "After");
       context.resHeaders?.append(
-        'Server-Timing',
-        `global;dur=${duration.toFixed(2)}`
+        "Server-Timing",
+        `global;dur=${duration.toFixed(2)}`,
       );
 
       return result;
     } catch (error) {
       const logLevel = (() => {
-        if (!(error instanceof ORPCError)) return 'error';
-        if (error.message === 'DEMO_MODE_ENABLED') return 'info';
+        if (!(error instanceof ORPCError)) return "error";
+        if (error.message === "DEMO_MODE_ENABLED") return "info";
         const errorCode = error.status;
-        if (errorCode >= 500) return 'error';
-        if (errorCode >= 400) return 'warn';
-        if (errorCode >= 300) return 'info';
-        return 'error';
+        if (errorCode >= 500) return "error";
+        if (errorCode >= 400) return "warn";
+        if (errorCode >= 300) return "info";
+        return "error";
       })();
 
       loggerForMiddleWare[logLevel](error);
@@ -79,12 +79,12 @@ const base = os
         .getStore()
         ?.prisma.map(
           (timing) =>
-            `db-${timing.model}-${timing.operation};dur=${timing.duration.toFixed(2)}`
+            `db-${timing.model}-${timing.operation};dur=${timing.duration.toFixed(2)}`,
         )
-        .join(', ');
+        .join(", ");
 
       if (serverTimingHeader) {
-        context.resHeaders?.append('Server-Timing', serverTimingHeader);
+        context.resHeaders?.append("Server-Timing", serverTimingHeader);
       }
 
       return result;
@@ -92,9 +92,9 @@ const base = os
   })
   // Demo Mode
   .use(async ({ next, procedure }) => {
-    if (envClient.VITE_IS_DEMO && procedure['~orpc'].route.method !== 'GET') {
-      throw new ORPCError('METHOD_NOT_SUPPORTED', {
-        message: 'DEMO_MODE_ENABLED',
+    if (envClient.VITE_IS_DEMO && procedure["~orpc"].route.method !== "GET") {
+      throw new ORPCError("METHOD_NOT_SUPPORTED", {
+        message: "DEMO_MODE_ENABLED",
       });
     }
     return await next();

@@ -1,48 +1,43 @@
-import { getUiState } from '@bearstudio/ui-state';
-import { useQuery } from '@tanstack/react-query';
-import dayjs from 'dayjs';
-import { motion } from 'framer-motion';
-import { AlertCircleIcon, CalendarIcon, MapPinIcon } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { useTranslation } from 'react-i18next';
+import { getUiState } from "@bearstudio/ui-state";
+import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
+import { motion } from "framer-motion";
+import { AlertCircleIcon, CalendarIcon, MapPinIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 
-import { orpc } from 'src/lib/orpc/client';
-import { cn } from 'src/lib/tailwind/utils';
-import { useIsMobile } from 'src/hooks/use-mobile';
+import { orpc } from "@/lib/orpc/client";
+import { cn } from "@/lib/tailwind/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-import { Avatar, AvatarFallback, AvatarImage } from 'src/components/ui/avatar';
-import { Badge } from 'src/components/ui/badge';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from 'src/components/ui/card';
-import { Skeleton } from 'src/components/ui/skeleton';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
-import { IconComponent } from './technology-icon';
+import { IconComponent } from "./technology-icon";
 
 export const ExperienceTimeline = () => {
-  const { i18n, t } = useTranslation(['cv']);
+  const { i18n, t } = useTranslation(["cv"]);
 
-  const locale = i18n?.language ?? 'en';
+  const locale = i18n?.language ?? "en";
 
   const isMobile = useIsMobile();
 
   const experiencesQuery = useQuery(
     orpc.cv.getExperiences.queryOptions({
-      input: { locale: locale as 'en' | 'fr' },
-    })
+      input: { locale: locale as "en" | "fr" },
+    }),
   );
   const { resolvedTheme } = useTheme();
 
   const ui = getUiState((set) => {
-    if (experiencesQuery.status === 'pending') return set('pending');
-    if (experiencesQuery.status === 'error') return set('error');
-    return set('default', {
+    if (experiencesQuery.status === "pending") return set("pending");
+    if (experiencesQuery.status === "error") return set("error");
+    return set("default", {
       experiences: experiencesQuery.data.sort(
         (a, b) =>
-          new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+          new Date(b.startDate).getTime() - new Date(a.startDate).getTime(),
       ),
     });
   });
@@ -50,18 +45,18 @@ export const ExperienceTimeline = () => {
   return (
     <>
       {ui
-        .match('pending', () => <Skeleton className="h-4 w-48" />)
-        .match('error', () => (
+        .match("pending", () => <Skeleton className="h-4 w-48" />)
+        .match("error", () => (
           <AlertCircleIcon className="size-4 text-muted-foreground" />
         ))
-        .match('default', ({ experiences }) => (
+        .match("default", ({ experiences }) => (
           <div className="space-y-8">
             <div className="mb-8 text-center">
               <h2 className="mb-2 text-3xl font-bold">
-                {t('cv:experience.title')}
+                {t("cv:experience.title")}
               </h2>
               <p className="text-muted-foreground">
-                {t('cv:experience.subtitle')}
+                {t("cv:experience.subtitle")}
               </p>
             </div>
 
@@ -69,8 +64,8 @@ export const ExperienceTimeline = () => {
               {/* Timeline line */}
               <div
                 className={cn(
-                  'absolute top-0 bottom-0 left-8 w-0.5 bg-border',
-                  isMobile ? 'left-5' : 'left-8'
+                  "absolute top-0 bottom-0 left-8 w-0.5 bg-border",
+                  isMobile ? "left-5" : "left-8",
                 )}
               />
 
@@ -87,8 +82,8 @@ export const ExperienceTimeline = () => {
                   <div>
                     <Avatar
                       className={cn(
-                        'border bg-white',
-                        isMobile ? 'size-10' : 'size-16'
+                        "border bg-white",
+                        isMobile ? "size-10" : "size-16",
                       )}
                     >
                       <AvatarImage
@@ -109,11 +104,11 @@ export const ExperienceTimeline = () => {
                       className="transition-shadow hover:shadow-lg"
                       style={{
                         color:
-                          resolvedTheme === 'dark'
-                            ? 'white'
+                          resolvedTheme === "dark"
+                            ? "white"
                             : experience.primaryColor,
                         backgroundColor:
-                          resolvedTheme === 'dark'
+                          resolvedTheme === "dark"
                             ? experience.primaryColor
                             : undefined,
                         boxShadow: `0 0 10px 0 ${experience.secondaryColor}`,
@@ -145,9 +140,9 @@ export const ExperienceTimeline = () => {
                         <div className="mt-2 flex items-center gap-2 text-sm">
                           <CalendarIcon className="h-4 w-4" />
                           <span>
-                            {dayjs(experience.startDate).format('MMM YYYY')} -{' '}
-                            {dayjs(experience.endDate).format('MMM YYYY') ||
-                              t('cv:experience.present')}
+                            {dayjs(experience.startDate).format("MMM YYYY")} -{" "}
+                            {dayjs(experience.endDate).format("MMM YYYY") ||
+                              t("cv:experience.present")}
                           </span>
                         </div>
                       </CardHeader>
@@ -158,7 +153,7 @@ export const ExperienceTimeline = () => {
                         <div className="space-y-4">
                           <div>
                             <h3 className="mb-2 font-semibold">
-                              {t('cv:experience.keyAchievements')}
+                              {t("cv:experience.keyAchievements")}
                             </h3>
                             <ul className="space-y-1">
                               {experience.achievements.map((achievement) => (
@@ -175,14 +170,14 @@ export const ExperienceTimeline = () => {
 
                           <div>
                             <h3 className="mb-2 font-semibold">
-                              {t('cv:experience.technologies')}
+                              {t("cv:experience.technologies")}
                             </h3>
                             <div className="flex flex-wrap gap-2">
                               {experience.technologies.map((tech) => {
                                 return (
                                   <Badge
                                     key={tech.name}
-                                    variant="outline"
+                                    variant="secondary"
                                     className="flex items-center gap-1 text-xs"
                                     style={{
                                       backgroundColor:

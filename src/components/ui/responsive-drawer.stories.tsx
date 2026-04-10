@@ -1,6 +1,6 @@
-import type { Meta } from '@storybook/react-vite';
+import type { Meta } from "@storybook/react-vite";
 
-import { Button } from 'src/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   ResponsiveDrawer,
   ResponsiveDrawerBody,
@@ -11,17 +11,17 @@ import {
   ResponsiveDrawerHeader,
   ResponsiveDrawerTitle,
   ResponsiveDrawerTrigger,
-} from 'src/components/ui/responsive-drawer';
+} from "@/components/ui/responsive-drawer";
 
 export default {
-  title: 'ResponsiveDrawer',
+  title: "ResponsiveDrawer",
 } satisfies Meta<typeof ResponsiveDrawer>;
 
 export const Default = () => {
   return (
     <ResponsiveDrawer>
-      <ResponsiveDrawerTrigger asChild>
-        <Button variant="secondary">Open</Button>
+      <ResponsiveDrawerTrigger render={<Button variant="secondary" />}>
+        Open
       </ResponsiveDrawerTrigger>
       <ResponsiveDrawerContent>
         <ResponsiveDrawerHeader>
@@ -30,8 +30,8 @@ export const Default = () => {
         </ResponsiveDrawerHeader>
         <ResponsiveDrawerBody>Content</ResponsiveDrawerBody>
         <ResponsiveDrawerFooter>
-          <ResponsiveDrawerClose asChild>
-            <Button>Close</Button>
+          <ResponsiveDrawerClose render={<Button />}>
+            Close
           </ResponsiveDrawerClose>
         </ResponsiveDrawerFooter>
       </ResponsiveDrawerContent>

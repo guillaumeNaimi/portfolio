@@ -1,24 +1,19 @@
-import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
+import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
-import { useIsMobile } from 'src/hooks/use-mobile';
+import { useIsMobile } from "@/hooks/use-mobile";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from 'src/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { PageLayout, PageLayoutContent } from '@/layout/app/page-layout';
+import { PageLayout, PageLayoutContent } from "@/layout/app/page-layout";
 
-import { EducationSection } from './components/education-section';
-import { ExperienceTimeline } from './components/experience-timeline';
-import { ProjectShowcase } from './components/project-showcase';
-import { SkillsRadar } from './components/skills-radar';
+import { EducationSection } from "./components/education-section";
+import { ExperienceTimeline } from "./components/experience-timeline";
+import { ProjectShowcase } from "./components/project-showcase";
+import { SkillsRadar } from "./components/skills-radar";
 
 export const PageCV = () => {
-  const { t } = useTranslation(['cv']);
+  const { t } = useTranslation(["cv"]);
   const isMobile = useIsMobile();
 
   return (
@@ -35,8 +30,8 @@ export const PageCV = () => {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8 text-center"
           >
-            <h1 className="mb-4 text-4xl font-bold">{t('cv:title')}</h1>
-            <p className="text-lg text-muted-foreground">{t('cv:subtitle')}</p>
+            <h1 className="mb-4 text-4xl font-bold">{t("cv:title")}</h1>
+            <p className="text-lg text-muted-foreground">{t("cv:subtitle")}</p>
           </motion.header>
 
           {/* Main Content */}
@@ -50,30 +45,30 @@ export const PageCV = () => {
                 <TabsTrigger
                   id="cv-tabs-experience"
                   value="experience"
-                  className={isMobile ? 'text-xs' : ''}
+                  className={isMobile ? "text-xs" : ""}
                 >
-                  {t('cv:tabs.experience')}
+                  {t("cv:tabs.experience")}
                 </TabsTrigger>
                 <TabsTrigger
                   id="cv-tabs-skills"
                   value="skills"
-                  className={isMobile ? 'text-xs' : ''}
+                  className={isMobile ? "text-xs" : ""}
                 >
-                  {t('cv:tabs.skills')}
+                  {t("cv:tabs.skills")}
                 </TabsTrigger>
                 <TabsTrigger
                   id="cv-tabs-projects"
                   value="projects"
-                  className={isMobile ? 'text-xs' : ''}
+                  className={isMobile ? "text-xs" : ""}
                 >
-                  {t('cv:tabs.projects')}
+                  {t("cv:tabs.projects")}
                 </TabsTrigger>
                 <TabsTrigger
                   id="cv-tabs-education"
                   value="education"
-                  className={isMobile ? 'text-xs' : ''}
+                  className={isMobile ? "text-xs" : ""}
                 >
-                  {t('cv:tabs.education')}
+                  {t("cv:tabs.education")}
                 </TabsTrigger>
               </TabsList>
 

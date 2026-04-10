@@ -1,11 +1,11 @@
-import type { ReactNode } from 'react';
-import { ThemeProvider } from 'next-themes';
-import 'src/lib/dayjs/config';
-import 'src/lib/i18n';
+import { ThemeProvider } from "next-themes";
+import type { ReactNode } from "react";
+import "@/lib/dayjs/config";
+import "@/lib/i18n";
 
-import { QueryClientProvider } from 'src/lib/tanstack-query/provider';
+import { QueryClientProvider } from "@/lib/tanstack-query/provider";
 
-import { Sonner } from 'src/components/ui/sonner';
+import { Sonner } from "@/components/ui/sonner";
 
 export const Providers = (props: { children: ReactNode }) => {
   return (

@@ -1,63 +1,58 @@
-import { getUiState } from '@bearstudio/ui-state';
-import { useQuery } from '@tanstack/react-query';
-import { AnimatePresence, motion } from 'framer-motion';
+import { getUiState } from "@bearstudio/ui-state";
+import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   AlertCircleIcon,
   ExternalLinkIcon,
   EyeIcon,
   GithubIcon,
-} from 'lucide-react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+} from "lucide-react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { orpc } from 'src/lib/orpc/client';
+import { orpc } from "@/lib/orpc/client";
 
-import { Badge } from 'src/components/ui/badge';
-import { Button } from 'src/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from 'src/components/ui/card';
-import { Skeleton } from 'src/components/ui/skeleton';
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
-import { IconComponent } from './technology-icon';
-import { Project } from '../schema';
+import { IconComponent } from "./technology-icon";
+import { Project } from "../schema";
 
 export const ProjectShowcase = () => {
-  const { i18n, t } = useTranslation(['cv']);
+  const { i18n, t } = useTranslation(["cv"]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const locale = i18n?.language ?? 'en';
+  const locale = i18n?.language ?? "en";
 
   const projectsQuery = useQuery(
     orpc.cv.getProjects.queryOptions({
-      input: { locale: locale as 'en' | 'fr' },
-    })
+      input: { locale: locale as "en" | "fr" },
+    }),
   );
 
   const ui = getUiState((set) => {
-    if (projectsQuery.status === 'pending') return set('pending');
-    if (projectsQuery.status === 'error') return set('error');
-    return set('default', { projects: projectsQuery.data });
+    if (projectsQuery.status === "pending") return set("pending");
+    if (projectsQuery.status === "error") return set("error");
+    return set("default", { projects: projectsQuery.data });
   });
 
   return (
     <>
       {ui
-        .match('pending', () => <Skeleton className="h-4 w-48" />)
-        .match('error', () => (
+        .match("pending", () => <Skeleton className="h-4 w-48" />)
+        .match("error", () => (
           <AlertCircleIcon className="size-4 text-muted-foreground" />
         ))
-        .match('default', ({ projects }) => (
+        .match("default", ({ projects }) => (
           <div className="space-y-8">
             <div className="mb-8 text-center">
               <h2 className="mb-2 text-3xl font-bold">
-                {t('cv:projects.title')}
+                {t("cv:projects.title")}
               </h2>
               <p className="text-muted-foreground">
-                {t('cv:projects.subtitle')}
+                {t("cv:projects.subtitle")}
               </p>
             </div>
 
@@ -88,7 +83,7 @@ export const ProjectShowcase = () => {
                             className="absolute top-2 right-2"
                             variant="default"
                           >
-                            {t('cv:projects.featured')}
+                            {t("cv:projects.featured")}
                           </Badge>
                         )}
                       </div>
@@ -106,11 +101,11 @@ export const ProjectShowcase = () => {
                         {project.technologies.map((tech) => (
                           <Badge
                             key={tech.name}
-                            variant="outline"
+                            variant="secondary"
                             className="text-xs"
                             style={{
                               backgroundColor: tech.color,
-                              color: 'white',
+                              color: "white",
                             }}
                           >
                             {tech.icon && (
@@ -125,7 +120,6 @@ export const ProjectShowcase = () => {
                         {project.githubUrl && (
                           <Button
                             size="sm"
-                            asChild
                             onClick={(e) => e.stopPropagation()}
                           >
                             <a
@@ -134,14 +128,13 @@ export const ProjectShowcase = () => {
                               rel="noopener noreferrer"
                             >
                               <GithubIcon className="mr-1 h-4 w-4" />
-                              {t('cv:projects.buttons.code')}
+                              {t("cv:projects.buttons.code")}
                             </a>
                           </Button>
                         )}
                         {project.liveUrl && (
                           <Button
                             size="sm"
-                            asChild
                             onClick={(e) => e.stopPropagation()}
                           >
                             <a
@@ -150,7 +143,7 @@ export const ProjectShowcase = () => {
                               rel="noopener noreferrer"
                             >
                               <ExternalLinkIcon className="mr-1 h-4 w-4" />
-                              {t('cv:projects.buttons.live')}
+                              {t("cv:projects.buttons.live")}
                             </a>
                           </Button>
                         )}
@@ -210,7 +203,7 @@ export const ProjectShowcase = () => {
 
                         <div>
                           <h3 className="mb-2 font-semibold">
-                            {t('cv:projects.modal.technologiesUsed')}
+                            {t("cv:projects.modal.technologiesUsed")}
                           </h3>
                           <div className="flex flex-wrap gap-2">
                             {selectedProject.technologies.map((tech) => (
@@ -219,7 +212,7 @@ export const ProjectShowcase = () => {
                                 variant="secondary"
                                 style={{
                                   backgroundColor: tech.color,
-                                  color: 'white',
+                                  color: "white",
                                 }}
                               >
                                 {tech.name}
@@ -230,32 +223,26 @@ export const ProjectShowcase = () => {
 
                         <div className="flex gap-2">
                           {selectedProject.githubUrl && (
-                            <Button
-                              asChild
-                              onClick={(e) => e.stopPropagation()}
-                            >
+                            <Button onClick={(e) => e.stopPropagation()}>
                               <a
                                 href={selectedProject.githubUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
                                 <GithubIcon className="mr-2 h-4 w-4" />
-                                {t('cv:projects.buttons.viewCode')}
+                                {t("cv:projects.buttons.viewCode")}
                               </a>
                             </Button>
                           )}
                           {selectedProject.liveUrl && (
-                            <Button
-                              asChild
-                              onClick={(e) => e.stopPropagation()}
-                            >
+                            <Button onClick={(e) => e.stopPropagation()}>
                               <a
                                 href={selectedProject.liveUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
                                 <EyeIcon className="mr-2 h-4 w-4" />
-                                {t('cv:projects.buttons.viewLive')}
+                                {t("cv:projects.buttons.viewLive")}
                               </a>
                             </Button>
                           )}

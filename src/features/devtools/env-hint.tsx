@@ -1,9 +1,9 @@
-import { envClient } from 'src/env/client';
+import { envClient } from "@/env/client";
 
 export const getEnvHintTitlePrefix = () => {
   if (envClient.VITE_ENV_EMOJI) return `${envClient.VITE_ENV_EMOJI} `;
   if (envClient.VITE_ENV_NAME) return `[${envClient.VITE_ENV_NAME}] `;
-  return '';
+  return "";
 };
 
 export const EnvHint = () => {

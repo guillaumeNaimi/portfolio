@@ -1,10 +1,10 @@
-import { createAuthClient } from 'better-auth/react';
+import { createAuthClient } from "better-auth/react";
 
-import { envClient } from 'src/env/client';
+import { envClient } from "@/env/client";
 
 export const authClient = createAuthClient({
   baseURL:
-    typeof window === 'undefined'
+    typeof window === "undefined"
       ? envClient.VITE_BASE_URL
       : window.location.origin,
 });

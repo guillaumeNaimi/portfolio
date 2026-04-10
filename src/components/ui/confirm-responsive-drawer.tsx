@@ -4,11 +4,11 @@ import {
   ReactElement,
   ReactNode,
   useState,
-} from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDisclosure } from 'react-use-disclosure';
+} from "react";
+import { useTranslation } from "react-i18next";
+import { useDisclosure } from "react-use-disclosure";
 
-import { Button } from 'src/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   ResponsiveDrawer,
   ResponsiveDrawerClose,
@@ -17,7 +17,7 @@ import {
   ResponsiveDrawerFooter,
   ResponsiveDrawerHeader,
   ResponsiveDrawerTitle,
-} from 'src/components/ui/responsive-drawer';
+} from "@/components/ui/responsive-drawer";
 
 export const ConfirmResponsiveDrawer = (props: {
   enabled?: boolean;
@@ -26,16 +26,16 @@ export const ConfirmResponsiveDrawer = (props: {
   description?: ReactNode;
   onConfirm: () => unknown | Promise<unknown>;
   confirmText?: ReactNode;
-  confirmVariant?: ComponentProps<typeof Button>['variant'];
+  confirmVariant?: ComponentProps<typeof Button>["variant"];
   cancelText?: ReactNode;
 }) => {
-  const { t } = useTranslation(['common', 'components']);
+  const { t } = useTranslation(["common", "components"]);
   const [isPending, setIsPending] = useState(false);
   const { close, open, isOpen } = useDisclosure();
 
   const displayHeading =
     !props.title && !props.description
-      ? t('components:confirmResponsiveDrawer.heading')
+      ? t("components:confirmResponsiveDrawer.heading")
       : props.title;
 
   if (props.enabled === false) {
@@ -84,7 +84,7 @@ export const ConfirmResponsiveDrawer = (props: {
           hideCloseButton
           className="sm:max-w-xs"
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               e.preventDefault();
               handleConfirm();
             }
@@ -97,21 +97,20 @@ export const ConfirmResponsiveDrawer = (props: {
             </ResponsiveDrawerDescription>
           </ResponsiveDrawerHeader>
           <ResponsiveDrawerFooter>
-            <ResponsiveDrawerClose asChild>
-              <Button size="lg" variant="secondary" className="max-sm:w-full">
-                {props.cancelText ??
-                  t('components:confirmResponsiveDrawer.cancelText')}
-              </Button>
+            <ResponsiveDrawerClose
+              render={<Button variant="secondary" className="max-sm:w-full" />}
+            >
+              {props.cancelText ??
+                t("components:confirmResponsiveDrawer.cancelText")}
             </ResponsiveDrawerClose>
             <Button
-              size="lg"
-              variant={props.confirmVariant ?? 'default'}
+              variant={props.confirmVariant ?? "default"}
               className="max-sm:w-full"
               loading={isPending}
               onClick={handleConfirm}
             >
               {props.confirmText ??
-                t('components:confirmResponsiveDrawer.confirmText')}
+                t("components:confirmResponsiveDrawer.confirmText")}
             </Button>
           </ResponsiveDrawerFooter>
         </ResponsiveDrawerContent>

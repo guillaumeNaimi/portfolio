@@ -1,8 +1,8 @@
-import { createContext, ReactNode, use, useId, useMemo } from 'react';
+import { createContext, ReactNode, use, useId, useMemo } from "react";
 
-import { cn } from 'src/lib/tailwind/utils';
+import { cn } from "@/lib/tailwind/utils";
 
-type FormFieldSize = 'sm' | 'default' | 'lg';
+import { FormFieldSize } from "@/components/form/types";
 
 type FormFieldProps = {
   id?: string;
@@ -23,12 +23,12 @@ export const FormField = (props: FormFieldProps) => {
       errorId: `${id}-error`,
       size: props.size,
     }),
-    [id, props.size]
+    [id, props.size],
   );
 
   return (
     <FormFieldContext value={contextValue}>
-      <div className={cn('flex flex-col gap-1.5', props.className)}>
+      <div className={cn("flex flex-col gap-1.5", props.className)}>
         {props.children}
       </div>
     </FormFieldContext>
@@ -44,13 +44,23 @@ type FormFieldContextValue = {
 };
 
 export const FormFieldContext = createContext<FormFieldContextValue | null>(
-  null
+  null,
 );
 
 export const useFormField = () => {
   const fieldContext = use(FormFieldContext);
   if (!fieldContext) {
-    throw new Error('Missing <FormField /> parent component');
+    throw new Error("Missing <FormField /> parent component");
   }
-  return fieldContext;
+  return {
+    ...fieldContext,
+    describedBy: (invalid: boolean) =>
+      invalid
+        ? `${fieldContext.descriptionId} ${fieldContext.errorId}`
+        : fieldContext.descriptionId,
+  };
+};
+
+export const useFormFieldUnsafe = () => {
+  return use(FormFieldContext);
 };

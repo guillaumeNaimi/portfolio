@@ -8,8 +8,6 @@
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitAny": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
     "paths": {
       "@/*": ["./src/*"]
     },
@@ -18,7 +16,7 @@
       {
         "name": "ts-plugin-sort-import-suggestions",
         "moveUpPatterns": ["@/", "\\.{1,2}/"],
-        "moveDownPatterns": ["lucide-react", "radix-ui", "@react-email"]
+        "moveDownPatterns": ["lucide-react", "@react-email"]
       }
     ]
   }

@@ -1,9 +1,9 @@
-import type { Meta } from '@storybook/react-vite';
+import type { Meta } from "@storybook/react-vite";
 
-import { ThemeSwitcher } from 'src/components/ui/theme-switcher';
+import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 
 export default {
-  title: 'Theme Switcher',
+  title: "Theme Switcher",
 } satisfies Meta<typeof ThemeSwitcher>;
 
 export const Default = () => {

@@ -1,35 +1,35 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Meta } from '@storybook/react-vite';
-import { CheckIcon } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Meta } from "@storybook/react-vite";
+import { CheckIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { cn } from 'src/lib/tailwind/utils';
+import { cn } from "@/lib/tailwind/utils";
 
 import {
   Form,
   FormField,
   FormFieldController,
   FormFieldHelper,
-} from 'src/components/form';
-import { onSubmit } from 'src/components/form/docs.utils';
-import { FieldCheckbox } from 'src/components/form/field-checkbox';
-import { Button } from 'src/components/ui/button';
+} from "@/components/form";
+import { onSubmit } from "@/components/form/docs.utils";
+import { FieldCheckbox } from "@/components/form/field-checkbox";
+import { Button } from "@/components/ui/button";
 
 export default {
-  title: 'Form/FieldCheckbox',
+  title: "Form/FieldCheckbox",
   component: FieldCheckbox,
 } satisfies Meta<typeof FieldCheckbox>;
 
 const zFormSchema = () =>
   z.object({
     lovesBears: z.boolean().refine((val) => val === true, {
-      message: 'Please say you love bears.',
+      error: "Please say you love bears.",
     }),
   });
 
 const formOptions = {
-  mode: 'onBlur',
+  mode: "onBlur",
   resolver: zodResolver(zFormSchema()),
   defaultValues: {
     lovesBears: false,
@@ -132,31 +132,27 @@ export const CustomCheckbox = () => {
             control={form.control}
             labelProps={{
               className:
-                'relative flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-border p-4 transition-colors outline-none focus-within:ring-[3px] focus-within:ring-ring/50 hover:bg-muted/50 has-[&[data-checked]]:bg-primary/5',
+                "relative flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-border p-4 transition-colors outline-none focus-within:ring-[3px] focus-within:ring-ring/50 hover:bg-muted/50 has-[:checked]:border-transparent has-[:checked]:bg-primary has-[:checked]:text-primary-foreground",
             }}
             render={(props, { checked }) => {
               return (
-                <div
+                <button
+                  type="button"
                   {...props}
                   className="flex w-full items-center justify-between outline-none"
                 >
-                  <div className="flex flex-col">
-                    <span className="font-medium">I love bears !</span>
-                    <FormFieldHelper>
-                      There is only one possible answer.
-                    </FormFieldHelper>
-                  </div>
-                  <div
+                  <span className="font-medium">I love bears</span>
+                  <span
                     className={cn(
-                      'aspect-square rounded-full bg-primary p-1 opacity-0',
+                      "rounded-full bg-primary-foreground p-1 opacity-0",
                       {
-                        'opacity-100': checked,
-                      }
+                        "opacity-100": checked,
+                      },
                     )}
                   >
-                    <CheckIcon className="h-4 w-4 text-primary-foreground" />
-                  </div>
-                </div>
+                    <CheckIcon className="size-4 text-primary" />
+                  </span>
+                </button>
               );
             }}
           />

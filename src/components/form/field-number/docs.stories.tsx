@@ -1,7 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Meta } from '@storybook/react-vite';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Meta } from "@storybook/react-vite";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 import {
   Form,
@@ -9,22 +9,22 @@ import {
   FormFieldController,
   FormFieldHelper,
   FormFieldLabel,
-} from 'src/components/form';
-import { onSubmit } from 'src/components/form/docs.utils';
-import { FieldNumber } from 'src/components/form/field-number';
-import { Button } from 'src/components/ui/button';
+} from "@/components/form";
+import { onSubmit } from "@/components/form/docs.utils";
+import { FieldNumber } from "@/components/form/field-number";
+import { Button } from "@/components/ui/button";
 
 export default {
-  title: 'Form/FieldNumber',
+  title: "Form/FieldNumber",
 } satisfies Meta<typeof FieldNumber>;
 
 const zFormSchema = () =>
   z.object({
-    balance: z.number().min(0),
+    balance: z.number({ error: "Required" }).min(0),
   });
 
 const formOptions = {
-  mode: 'onBlur',
+  mode: "onBlur",
   resolver: zodResolver(zFormSchema()),
 } as const;
 
@@ -95,8 +95,8 @@ export const Currency = () => {
             name="balance"
             placeholder="Bearcoin"
             format={{
-              style: 'currency',
-              currency: 'EUR',
+              style: "currency",
+              currency: "EUR",
             }}
             inCents
           />

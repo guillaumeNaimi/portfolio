@@ -2,7 +2,7 @@ import type {
   Inputs as OrpcInputs,
   Outputs as OrpcOutputs,
   Router as OrpcRouter,
-} from 'src/server/router';
+} from "@/server/router";
 
 export type Inputs = OrpcInputs;
 export type Outputs = OrpcOutputs;

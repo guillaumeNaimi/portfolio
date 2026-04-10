@@ -1,10 +1,10 @@
-import { CalendarIcon } from 'lucide-react';
-import { ComponentProps } from 'react';
-import { useTranslation } from 'react-i18next';
+import { CalendarIcon } from "lucide-react";
+import { ComponentProps } from "react";
+import { useTranslation } from "react-i18next";
 
-import { cn } from 'src/lib/tailwind/utils';
+import { cn } from "@/lib/tailwind/utils";
 
-import { Button } from 'src/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 export type DatePickerButtonProps = ComponentProps<typeof Button>;
 
@@ -13,19 +13,19 @@ export const DatePickerButton = ({
   children,
   ...props
 }: DatePickerButtonProps) => {
-  const { t } = useTranslation(['components']);
+  const { t } = useTranslation(["components"]);
   return (
     <Button
       variant="secondary"
       className={cn(
-        'w-full max-w-[240px] justify-start text-left font-normal',
-        !children && 'text-muted-foreground',
-        className
+        "w-full max-w-60 justify-start text-left font-normal",
+        !children && "text-muted-foreground",
+        className,
       )}
       {...props}
     >
       <CalendarIcon />
-      {children ?? t('components:datePickerButton.pickADate')}
+      {children ?? t("components:datePickerButton.pickADate")}
     </Button>
   );
 };

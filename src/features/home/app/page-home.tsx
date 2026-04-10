@@ -1,25 +1,25 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import {
   ArrowRightIcon,
   GithubIcon,
   LinkedinIcon,
   MailIcon,
-} from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-import { Button } from 'src/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from 'src/components/ui/card';
+} from "@/components/ui/card";
 
-import { PageLayout, PageLayoutContent } from '@/layout/app/page-layout';
+import { PageLayout, PageLayoutContent } from "@/layout/app/page-layout";
 
 export const PageHome = () => {
-  const { t } = useTranslation(['common']);
+  const { t } = useTranslation(["common"]);
 
   return (
     <PageLayout>
@@ -53,27 +53,27 @@ export const PageHome = () => {
 
             <div className="space-y-4">
               <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
-                {t('common:hero.title')}
+                {t("common:hero.title")}
               </h1>
               <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
-                {t('common:hero.subtitle')}
+                {t("common:hero.subtitle")}
               </p>
             </div>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild size="lg">
+              <Button size="lg">
                 <a href="/cv" data-testid="hero-cv-link">
-                  {t('common:hero.viewCV')}
+                  {t("common:hero.viewCV")}
                   <ArrowRightIcon className="ml-2 h-4 w-4" />
                 </a>
               </Button>
-              <Button asChild variant="secondary" size="lg">
+              <Button variant="secondary" size="lg">
                 <a
                   href="mailto:naimi.guillaume@gmail.com"
                   data-testid="hero-contact-link"
                 >
                   <MailIcon className="mr-2 h-4 w-4" />
-                  {t('common:hero.contact')}
+                  {t("common:hero.contact")}
                 </a>
               </Button>
             </div>
@@ -87,28 +87,28 @@ export const PageHome = () => {
             className="space-y-6"
           >
             <h2 className="text-center text-2xl font-semibold">
-              {t('common:quickActions.title')}
+              {t("common:quickActions.title")}
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <GithubIcon className="h-5 w-5" />
-                    {t('common:quickActions.github.title')}
+                    {t("common:quickActions.github.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="mb-4">
-                    {t('common:quickActions.github.description')}
+                    {t("common:quickActions.github.description")}
                   </CardDescription>
-                  <Button asChild variant="secondary" className="w-full">
+                  <Button variant="secondary" className="w-full">
                     <a
                       href="https://github.com/guillaumeNaimi"
                       target="_blank"
                       rel="noopener noreferrer"
                       data-testid="github-link"
                     >
-                      {t('common:quickActions.github.button')}
+                      {t("common:quickActions.github.button")}
                     </a>
                   </Button>
                 </CardContent>
@@ -118,21 +118,21 @@ export const PageHome = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <LinkedinIcon className="h-5 w-5" />
-                    {t('common:quickActions.linkedin.title')}
+                    {t("common:quickActions.linkedin.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="mb-4">
-                    {t('common:quickActions.linkedin.description')}
+                    {t("common:quickActions.linkedin.description")}
                   </CardDescription>
-                  <Button asChild variant="secondary" className="w-full">
+                  <Button variant="secondary" className="w-full">
                     <a
                       href="https://www.linkedin.com/in/guillaume-naimi-b60737105/"
                       target="_blank"
                       rel="noopener noreferrer"
                       data-testid="linkedin-link"
                     >
-                      {t('common:quickActions.linkedin.button')}
+                      {t("common:quickActions.linkedin.button")}
                     </a>
                   </Button>
                 </CardContent>

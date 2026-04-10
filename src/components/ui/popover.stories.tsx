@@ -1,10 +1,10 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import type { Meta } from '@storybook/react-vite';
-import { useForm } from 'react-hook-form';
-import { useDisclosure } from 'react-use-disclosure';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { Meta } from "@storybook/react-vite";
+import { useForm } from "react-hook-form";
+import { useDisclosure } from "react-use-disclosure";
+import { z } from "zod";
 
-import { zu } from 'src/lib/zod/zod-utils';
+import { zu } from "@/lib/zod/zod-utils";
 
 import {
   Form,
@@ -12,25 +12,28 @@ import {
   FormFieldController,
   FormFieldHelper,
   FormFieldLabel,
-} from 'src/components/form';
-import { onSubmit } from 'src/components/form/docs.utils';
-import { Button } from 'src/components/ui/button';
+} from "@/components/form";
+import { onSubmit } from "@/components/form/docs.utils";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
   PopoverTrigger,
-} from 'src/components/ui/popover';
+} from "@/components/ui/popover";
 
 export default {
-  title: 'Popover',
+  title: "Popover",
 } satisfies Meta<typeof Popover>;
 
 export const Default = () => {
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <Button>Click me</Button>
-      </PopoverTrigger>
+      <PopoverTrigger render={<Button />}>Click me</PopoverTrigger>
       <PopoverContent>The content</PopoverContent>
     </Popover>
   );
@@ -58,17 +61,15 @@ export const Controlled = () => {
 
 const zFormSchema = () =>
   z.object({
-    name: zu.string.nonEmpty(z.string(), {
-      required_error: 'Name is required',
-    }),
+    name: zu.fieldText.required({ error: "Name is required" }),
   });
 
 export const WithForm = () => {
   const form = useForm({
-    mode: 'onSubmit',
+    mode: "onSubmit",
     resolver: zodResolver(zFormSchema()),
     defaultValues: {
-      name: '',
+      name: "",
     },
   });
   const popover = useDisclosure();
@@ -88,9 +89,7 @@ export const WithForm = () => {
       }}
       open={popover.isOpen}
     >
-      <PopoverTrigger asChild>
-        <Button>Info</Button>
-      </PopoverTrigger>
+      <PopoverTrigger render={<Button />}>Info</PopoverTrigger>
       <PopoverContent>
         <Form
           {...form}
@@ -118,5 +117,80 @@ export const WithForm = () => {
         </Form>
       </PopoverContent>
     </Popover>
+  );
+};
+
+export const WithHeaderAndDescription = () => {
+  return (
+    <Popover>
+      <PopoverTrigger render={<Button variant="secondary" />}>
+        Open popover
+      </PopoverTrigger>
+      <PopoverContent className="w-80">
+        <PopoverHeader>
+          <PopoverTitle>Dimensions</PopoverTitle>
+          <PopoverDescription>
+            Set the dimensions for the layer.
+          </PopoverDescription>
+        </PopoverHeader>
+        <div className="grid gap-2">
+          <div className="grid grid-cols-3 items-center gap-4">
+            <Label htmlFor="width">Width</Label>
+            <Input id="width" defaultValue="100%" className="col-span-2 h-8" />
+          </div>
+          <div className="grid grid-cols-3 items-center gap-4">
+            <Label htmlFor="maxWidth">Max. width</Label>
+            <Input
+              id="maxWidth"
+              defaultValue="300px"
+              className="col-span-2 h-8"
+            />
+          </div>
+          <div className="grid grid-cols-3 items-center gap-4">
+            <Label htmlFor="height">Height</Label>
+            <Input id="height" defaultValue="25px" className="col-span-2 h-8" />
+          </div>
+          <div className="grid grid-cols-3 items-center gap-4">
+            <Label htmlFor="maxHeight">Max. height</Label>
+            <Input
+              id="maxHeight"
+              defaultValue="none"
+              className="col-span-2 h-8"
+            />
+          </div>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+export const Placements = () => {
+  return (
+    <div className="flex min-h-[300px] items-center justify-center gap-4">
+      <Popover>
+        <PopoverTrigger render={<Button variant="secondary" />}>
+          Top
+        </PopoverTrigger>
+        <PopoverContent side="top">Popover on top</PopoverContent>
+      </Popover>
+      <Popover>
+        <PopoverTrigger render={<Button variant="secondary" />}>
+          Right
+        </PopoverTrigger>
+        <PopoverContent side="right">Popover on right</PopoverContent>
+      </Popover>
+      <Popover>
+        <PopoverTrigger render={<Button variant="secondary" />}>
+          Bottom
+        </PopoverTrigger>
+        <PopoverContent side="bottom">Popover on bottom</PopoverContent>
+      </Popover>
+      <Popover>
+        <PopoverTrigger render={<Button variant="secondary" />}>
+          Left
+        </PopoverTrigger>
+        <PopoverContent side="left">Popover on left</PopoverContent>
+      </Popover>
+    </div>
   );
 };

@@ -1,6 +1,6 @@
-import { betterAuth } from 'better-auth';
+import { betterAuth } from "better-auth";
 
-import { envServer } from 'src/env/server';
+import { envServer } from "@/env/server";
 
 export const auth = betterAuth({
   socialProviders: {

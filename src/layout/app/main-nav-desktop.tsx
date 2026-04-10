@@ -1,15 +1,15 @@
-import { Link, ValidateLinkOptions } from '@tanstack/react-router';
-import { FC, ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Link, ValidateLinkOptions } from "@tanstack/react-router";
+import { FC, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
-import { LocalSwitcher } from 'src/components/ui/local-switcher';
-import { ThemeSwitcher } from 'src/components/ui/theme-switcher';
+import { LocalSwitcher } from "@/components/ui/local-switcher";
+import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 
-import { MAIN_NAV_LINKS } from '@/layout/app/main-nav-config';
+import { MAIN_NAV_LINKS } from "@/layout/app/main-nav-config";
 
 export const MainNavDesktop = () => {
-  const { t } = useTranslation(['layout']);
-  const HEIGHT = 'calc(56px + env(safe-area-inset-top))';
+  const { t } = useTranslation(["layout"]);
+  const HEIGHT = "calc(56px + env(safe-area-inset-top))";
   return (
     <div className="hidden md:flex">
       <div

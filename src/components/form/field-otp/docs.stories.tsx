@@ -1,35 +1,38 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { zu } from 'src/lib/zod/zod-utils';
+import { zu } from "@/lib/zod/zod-utils";
 
-import { onSubmit } from 'src/components/form/docs.utils';
-import { Button } from 'src/components/ui/button';
-
-import { Form, FormField, FormFieldController, FormFieldLabel } from '..';
+import {
+  Form,
+  FormField,
+  FormFieldController,
+  FormFieldLabel,
+} from "@/components/form";
+import { onSubmit } from "@/components/form/docs.utils";
+import { Button } from "@/components/ui/button";
 
 export default {
-  title: 'Form/FieldOtp',
+  title: "Form/FieldOtp",
 };
 
 const zFormSchema = (options: { length?: number } = {}) => {
   const length = options.length ?? 6;
   return z.object({
-    code: zu.string.nonEmpty(
-      z
-        .string()
-        .min(length, `Code is ${length} digits`)
-        .max(length, `Code is ${length} digits`),
-      {
-        required_error: 'Code is required',
-      }
-    ),
+    code: zu.fieldText
+      .required({ error: "Invalid code" })
+      .pipe(
+        z
+          .string()
+          .min(length, `Code is ${length} digits`)
+          .max(length, `Code is ${length} digits`),
+      ),
   });
 };
 
 const formOptions = {
-  mode: 'onBlur',
+  mode: "onBlur",
   resolver: zodResolver(zFormSchema()),
 } as const;
 
@@ -60,7 +63,7 @@ export const DefaultValue = () => {
   const form = useForm({
     ...formOptions,
     defaultValues: {
-      code: '927342',
+      code: "927342",
     },
   });
 

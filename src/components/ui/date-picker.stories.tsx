@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Button } from 'src/components/ui/button';
-import { DatePicker } from 'src/components/ui/date-picker';
+import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/ui/date-picker";
 import {
   Dialog,
   DialogBody,
@@ -12,10 +12,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from 'src/components/ui/dialog';
+} from "@/components/ui/dialog";
 
 export default {
-  title: 'DatePicker',
+  title: "DatePicker",
 };
 
 export const Default = () => {
@@ -52,8 +52,8 @@ export const InDialog = () => {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="secondary">Open</Button>
+      <DialogTrigger render={<Button variant="secondary" />}>
+        Open
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -64,9 +64,7 @@ export const InDialog = () => {
           <DatePicker onChange={(value) => setDate(value)} value={date} />
         </DialogBody>
         <DialogFooter>
-          <DialogClose asChild>
-            <Button>Save</Button>
-          </DialogClose>
+          <DialogClose render={<Button />}>Save</DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

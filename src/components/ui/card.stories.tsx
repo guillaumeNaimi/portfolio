@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react-vite';
+import type { Meta } from "@storybook/react-vite";
 
 import {
   Card,
@@ -7,10 +7,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from 'src/components/ui/card';
+} from "@/components/ui/card";
 
 export default {
-  title: 'Card',
+  title: "Card",
 } satisfies Meta<typeof Card>;
 
 export function Default() {

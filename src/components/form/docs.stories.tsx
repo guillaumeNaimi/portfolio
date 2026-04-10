@@ -1,9 +1,9 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Meta } from '@storybook/react-vite';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Meta } from "@storybook/react-vite";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { zu } from 'src/lib/zod/zod-utils';
+import { zu } from "@/lib/zod/zod-utils";
 
 import {
   Form,
@@ -12,30 +12,33 @@ import {
   FormFieldError,
   FormFieldHelper,
   FormFieldLabel,
-} from 'src/components/form';
-import { onSubmit } from 'src/components/form/docs.utils';
-import { Button } from 'src/components/ui/button';
-import { Input } from 'src/components/ui/input';
+} from "@/components/form";
+import { onSubmit } from "@/components/form/docs.utils";
+import { Button } from "@/components/ui/button";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
 
 export default {
-  title: 'Form/Form',
+  title: "Form/Form",
 } satisfies Meta<typeof Form>;
 
 const zFormSchema = () =>
   z.object({
-    name: zu.string.nonEmpty(z.string(), {
-      required_error: 'Name is required',
-    }),
-    other: zu.string.nonEmptyNullish(z.string()),
+    name: zu.fieldText.required(),
+    other: zu.fieldText.required(),
   });
 
 export const Default = () => {
   const form = useForm({
-    mode: 'onBlur',
+    mode: "onBlur",
     resolver: zodResolver(zFormSchema()),
     defaultValues: {
-      name: '',
-      other: '',
+      name: "",
+      other: "",
     },
   });
 
@@ -53,9 +56,18 @@ export const Default = () => {
             control={form.control}
             name="other"
             type="custom"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <>
-                <Input {...field} value={field.value ?? ''} />
+                <InputGroup>
+                  <InputGroupAddon>
+                    <InputGroupText>https://</InputGroupText>
+                  </InputGroupAddon>
+                  <InputGroupInput
+                    {...field}
+                    aria-invalid={fieldState.invalid ? true : undefined}
+                    value={field.value ?? ""}
+                  />
+                </InputGroup>
                 <FormFieldError />
               </>
             )}
@@ -71,11 +83,11 @@ export const Default = () => {
 
 export const NoHtmlForm = () => {
   const form = useForm({
-    mode: 'onBlur',
+    mode: "onBlur",
     resolver: zodResolver(zFormSchema()),
     defaultValues: {
-      name: '',
-      other: '',
+      name: "",
+      other: "",
     },
   });
 
@@ -98,9 +110,18 @@ export const NoHtmlForm = () => {
               control={form.control}
               name="other"
               type="custom"
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <>
-                  <Input {...field} value={field.value ?? ''} />
+                  <InputGroup>
+                    <InputGroupAddon>
+                      <InputGroupText>https://</InputGroupText>
+                    </InputGroupAddon>
+                    <InputGroupInput
+                      {...field}
+                      aria-invalid={fieldState.invalid ? true : undefined}
+                      value={field.value ?? ""}
+                    />
+                  </InputGroup>
                   <FormFieldError />
                 </>
               )}

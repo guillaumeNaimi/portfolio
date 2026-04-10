@@ -1,8 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from "@tanstack/react-router";
 
-import { PageSkillsNew } from 'src/features/cv/page-skill-new';
+import { PageSkillsNew } from "@/features/cv/page-skill-new";
 
-export const Route = createFileRoute('/_layout/manager/skill/new')({
+export const Route = createFileRoute("/_layout/manager/skill/new")({
   component: RouteComponent,
 });
 

@@ -1,16 +1,16 @@
-import { Meta } from '@storybook/react-vite';
-import { toast } from 'sonner';
+import { Meta } from "@storybook/react-vite";
+import { toast } from "sonner";
 
-import { Button } from 'src/components/ui/button';
-import { Sonner } from 'src/components/ui/sonner';
+import { Button } from "@/components/ui/button";
+import { Sonner } from "@/components/ui/sonner";
 
 export default {
-  title: 'Sonner',
+  title: "Sonner",
   parameters: {
     docs: {
       description: {
         component:
-          'Find everything about sonner in [Sonner docs](https://sonner.emilkowal.ski/toast)',
+          "Find everything about sonner in [Sonner docs](https://sonner.emilkowal.ski/toast)",
       },
     },
   },
@@ -20,9 +20,7 @@ export const Default = () => {
   return (
     <Button
       onClick={() =>
-        toast.success(
-          'Hey there, thanks for checking out Guillaume Naimi Portfolio! [web]'
-        )
+        toast.success("Hey there, thanks for checking out Start UI! [web]")
       }
     >
       Show toast
