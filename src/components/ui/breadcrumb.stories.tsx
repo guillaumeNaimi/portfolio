@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react-vite';
+import type { Meta } from "@storybook/react-vite";
 
 import {
   Breadcrumb,
@@ -8,16 +8,16 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from 'src/components/ui/breadcrumb';
+} from "@/components/ui/breadcrumb";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from 'src/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
 export default {
-  title: 'Breadcrumb',
+  title: "Breadcrumb",
 } satisfies Meta<typeof Breadcrumb>;
 
 export function Default() {

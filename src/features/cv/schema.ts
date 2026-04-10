@@ -1,12 +1,12 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const zTechnology = () =>
   z.object({
-    id: z.string(),
+    id: z.string().optional(),
     name: z.string(),
     icon: z.string().optional(),
     color: z.string().optional(),
-    category: z.enum(['frontend', 'backend', 'devops', 'design', 'other']),
+    category: z.enum(["frontend", "backend", "devops", "design", "other"]),
   });
 
 export const zSkill = () =>
@@ -18,7 +18,7 @@ export const zSkill = () =>
 
 export const zExperience = () =>
   z.object({
-    id: z.string(),
+    id: z.string().optional(),
     company: z.string(),
     position: z.string(),
     startDate: z.string(),
@@ -27,7 +27,7 @@ export const zExperience = () =>
     achievements: z.array(z.string()),
     technologies: z.array(zTechnology()),
     location: z.string().optional(),
-    type: z.enum(['full-time', 'part-time', 'contract', 'freelance']),
+    type: z.enum(["full-time", "part-time", "contract", "freelance"]),
     image: z.string().optional(),
     primaryColor: z.string().optional(),
     secondaryColor: z.string().optional(),
@@ -35,7 +35,7 @@ export const zExperience = () =>
 
 export const zEducation = () =>
   z.object({
-    id: z.string(),
+    id: z.string().optional(),
     institution: z.string(),
     degree: z.string(),
     field: z.string(),
@@ -46,7 +46,7 @@ export const zEducation = () =>
 
 export const zProject = () =>
   z.object({
-    id: z.string(),
+    id: z.string().optional(),
     title: z.string(),
     description: z.string(),
     image: z.string().optional(),

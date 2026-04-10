@@ -1,39 +1,34 @@
-import { getUiState } from '@bearstudio/ui-state';
-import { useQuery } from '@tanstack/react-query';
-import dayjs from 'dayjs';
-import { motion } from 'framer-motion';
-import { AlertCircleIcon, CalendarIcon, GraduationCapIcon } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { getUiState } from "@bearstudio/ui-state";
+import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
+import { motion } from "framer-motion";
+import { AlertCircleIcon, CalendarIcon, GraduationCapIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-import { orpc } from 'src/lib/orpc/client';
+import { orpc } from "@/lib/orpc/client";
 
-import { Badge } from 'src/components/ui/badge';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from 'src/components/ui/card';
-import { Skeleton } from 'src/components/ui/skeleton';
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const EducationSection = () => {
-  const { i18n, t } = useTranslation(['cv']);
+  const { i18n, t } = useTranslation(["cv"]);
 
-  const locale = i18n?.language ?? 'en';
+  const locale = i18n?.language ?? "en";
 
   const educationQuery = useQuery(
     orpc.cv.getEducation.queryOptions({
-      input: { locale: locale as 'en' | 'fr' },
-    })
+      input: { locale: locale as "en" | "fr" },
+    }),
   );
 
   const ui = getUiState((set) => {
-    if (educationQuery.status === 'pending') return set('pending');
-    if (educationQuery.status === 'error') return set('error');
-    return set('default', {
+    if (educationQuery.status === "pending") return set("pending");
+    if (educationQuery.status === "error") return set("error");
+    return set("default", {
       education: educationQuery.data.sort(
         (a, b) =>
-          new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+          new Date(b.startDate).getTime() - new Date(a.startDate).getTime(),
       ),
     });
   });
@@ -41,18 +36,18 @@ export const EducationSection = () => {
   return (
     <>
       {ui
-        .match('pending', () => <Skeleton className="h-4 w-48" />)
-        .match('error', () => (
+        .match("pending", () => <Skeleton className="h-4 w-48" />)
+        .match("error", () => (
           <AlertCircleIcon className="size-4 text-muted-foreground" />
         ))
-        .match('default', ({ education }) => (
+        .match("default", ({ education }) => (
           <div className="space-y-8">
             <div className="mb-8 text-center">
               <h2 className="mb-2 text-3xl font-bold">
-                {t('cv:education.title')}
+                {t("cv:education.title")}
               </h2>
               <p className="text-muted-foreground">
-                {t('cv:education.subtitle')}
+                {t("cv:education.subtitle")}
               </p>
             </div>
 
@@ -98,17 +93,17 @@ export const EducationSection = () => {
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <CalendarIcon className="h-4 w-4" />
                         <span>
-                          {dayjs(edu.startDate).format('MMM YYYY')} -{' '}
+                          {dayjs(edu.startDate).format("MMM YYYY")} -{" "}
                           {edu.endDate
-                            ? dayjs(edu.endDate).format('MMM YYYY')
-                            : t('cv:education.present')}
+                            ? dayjs(edu.endDate).format("MMM YYYY")
+                            : t("cv:education.present")}
                         </span>
                       </div>
 
-                      <Badge variant="outline" className="w-fit">
-                        {edu.degree === 'Certification'
-                          ? t('cv:education.badges.professional')
-                          : t('cv:education.badges.academic')}
+                      <Badge variant="secondary" className="w-fit">
+                        {edu.degree === "Certification"
+                          ? t("cv:education.badges.professional")
+                          : t("cv:education.badges.academic")}
                       </Badge>
                     </CardContent>
                   </Card>

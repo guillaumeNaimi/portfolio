@@ -1,16 +1,16 @@
-import type { Meta } from '@storybook/react-vite';
-import { useState } from 'react';
+import type { Meta } from "@storybook/react-vite";
+import { useState } from "react";
 
-import { Button } from 'src/components/ui/button';
-import { ConfirmResponsiveDrawer } from 'src/components/ui/confirm-responsive-drawer';
+import { Button } from "@/components/ui/button";
+import { ConfirmResponsiveDrawer } from "@/components/ui/confirm-responsive-drawer";
 
 export default {
-  title: 'ConfirmResponsiveDrawer',
+  title: "ConfirmResponsiveDrawer",
 } satisfies Meta<typeof ConfirmResponsiveDrawer>;
 
 export function Default() {
   return (
-    <ConfirmResponsiveDrawer onConfirm={() => alert('Custom Action')}>
+    <ConfirmResponsiveDrawer onConfirm={() => alert("Custom Action")}>
       <Button>Confirm</Button>
     </ConfirmResponsiveDrawer>
   );
@@ -21,7 +21,7 @@ export function WithCustomProps() {
     <ConfirmResponsiveDrawer
       title="ConfirmModal Title"
       description="Custom message"
-      onConfirm={() => alert('Custom Action')}
+      onConfirm={() => alert("Custom Action")}
       confirmText="Custom Text"
       confirmVariant="destructive"
     >
@@ -43,10 +43,10 @@ export function EnabledProps() {
         Enabled
       </label>
       <ConfirmResponsiveDrawer
-        onConfirm={() => alert('Custom Action')}
+        onConfirm={() => alert("Custom Action")}
         enabled={enabled}
       >
-        <Button>{enabled ? 'Confirm' : 'Without confirm'}</Button>
+        <Button>{enabled ? "Confirm" : "Without confirm"}</Button>
       </ConfirmResponsiveDrawer>
     </div>
   );

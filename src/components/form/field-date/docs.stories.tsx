@@ -1,24 +1,24 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { FormFieldController } from 'src/components/form';
-import { onSubmit } from 'src/components/form/docs.utils';
-import { Button } from 'src/components/ui/button';
+import { FormFieldController } from "@/components/form";
+import { onSubmit } from "@/components/form/docs.utils";
+import { Button } from "@/components/ui/button";
 
-import { Form, FormField, FormFieldHelper, FormFieldLabel } from '..';
+import { Form, FormField, FormFieldHelper, FormFieldLabel } from "..";
 
 export default {
-  title: 'Form/FieldDate',
+  title: "Form/FieldDate",
 };
 
 const zFormSchema = () =>
   z.object({
-    date: z.date(),
+    date: z.date({ error: "Required" }),
   });
 
 const formOptions = {
-  mode: 'onBlur',
+  mode: "onBlur",
   resolver: zodResolver(zFormSchema()),
   defaultValues: {
     date: null as unknown as Date,

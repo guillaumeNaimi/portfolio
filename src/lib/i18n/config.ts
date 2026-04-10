@@ -1,12 +1,9 @@
-import { InitOptions } from 'i18next';
-import { keys } from 'remeda';
+import { InitOptions } from "i18next";
+import { keys } from "remeda";
 
-import {
-  DEFAULT_LANGUAGE_KEY,
-  DEFAULT_NAMESPACE,
-} from 'src/lib/i18n/constants';
+import { DEFAULT_LANGUAGE_KEY, DEFAULT_NAMESPACE } from "@/lib/i18n/constants";
 
-import locales from 'src/locales';
+import locales from "@/locales";
 
 export const i18nConfig: InitOptions = {
   defaultNS: DEFAULT_NAMESPACE,
@@ -15,9 +12,9 @@ export const i18nConfig: InitOptions = {
   fallbackLng: DEFAULT_LANGUAGE_KEY,
   supportedLngs: keys(locales),
   detection: {
-    caches: ['cookie'],
+    caches: ["cookie"],
     cookieMinutes: 43200, // 30 days
-    cookieOptions: { path: '/', sameSite: 'lax' },
+    cookieOptions: { path: "/", sameSite: "lax" },
   },
 
   // Fix issue with i18next types

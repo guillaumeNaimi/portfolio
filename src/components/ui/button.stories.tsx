@@ -1,10 +1,10 @@
-import type { Meta } from '@storybook/react-vite';
-import { MailIcon } from 'lucide-react';
+import type { Meta } from "@storybook/react-vite";
+import { MailIcon } from "lucide-react";
 
-import { Button } from 'src/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 export default {
-  title: 'Button',
+  title: "Button",
 } satisfies Meta<typeof Button>;
 
 export const Default = () => {
@@ -35,10 +35,19 @@ export const Sizes = () => {
   );
 };
 
-export const AsChild = () => {
+export const Render = () => {
   return (
-    <Button asChild>
-      <a href="#">Anchor as child</a>
+    <Button
+      render={
+        <a
+          href="https://start-ui.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        />
+      }
+      nativeButton={false}
+    >
+      Render as Anchor
     </Button>
   );
 };
@@ -71,6 +80,41 @@ export const WithIcon = () => {
       </Button>
       <Button>
         Button
+        <MailIcon />
+      </Button>
+    </div>
+  );
+};
+
+export const FixedWidth = () => {
+  return (
+    <div className="flex gap-4">
+      <Button className="w-32">
+        <MailIcon />
+        <span className="truncate">Button</span>
+      </Button>
+      <Button className="w-32">
+        <MailIcon />
+        <span className="truncate">Button with a long label</span>
+      </Button>
+      <Button className="w-32">
+        <MailIcon />
+        <span className="flex-1 truncate text-left">Button</span>
+      </Button>
+      <Button className="w-32">
+        <MailIcon />
+        <span className="flex-1 truncate text-left">
+          Button with a long label
+        </span>
+      </Button>
+      <Button className="w-32">
+        <span className="flex-1 truncate text-left">Button</span>
+        <MailIcon />
+      </Button>
+      <Button className="w-32">
+        <span className="flex-1 truncate text-left">
+          Button with a long label
+        </span>
         <MailIcon />
       </Button>
     </div>

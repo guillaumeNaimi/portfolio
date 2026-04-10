@@ -1,54 +1,54 @@
-import type { Meta } from '@storybook/react-vite';
-import { useState } from 'react';
+import type { Meta } from "@storybook/react-vite";
+import { useState } from "react";
 
-import { Button } from 'src/components/ui/button';
-import { SearchInput } from 'src/components/ui/search-input';
+import { Button } from "@/components/ui/button";
+import { SearchInput } from "@/components/ui/search-input";
 
 export default {
-  title: 'SearchInput',
+  title: "SearchInput",
 } satisfies Meta<typeof SearchInput>;
 
 export function Default() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <div className="flex flex-col gap-4">
       <SearchInput
         value={searchTerm}
-        onChange={(value) => setSearchTerm(value ?? '')}
+        onChange={(value) => setSearchTerm(value ?? "")}
       />
       <p className="text-sm text-muted-foreground">
-        {searchTerm ? `Search term is ${searchTerm}` : 'No search term'}
+        {searchTerm ? `Search term is ${searchTerm}` : "No search term"}
       </p>
       <div className="flex gap-2">
         <Button
-          disabled={searchTerm === 'Guillaume Naimi Portfolio'}
+          disabled={searchTerm === "Start UI"}
           size="xs"
           variant="secondary"
-          onClick={() => setSearchTerm('Guillaume Naimi Portfolio')}
+          onClick={() => setSearchTerm("Start UI")}
         >
-          Set to "Guillaume Naimi Portfolio"
+          Set to "Start UI"
         </Button>
         <Button
-          disabled={searchTerm === 'React'}
+          disabled={searchTerm === "React"}
           size="xs"
           variant="secondary"
-          onClick={() => setSearchTerm('React')}
+          onClick={() => setSearchTerm("React")}
         >
           Set to "React"
         </Button>
         <Button
-          disabled={searchTerm === 'TypeScript'}
+          disabled={searchTerm === "TypeScript"}
           size="xs"
           variant="secondary"
-          onClick={() => setSearchTerm('TypeScript')}
+          onClick={() => setSearchTerm("TypeScript")}
         >
           Set to "TypeScript"
         </Button>
         <Button
-          disabled={searchTerm === ''}
+          disabled={searchTerm === ""}
           size="xs"
           variant="secondary"
-          onClick={() => setSearchTerm('')}
+          onClick={() => setSearchTerm("")}
         >
           Clear
         </Button>
@@ -76,35 +76,35 @@ export function Sizes() {
 }
 
 export function DebounceDelay() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [delay, setDelay] = useState(500);
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-2">
         <Button
           size="xs"
-          variant={delay === 0 ? 'default' : 'secondary'}
+          variant={delay === 0 ? "default" : "secondary"}
           onClick={() => setDelay(0)}
         >
           No delay
         </Button>
         <Button
           size="xs"
-          variant={delay === 200 ? 'default' : 'secondary'}
+          variant={delay === 200 ? "default" : "secondary"}
           onClick={() => setDelay(200)}
         >
           200ms
         </Button>
         <Button
           size="xs"
-          variant={delay === 500 ? 'default' : 'secondary'}
+          variant={delay === 500 ? "default" : "secondary"}
           onClick={() => setDelay(500)}
         >
           500ms (default)
         </Button>
         <Button
           size="xs"
-          variant={delay === 1000 ? 'default' : 'secondary'}
+          variant={delay === 1000 ? "default" : "secondary"}
           onClick={() => setDelay(1000)}
         >
           1000ms
@@ -112,11 +112,11 @@ export function DebounceDelay() {
       </div>
       <SearchInput
         value={searchTerm}
-        onChange={(value) => setSearchTerm(value ?? '')}
+        onChange={(value) => setSearchTerm(value ?? "")}
         delay={delay}
       />
       <p className="text-sm text-muted-foreground">
-        {searchTerm ? `Search term is ${searchTerm}` : 'No search term'}
+        {searchTerm ? `Search term is ${searchTerm}` : "No search term"}
       </p>
     </div>
   );

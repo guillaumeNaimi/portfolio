@@ -1,16 +1,16 @@
-import type { Meta } from '@storybook/react-vite';
-import dayjs from 'dayjs';
-import { useState } from 'react';
+import type { Meta } from "@storybook/react-vite";
+import dayjs from "dayjs";
+import { useState } from "react";
 
-import { Calendar } from 'src/components/ui/calendar';
+import { Calendar } from "@/components/ui/calendar";
 
 export default {
-  title: 'Calendar',
+  title: "Calendar",
   parameters: {
     docs: {
       description: {
         component:
-          'Calendar component uses [React Day Picker](https://daypicker.dev/) behind the scene. Most of its implementation is inspired by [shadcn and Luca Ziegler Félix](https://date-picker.luca-felix.com/).',
+          "Calendar component uses [React Day Picker](https://daypicker.dev/) behind the scene. Most of its implementation is inspired by [shadcn and Luca Ziegler Félix](https://date-picker.luca-felix.com/).",
       },
     },
   },
@@ -35,8 +35,8 @@ export const Controlled = () => {
       footer={
         <div className="mt-4 text-sm">
           {selected
-            ? `Selected: ${dayjs(selected).format('DD/MM/YYYY')}`
-            : 'Pick a day'}
+            ? `Selected: ${dayjs(selected).format("DD/MM/YYYY")}`
+            : "Pick a day"}
         </div>
       }
     />
@@ -46,8 +46,8 @@ export const Controlled = () => {
 export const WithStartAndEndMonths = () => {
   return (
     <Calendar
-      startMonth={dayjs().startOf('year').subtract(2, 'months').toDate()}
-      endMonth={dayjs().endOf('year').add(2, 'months').toDate()}
+      startMonth={dayjs().startOf("year").subtract(2, "months").toDate()}
+      endMonth={dayjs().endOf("year").add(2, "months").toDate()}
     />
   );
 };
@@ -61,7 +61,7 @@ export const Dropdowns = () => {
 };
 
 export const DisabledSelected = () => {
-  const date = dayjs().set('date', 8).toDate();
+  const date = dayjs().set("date", 8).toDate();
 
   return <Calendar mode="single" selected={date} disabled={date} />;
 };

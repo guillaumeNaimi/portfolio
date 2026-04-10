@@ -1,75 +1,39 @@
-import { ComponentProps } from 'react';
-import { Controller, FieldPath, FieldValues } from 'react-hook-form';
+import { ComponentProps } from "react";
 
-import { cn } from 'src/lib/tailwind/utils';
+import { useFormField } from "@/components/form/form-field";
+import { FormFieldContainer } from "@/components/form/form-field-container";
+import { useFormFieldController } from "@/components/form/form-field-controller/context";
+import { FormFieldError } from "@/components/form/form-field-error";
+import { FieldProps } from "@/components/form/types";
+import { Checkbox } from "@/components/ui/checkbox";
 
-import { FormFieldError } from 'src/components/form';
-import { useFormField } from 'src/components/form/form-field';
-import { FieldProps } from 'src/components/form/form-field-controller';
-import { Checkbox } from 'src/components/ui/checkbox';
-
-export type FieldCheckboxProps<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = FieldProps<
-  TFieldValues,
-  TName,
-  {
-    type: 'checkbox';
-    containerProps?: ComponentProps<'div'>;
-  } & ComponentProps<typeof Checkbox>
->;
-
-export const FieldCheckbox = <
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->(
-  props: FieldCheckboxProps<TFieldValues, TName>
+export const FieldCheckbox = (
+  props: FieldProps<
+    {
+      containerProps?: React.ComponentProps<typeof FormFieldContainer>;
+    } & ComponentProps<typeof Checkbox>
+  >,
 ) => {
-  const {
-    name,
-    control,
-    disabled,
-    defaultValue,
-    type,
-    shouldUnregister,
-    containerProps,
-    ...rest
-  } = props;
+  const { containerProps, ...rest } = props;
+
   const ctx = useFormField();
+  const {
+    field: { value, onChange, ...field },
+    fieldState,
+  } = useFormFieldController();
+
   return (
-    <Controller
-      name={name}
-      control={control}
-      disabled={disabled}
-      defaultValue={defaultValue}
-      shouldUnregister={shouldUnregister}
-      render={({ field: { onChange, value, ...field }, fieldState }) => {
-        return (
-          <div
-            {...containerProps}
-            className={cn(
-              'flex flex-1 flex-col gap-1',
-              containerProps?.className
-            )}
-          >
-            <Checkbox
-              id={ctx.id}
-              aria-invalid={fieldState.error ? true : undefined}
-              aria-describedby={
-                !fieldState.error
-                  ? `${ctx.descriptionId}`
-                  : `${ctx.descriptionId} ${ctx.errorId}`
-              }
-              checked={value}
-              onCheckedChange={onChange}
-              {...rest}
-              {...field}
-            />
-            <FormFieldError />
-          </div>
-        );
-      }}
-    />
+    <FormFieldContainer {...containerProps}>
+      <Checkbox
+        id={ctx.id}
+        aria-invalid={fieldState.invalid ? true : undefined}
+        aria-describedby={ctx.describedBy(fieldState.invalid)}
+        checked={value}
+        onCheckedChange={onChange}
+        {...rest}
+        {...field}
+      />
+      <FormFieldError />
+    </FormFieldContainer>
   );
 };

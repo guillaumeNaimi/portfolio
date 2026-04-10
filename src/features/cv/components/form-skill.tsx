@@ -1,15 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import { useFormContext } from 'react-hook-form';
+import { useQuery } from "@tanstack/react-query";
+import { useFormContext } from "react-hook-form";
 
-import { orpc } from 'src/lib/orpc/client';
+import { orpc } from "@/lib/orpc/client";
 
 import {
   FormField,
   FormFieldController,
   FormFieldLabel,
-} from 'src/components/form';
+} from "@/components/form";
 
-import { SkillForm } from '../schema';
+import { SkillForm } from "../schema";
 
 export const FormSkill = () => {
   const form = useFormContext<SkillForm>();
@@ -21,7 +21,7 @@ export const FormSkill = () => {
   const technologiesQuery = useQuery(orpc.cv.getTechnologies.queryOptions());
   const availableTechnologies =
     technologiesQuery.data?.filter(
-      (technology) => !usedTechnologies.includes(technology.id)
+      (technology) => !usedTechnologies.includes(technology.id),
     ) ?? [];
 
   return (
@@ -30,13 +30,12 @@ export const FormSkill = () => {
         <FormFieldLabel>Technology</FormFieldLabel>
         <FormFieldController
           type="select"
-          options={availableTechnologies.map((technology) => ({
-            id: technology.id,
+          items={availableTechnologies.map((technology) => ({
+            value: technology.id,
             label: technology.name,
           }))}
           control={form.control}
           name="technologyId"
-          autoFocus
         />
       </FormField>
       <FormField>

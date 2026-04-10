@@ -1,10 +1,10 @@
-import { Meta } from '@storybook/react-vite';
-import { useState } from 'react';
+import { Meta } from "@storybook/react-vite";
+import { useState } from "react";
 
-import { NumberInput } from 'src/components/ui/number-input';
+import { NumberInput } from "@/components/ui/number-input";
 
 export default {
-  title: 'NumberInput',
+  title: "NumberInput",
 } satisfies Meta<typeof NumberInput>;
 
 export const Default = () => {
@@ -16,7 +16,7 @@ export const Placeholder = () => {
 };
 
 export const Invalid = () => {
-  return <NumberInput invalid />;
+  return <NumberInput aria-invalid={true} data-invalid />;
 };
 
 export const Disabled = () => {
@@ -67,19 +67,19 @@ export const Currency = () => {
   return (
     <div className="flex flex-col gap-2">
       <NumberInput
-        format={{ style: 'currency', currency: 'EUR' }}
+        format={{ style: "currency", currency: "EUR" }}
         defaultValue={value ?? undefined}
         onValueChange={(v) => setValue(v)}
       />
       <NumberInput
-        format={{ style: 'currency', currency: 'GBP' }}
+        format={{ style: "currency", currency: "GBP" }}
         onValueChange={(v) => {
           setValue(v);
         }}
         value={value}
       />
       <NumberInput
-        format={{ style: 'currency', currency: 'USD' }}
+        format={{ style: "currency", currency: "USD" }}
         onValueChange={(v) => setValue(v)}
         value={value}
       />
@@ -103,21 +103,21 @@ export const Locale = () => {
       <NumberInput
         locale="fr"
         format={{
-          style: 'currency',
-          currency: 'EUR',
+          style: "currency",
+          currency: "EUR",
         }}
         value={value}
         onValueChange={(v) => setValue(v)}
       />
       <NumberInput
         locale="fr"
-        format={{ style: 'currency', currency: 'GBP' }}
+        format={{ style: "currency", currency: "GBP" }}
         value={value}
         onValueChange={(v) => setValue(v)}
       />
       <NumberInput
         locale="fr"
-        format={{ style: 'currency', currency: 'USD' }}
+        format={{ style: "currency", currency: "USD" }}
         value={value}
         onValueChange={(v) => setValue(v)}
       />

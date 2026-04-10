@@ -3,17 +3,21 @@ import {
   FormProvider,
   FormProviderProps,
   SubmitHandler,
-} from 'react-hook-form';
+} from "react-hook-form";
 
-import { cn } from 'src/lib/tailwind/utils';
+import { cn } from "@/lib/tailwind/utils";
 
-type FormProps<TFieldValues extends FieldValues> = StrictUnion<
-  | (FormProviderProps<TFieldValues> & {
+type FormProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = ExplicitAny,
+  TTransformedValues = TFieldValues,
+> = StrictUnion<
+  | (FormProviderProps<TFieldValues, TContext, TTransformedValues> & {
       noHtmlForm?: false;
-      onSubmit?: SubmitHandler<TFieldValues>;
+      onSubmit?: SubmitHandler<TTransformedValues>;
       className?: string;
     })
-  | (FormProviderProps<TFieldValues> & {
+  | (FormProviderProps<TFieldValues, TContext, TTransformedValues> & {
       noHtmlForm: true;
     })
 >;
@@ -38,10 +42,10 @@ export const Form = <TFieldValues extends FieldValues>({
           if (props.onSubmit) {
             props.handleSubmit(props.onSubmit)(e);
           } else {
-            console.warn('Missing onSubmit method on <Form>');
+            console.warn("Missing onSubmit method on <Form>");
           }
         }}
-        className={cn('flex flex-1 flex-col', className)}
+        className={cn("flex flex-1 flex-col", className)}
       >
         {props.children}
       </form>

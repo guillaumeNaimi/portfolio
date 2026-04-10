@@ -1,14 +1,14 @@
-import type { Meta } from '@storybook/react-vite';
+import type { Meta } from "@storybook/react-vite";
 
-import { onSubmit } from 'src/components/form/docs.utils';
+import { onSubmit } from "@/components/form/docs.utils";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from 'src/components/ui/input-otp';
+} from "@/components/ui/input-otp";
 
 export default {
-  title: 'InputOTP',
+  title: "InputOTP",
 } satisfies Meta<typeof InputOTP>;
 
 export const Default = () => {

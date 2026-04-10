@@ -1,22 +1,22 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
-import { envServer } from 'src/env/server';
-import { timingStore } from 'src/server/timing-store';
+import { envServer } from "@/env/server";
+import { timingStore } from "@/server/timing-store";
 
 const levels = {
-  trace: ['query', 'error', 'warn', 'info'],
-  debug: ['error', 'warn', 'info'],
-  info: ['error', 'warn', 'info'],
-  warn: ['error', 'warn'],
-  error: ['error'],
-  fatal: ['error'],
-} satisfies Record<string, ('query' | 'error' | 'warn' | 'info')[]>;
+  trace: ["query", "error", "warn", "info"],
+  debug: ["error", "warn", "info"],
+  info: ["error", "warn", "info"],
+  warn: ["error", "warn"],
+  error: ["error"],
+  fatal: ["error"],
+} satisfies Record<string, ("query" | "error" | "warn" | "info")[]>;
 
 function createPrisma() {
   return new PrismaClient({
     log: levels[envServer.LOGGER_LEVEL],
   }).$extends({
-    name: 'server-timing',
+    name: "server-timing",
     query: {
       $allModels: {
         async $allOperations({ query, args, model, operation }) {

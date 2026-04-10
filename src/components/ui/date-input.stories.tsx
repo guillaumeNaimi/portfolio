@@ -1,25 +1,25 @@
-import type { Meta } from '@storybook/react-vite';
-import { CalendarIcon } from 'lucide-react';
-import { useState } from 'react';
-import { useDisclosure } from 'react-use-disclosure';
+import type { Meta } from "@storybook/react-vite";
+import { CalendarIcon } from "lucide-react";
+import { useState } from "react";
+import { useDisclosure } from "react-use-disclosure";
 
-import { onSubmit } from 'src/components/form/docs.utils';
-import { Button } from 'src/components/ui/button';
-import { Calendar } from 'src/components/ui/calendar';
-import { DateInput } from 'src/components/ui/date-input';
+import { onSubmit } from "@/components/form/docs.utils";
+import { Calendar } from "@/components/ui/calendar";
+import { DateInput } from "@/components/ui/date-input";
+import { InputGroupButton } from "@/components/ui/input-group";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from 'src/components/ui/popover';
+} from "@/components/ui/popover";
 
 export default {
-  title: 'DateInput',
+  title: "DateInput",
   parameters: {
     docs: {
       description: {
         component:
-          'If you are looking at a date input with picker, take a look at the DatePicker component, designed for user to select a date. This component is here to handle auto-format of a date from an input.',
+          "If you are looking at a date input with picker, take a look at the DatePicker component, designed for user to select a date. This component is here to handle auto-format of a date from an input.",
       },
     },
   },
@@ -43,15 +43,13 @@ export const WithPicker = () => {
     <DateInput
       onChange={(date) => setDate(date)}
       value={date}
-      endElement={
+      endAddon={
         <Popover
           open={datePicker.isOpen}
           onOpenChange={(open) => datePicker.toggle(open)}
         >
-          <PopoverTrigger asChild>
-            <Button size="icon-xs" className="-mr-1.5">
-              <CalendarIcon />
-            </Button>
+          <PopoverTrigger render={<InputGroupButton size="icon-xs" />}>
+            <CalendarIcon />
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar

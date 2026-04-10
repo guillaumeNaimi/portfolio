@@ -1,29 +1,29 @@
-import { ValidateLinkOptions } from '@tanstack/react-router';
-import { FC } from 'react';
+import { ValidateLinkOptions } from "@tanstack/react-router";
+import { FC } from "react";
 
 import {
   IconHouseDuotone,
   IconHouseFill,
   IconUserCircleDuotone,
   IconUserCircleFill,
-} from 'src/components/icons/generated';
+} from "@/components/icons/generated";
 
 export const MAIN_NAV_LINKS = [
   {
-    labelTranslationKey: 'layout:nav.home',
+    labelTranslationKey: "layout:nav.home",
     icon: IconHouseDuotone,
     iconActive: IconHouseFill,
     linkOptions: {
-      to: '/',
+      to: "/",
     },
     exact: true,
   } as const,
   {
-    labelTranslationKey: 'layout:nav.cv',
+    labelTranslationKey: "layout:nav.cv",
     icon: IconUserCircleDuotone,
     iconActive: IconUserCircleFill,
     linkOptions: {
-      to: '/cv',
+      to: "/cv",
     },
   } as const,
 ] satisfies Array<{

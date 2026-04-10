@@ -1,4 +1,4 @@
-import en from 'src/locales/en';
-import fr from 'src/locales/fr';
+import en from "@/locales/en";
+import fr from "@/locales/fr";
 
 export default { en, fr } as const;

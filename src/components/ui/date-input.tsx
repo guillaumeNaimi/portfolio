@@ -1,15 +1,14 @@
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import {
   ChangeEvent,
   ChangeEventHandler,
   ComponentProps,
-  useEffect,
   useState,
-} from 'react';
+} from "react";
 
-import { parseStringToDate } from 'src/lib/dayjs/parse-string-to-date';
+import { parseStringToDate } from "@/lib/dayjs/parse-string-to-date";
 
-import { Input } from 'src/components/ui/input';
+import { Input } from "@/components/ui/input";
 
 type UseDayPickerInputManagement = {
   inputValue: string;
@@ -23,29 +22,27 @@ type UseDayPickerInputManagementParams = {
   onChange: (newDate: Date | null) => void;
 };
 export const useDatePickerInputManagement = (
-  params: UseDayPickerInputManagementParams
+  params: UseDayPickerInputManagementParams,
 ): UseDayPickerInputManagement => {
   const { dateValue, dateFormat, onChange } = params;
   const [inputValue, setInputValue] = useState<string>(
-    dateValue ? dayjs(dateValue).format(dateFormat) : ''
+    dateValue ? dayjs(dateValue).format(dateFormat) : "",
   );
 
-  // To update the state if the value of the format change
-  useEffect(() => {
-    if (dateValue) {
-      // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect
-      setInputValue(dayjs(dateValue).format(dateFormat));
-    } else {
-      // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect
-      setInputValue('');
-    }
-  }, [dateFormat, dateValue]);
+  // Update the state if the value or the format changes (adjusting state during render)
+  const [prevDateValue, setPrevDateValue] = useState(dateValue);
+  const [prevDateFormat, setPrevDateFormat] = useState(dateFormat);
+  if (dateValue !== prevDateValue || dateFormat !== prevDateFormat) {
+    setPrevDateValue(dateValue);
+    setPrevDateFormat(dateFormat);
+    setInputValue(dateValue ? dayjs(dateValue).format(dateFormat) : "");
+  }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.currentTarget.value);
     const date = dayjs(e.currentTarget.value, dateFormat);
     if (date.isValid()) {
-      const dateValue = date.startOf('day').toDate();
+      const dateValue = date.startOf("day").toDate();
       onChange(dateValue);
     }
   };
@@ -61,14 +58,14 @@ export const useDatePickerInputManagement = (
 
       const dateValueAsDayjs = dayjs(dateValue);
       setInputValue(
-        dateValueAsDayjs.isValid() ? dateValueAsDayjs.format(dateFormat) : ''
+        dateValueAsDayjs.isValid() ? dateValueAsDayjs.format(dateFormat) : "",
       );
       return;
     }
 
-    const isNewValue = !date.isSame(dateValue, 'date');
+    const isNewValue = !date.isSame(dateValue, "date");
     if (!isNewValue) {
-      setInputValue(date.format('DD/MM/YYYY'));
+      setInputValue(date.format("DD/MM/YYYY"));
       // To avoid the issue of non-selection when:
       // * The input is focused with an already selected value
       // * A new date is clicked directly
@@ -87,9 +84,9 @@ export const DateInput = ({
   onBlur,
   onKeyDown,
   value,
-  format = 'DD/MM/YYYY',
+  format = "DD/MM/YYYY",
   ...props
-}: Omit<ComponentProps<typeof Input>, 'onChange' | 'value'> & {
+}: Omit<ComponentProps<typeof Input>, "onChange" | "value"> & {
   onChange?: (date: Date | null) => void;
   format?: string;
   value?: Date | null;
@@ -107,7 +104,7 @@ export const DateInput = ({
         onBlur?.(e);
       }}
       onKeyDown={(e) => {
-        if (e.key === 'Enter') {
+        if (e.key === "Enter") {
           datePickerInputManagement.handleInputBlur(e.currentTarget.value);
         }
         onKeyDown?.(e);

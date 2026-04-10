@@ -1,6 +1,6 @@
-import { db } from 'src/server/db';
+import { db } from "@/server/db";
 
-import { createCV } from './cv';
+import { createCV } from "./cv";
 
 async function main() {
   await createCV();

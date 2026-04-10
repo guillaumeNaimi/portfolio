@@ -1,9 +1,9 @@
-import type { Meta } from '@storybook/react-vite';
+import type { Meta } from "@storybook/react-vite";
 
-import { Spinner } from 'src/components/ui/spinner';
+import { Spinner } from "@/components/ui/spinner";
 
 export default {
-  title: 'Spinner',
+  title: "Spinner",
 } satisfies Meta<typeof Spinner>;
 
 export const Default = () => {

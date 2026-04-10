@@ -1,28 +1,28 @@
-import { useMutation } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'sonner';
+import { useMutation } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
-import { Button } from 'src/components/ui/button';
+import { Button } from "@/components/ui/button";
 
-import { envClient } from 'src/env/client';
-import { authClient } from 'src/features/auth/client';
+import { envClient } from "@/env/client";
+import { authClient } from "@/features/auth/client";
 
-const I18N_KEY_PAGE_PREFIX = 'auth:pageLogin' as const;
+const I18N_KEY_PAGE_PREFIX = "auth:pageLogin" as const;
 
 export default function PageLogin({
   search,
 }: {
   search: { redirect?: string };
 }) {
-  const { t } = useTranslation(['auth', 'common']);
+  const { t } = useTranslation(["auth", "common"]);
   const social = useMutation({
     mutationFn: async (
-      provider: Parameters<typeof authClient.signIn.social>[0]['provider']
+      provider: Parameters<typeof authClient.signIn.social>[0]["provider"],
     ) => {
       const response = await authClient.signIn.social({
         provider,
-        callbackURL: search.redirect ?? '/',
-        errorCallbackURL: '/login/error',
+        callbackURL: search.redirect ?? "/",
+        errorCallbackURL: "/login/error",
       });
       if (response.error) {
         throw new Error(response.error.message);
@@ -49,13 +49,13 @@ export default function PageLogin({
         variant="secondary"
         disabled={envClient.VITE_IS_DEMO}
         loading={
-          social.variables === 'github' &&
+          social.variables === "github" &&
           (social.isPending || social.isSuccess)
         }
         size="lg"
-        onClick={() => social.mutate('github')}
+        onClick={() => social.mutate("github")}
       >
-        {t(`${I18N_KEY_PAGE_PREFIX}.loginWithSocial`, { provider: 'GitHub' })}
+        {t(`${I18N_KEY_PAGE_PREFIX}.loginWithSocial`, { provider: "GitHub" })}
       </Button>
     </>
   );

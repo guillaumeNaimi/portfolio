@@ -1,16 +1,17 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ReactNode } from 'react';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ReactNode } from "react";
 import {
+  FieldValues,
   SubmitHandler,
   useForm,
   UseFormProps,
   UseFormReturn,
-} from 'react-hook-form';
-import { Schema, z } from 'zod';
+} from "react-hook-form";
+import { z, ZodType } from "zod";
 
-import { Form } from '.';
+import { Form } from "@/components/form";
 
-export const FormMocked = <T extends Schema>({
+export const FormMocked = <T extends ZodType<FieldValues>>({
   children,
   schema,
   useFormOptions,
@@ -22,8 +23,8 @@ export const FormMocked = <T extends Schema>({
   onSubmit?: SubmitHandler<z.infer<T>>;
 }) => {
   const form = useForm({
-    mode: 'onBlur',
-    resolver: zodResolver(schema),
+    mode: "onBlur",
+    resolver: zodResolver(schema as TODO),
     ...useFormOptions,
   });
   return (

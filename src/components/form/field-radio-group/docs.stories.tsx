@@ -1,41 +1,41 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { CheckIcon } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { cn } from 'src/lib/tailwind/utils';
-import { zu } from 'src/lib/zod/zod-utils';
+import { cn } from "@/lib/tailwind/utils";
+import { zu } from "@/lib/zod/zod-utils";
 
-import { FormFieldController } from 'src/components/form';
-import { onSubmit } from 'src/components/form/docs.utils';
-import { Button } from 'src/components/ui/button';
-import { Radio, RadioProps } from 'src/components/ui/radio-group';
+import { FormFieldController } from "@/components/form";
+import { onSubmit } from "@/components/form/docs.utils";
+import { Button } from "@/components/ui/button";
+import { Radio } from "@/components/ui/radio-group";
 
-import { Form, FormField, FormFieldHelper, FormFieldLabel } from '..';
+import { Form, FormField, FormFieldHelper, FormFieldLabel } from "../";
 
 export default {
-  title: 'Form/FieldRadioGroup',
+  title: "Form/FieldRadioGroup",
 };
 
 const zFormSchema = () =>
   z.object({
-    bear: zu.string.nonEmpty(z.string(), {
-      required_error: 'Please select your favorite bearstronaut',
+    bear: zu.fieldText.required({
+      error: "Please select your favorite bearstronaut",
     }),
   });
 
 const formOptions = {
-  mode: 'onBlur',
+  mode: "onBlur",
   resolver: zodResolver(zFormSchema()),
   defaultValues: {
-    bear: '',
+    bear: "",
   },
 } as const;
 
 const options = [
-  { value: 'bearstrong', label: 'Bearstrong' },
-  { value: 'pawdrin', label: 'Buzz Pawdrin' },
-  { value: 'grizzlyrin', label: 'Yuri Grizzlyrin' },
+  { value: "bearstrong", label: "Bearstrong" },
+  { value: "pawdrin", label: "Buzz Pawdrin" },
+  { value: "grizzlyrin", label: "Yuri Grizzlyrin" },
 ];
 
 export const Default = () => {
@@ -66,7 +66,7 @@ export const DefaultValue = () => {
   const form = useForm({
     ...formOptions,
     defaultValues: {
-      bear: 'pawdrin',
+      bear: "pawdrin",
     },
   });
 
@@ -95,7 +95,7 @@ export const Disabled = () => {
   const form = useForm({
     ...formOptions,
     defaultValues: {
-      bear: 'pawdrin',
+      bear: "pawdrin",
     },
   });
 
@@ -150,9 +150,9 @@ export const WithDisabledOption = () => {
   const form = useForm(formOptions);
 
   const optionsWithDisabled = [
-    { value: 'bearstrong', label: 'Bearstrong' },
-    { value: 'pawdrin', label: 'Buzz Pawdrin' },
-    { value: 'grizzlyrin', label: 'Yuri Grizzlyrin', disabled: true },
+    { value: "bearstrong", label: "Bearstrong" },
+    { value: "pawdrin", label: "Buzz Pawdrin" },
+    { value: "grizzlyrin", label: "Yuri Grizzlyrin", disabled: true },
   ];
 
   return (
@@ -177,49 +177,6 @@ export const WithDisabledOption = () => {
 };
 
 export const WithCustomRadio = () => {
-  // Let's say we have a custom radio component:
-  // eslint-disable-next-line @eslint-react/no-nested-component-definitions
-  const CardRadio = ({
-    value,
-    id,
-    children,
-    containerProps,
-    ...props
-  }: RadioProps & { containerProps?: React.ComponentProps<'label'> }) => {
-    return (
-      <label
-        className="relative flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-border p-4 transition-colors focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:outline-none hover:bg-muted/50 has-[&[data-checked]]:border-primary/90 has-[&[data-checked]]:bg-primary/5"
-        {...containerProps}
-      >
-        <Radio
-          value={value}
-          id={id}
-          noLabel
-          render={(props, { checked }) => {
-            return (
-              <div
-                {...props}
-                className="flex w-full justify-between outline-none"
-              >
-                <div className="flex flex-col">
-                  <span className="font-medium">{children}</span>
-                </div>
-                <div
-                  className={cn('rounded-full bg-primary p-1 opacity-0', {
-                    'opacity-100': checked,
-                  })}
-                >
-                  <CheckIcon className="h-4 w-4 text-primary-foreground" />
-                </div>
-              </div>
-            );
-          }}
-          {...props}
-        />
-      </label>
-    );
-  };
-
   const form = useForm(formOptions);
 
   return (
@@ -234,8 +191,36 @@ export const WithCustomRadio = () => {
             name="bear"
             options={options}
             renderOption={({ label, ...props }) => {
-              // We can then customize the render of our field's radios
-              return <CardRadio {...props}>{label}</CardRadio>;
+              return (
+                <Radio
+                  {...props}
+                  labelProps={{
+                    className:
+                      "relative flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-border p-4 transition-colors outline-none focus-within:ring-[3px] focus-within:ring-ring/50 hover:bg-muted/50 has-[:checked]:border-transparent has-[:checked]:bg-primary has-[:checked]:text-primary-foreground",
+                  }}
+                  render={(props, { checked }) => {
+                    return (
+                      <button
+                        type="button"
+                        {...props}
+                        className="flex w-full items-center justify-between outline-none"
+                      >
+                        <span className="font-medium">{label}</span>
+                        <span
+                          className={cn(
+                            "rounded-full bg-primary-foreground p-1 opacity-0",
+                            {
+                              "opacity-100": checked,
+                            },
+                          )}
+                        >
+                          <CheckIcon className="size-4 text-primary" />
+                        </span>
+                      </button>
+                    );
+                  }}
+                />
+              );
             }}
           />
         </FormField>

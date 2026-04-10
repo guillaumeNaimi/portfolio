@@ -3,10 +3,10 @@ import {
   PencilLineIcon,
   PlusIcon,
   Trash2Icon,
-} from 'lucide-react';
+} from "lucide-react";
 
-import { Avatar, AvatarFallback } from 'src/components/ui/avatar';
-import { Button } from 'src/components/ui/button';
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DataList,
   DataListCell,
@@ -17,58 +17,58 @@ import {
   DataListRowResults,
   DataListText,
   DataListTextHeader,
-} from 'src/components/ui/datalist';
+} from "@/components/ui/datalist";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from 'src/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
 export default {
-  title: 'DataList',
+  title: "DataList",
 };
 
 const data = [
   {
     id: 1,
-    name: 'Jane Cooper',
-    email: 'jane.cooper@example.com',
-    job: 'Regional Paradigm Technician',
-    department: 'Optimization',
-    status: 'active',
-    role: 'Admin',
+    name: "Jane Cooper",
+    email: "jane.cooper@example.com",
+    job: "Regional Paradigm Technician",
+    department: "Optimization",
+    status: "active",
+    role: "Admin",
     wallet: 42,
   },
   {
     id: 2,
-    name: 'Cody Fisher',
-    email: 'cody.fisher@example.com',
-    job: 'Product Directives Officer',
-    department: 'Intranet',
-    status: 'active',
-    role: 'Owner',
+    name: "Cody Fisher",
+    email: "cody.fisher@example.com",
+    job: "Product Directives Officer",
+    department: "Intranet",
+    status: "active",
+    role: "Owner",
     wallet: 142,
   },
   {
     id: 3,
-    name: 'Esther Howard',
-    email: 'esther.howard@example.com',
-    job: 'Forward Response Developer',
-    department: 'Directives',
-    status: 'inactive',
-    role: 'Member',
+    name: "Esther Howard",
+    email: "esther.howard@example.com",
+    job: "Forward Response Developer",
+    department: "Directives",
+    status: "inactive",
+    role: "Member",
     wallet: 23,
   },
   {
     id: 4,
-    name: 'Emily Esther',
-    email: 'emily.esther@example.com',
-    job: 'Forward Response Developer',
-    department: 'Directives',
-    status: 'inactive',
-    role: 'Member',
+    name: "Emily Esther",
+    email: "emily.esther@example.com",
+    job: "Forward Response Developer",
+    department: "Directives",
+    status: "inactive",
+    role: "Member",
     wallet: 132,
   },
 ] as const;
@@ -85,7 +85,11 @@ export const Default = () => (
           </DataListCell>
           <DataListCell>
             <DataListText className="font-medium">
-              <a href="#">
+              <a
+                href="https://start-ui.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {user.name}
                 {/* Row hitzone for link */}
                 <span className="absolute inset-0" />
@@ -139,7 +143,11 @@ export const WithHeader = () => (
           </DataListCell>
           <DataListCell>
             <DataListText className="font-medium">
-              <a href="#">
+              <a
+                href="https://start-ui.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {user.name}
                 {/* Row hitzone for link */}
                 <span className="absolute inset-0" />
@@ -207,12 +215,12 @@ export const ErrorState = () => {
         <DataListErrorState />
       </DataList>
       <DataList>
-        <DataListErrorState retry={() => alert('Retry')} />
+        <DataListErrorState retry={() => alert("Retry")} />
       </DataList>
       <DataList>
         <DataListErrorState
           title="Failed to load the users"
-          retry={() => alert('Retry')}
+          retry={() => alert("Retry")}
         >
           Retry or contact the administator
         </DataListErrorState>
@@ -223,7 +231,7 @@ export const ErrorState = () => {
 
 export const RowResults = () => (
   <DataList>
-    <DataListRowResults withClearButton onClear={() => alert('Clear')}>
+    <DataListRowResults withClearButton onClear={() => alert("Clear")}>
       4 results for "Search term"
     </DataListRowResults>
     {data.map((user) => {
@@ -236,7 +244,11 @@ export const RowResults = () => (
           </DataListCell>
           <DataListCell>
             <DataListText className="font-medium">
-              <a href="#">
+              <a
+                href="https://start-ui.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {user.name}
                 {/* Row hitzone for link */}
                 <span className="absolute inset-0" />
@@ -268,10 +280,10 @@ export const RowResults = () => (
 const ExampleMenu = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button size="icon-sm" variant="ghost" className="-m-1">
-          <EllipsisIcon />
-        </Button>
+      <DropdownMenuTrigger
+        render={<Button size="icon-sm" variant="ghost" className="-m-1" />}
+      >
+        <EllipsisIcon />
       </DropdownMenuTrigger>
       <DropdownMenuContent side="left" className="min-w-24">
         <DropdownMenuGroup>

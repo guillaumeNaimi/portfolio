@@ -1,21 +1,21 @@
-import { CalendarIcon } from 'lucide-react';
-import { ComponentProps } from 'react';
-import { useDisclosure } from 'react-use-disclosure';
+import { CalendarIcon } from "lucide-react";
+import { ComponentProps } from "react";
+import { useDisclosure } from "react-use-disclosure";
 
-import { Button } from 'src/components/ui/button';
-import { Calendar } from 'src/components/ui/calendar';
-import { DateInput } from 'src/components/ui/date-input';
+import { Calendar } from "@/components/ui/calendar";
+import { DateInput } from "@/components/ui/date-input";
+import { InputGroupButton } from "@/components/ui/input-group";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from 'src/components/ui/popover';
+} from "@/components/ui/popover";
 
 type DatePickerProps = ComponentProps<typeof DateInput> & {
   noCalendar?: boolean;
   calendarProps?: Omit<
     ComponentProps<typeof Calendar>,
-    'onSelect' | 'selected' | 'mode'
+    "onSelect" | "selected" | "mode"
   >;
 };
 
@@ -29,16 +29,14 @@ export const DatePicker = ({
   return (
     <DateInput
       {...props}
-      endElement={
+      endAddon={
         noCalendar ? null : (
           <Popover
             open={datePicker.isOpen}
             onOpenChange={(open) => datePicker.toggle(open)}
           >
-            <PopoverTrigger asChild>
-              <Button size="icon-xs" variant="secondary" className="-mr-1.5">
-                <CalendarIcon />
-              </Button>
+            <PopoverTrigger render={<InputGroupButton size="icon-xs" />}>
+              <CalendarIcon />
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar

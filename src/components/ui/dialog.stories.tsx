@@ -1,6 +1,6 @@
-import type { Meta } from '@storybook/react-vite';
+import type { Meta } from "@storybook/react-vite";
 
-import { Button } from 'src/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogBody,
@@ -11,17 +11,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from 'src/components/ui/dialog';
+} from "@/components/ui/dialog";
 
 export default {
-  title: 'Dialog',
+  title: "Dialog",
 } satisfies Meta<typeof Dialog>;
 
 export const Default = () => {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="secondary">Open</Button>
+      <DialogTrigger render={<Button variant="secondary" />}>
+        Open
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -30,9 +30,7 @@ export const Default = () => {
         </DialogHeader>
         <DialogBody>Content</DialogBody>
         <DialogFooter>
-          <DialogClose asChild>
-            <Button>Close</Button>
-          </DialogClose>
+          <DialogClose render={<Button />}>Close</DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

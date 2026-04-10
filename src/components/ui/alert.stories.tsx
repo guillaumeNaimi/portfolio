@@ -1,10 +1,10 @@
-import { Meta } from '@storybook/react-vite';
-import { AlertCircleIcon, TerminalIcon } from 'lucide-react';
+import { Meta } from "@storybook/react-vite";
+import { AlertCircleIcon, TerminalIcon } from "lucide-react";
 
-import { Alert, AlertDescription, AlertTitle } from 'src/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default {
-  title: 'Alert',
+  title: "Alert",
 } satisfies Meta<typeof Alert>;
 
 export const Default = () => {

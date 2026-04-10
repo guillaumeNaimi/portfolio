@@ -1,25 +1,25 @@
-import dayjs from 'dayjs';
-import { useState } from 'react';
-import { DateRange } from 'react-day-picker';
-import { useDisclosure } from 'react-use-disclosure';
-import { isNullish } from 'remeda';
+import dayjs from "dayjs";
+import { useState } from "react";
+import { DateRange } from "react-day-picker";
+import { useDisclosure } from "react-use-disclosure";
+import { isNullish } from "remeda";
 
-import { Calendar } from 'src/components/ui/calendar';
-import { DatePickerButton } from 'src/components/ui/date-picker-button';
+import { Calendar } from "@/components/ui/calendar";
+import { DatePickerButton } from "@/components/ui/date-picker-button";
 import {
   Dialog,
   DialogBody,
   DialogContent,
   DialogTrigger,
-} from 'src/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from 'src/components/ui/popover';
+} from "@/components/ui/popover";
 
 export default {
-  title: 'DatePickerButton',
+  title: "DatePickerButton",
 };
 
 export const Default = () => {
@@ -35,7 +35,7 @@ export const NoValueString = () => {
 };
 
 export const Value = () => {
-  return <DatePickerButton>{dayjs().format('DD/MM/YYYY')}</DatePickerButton>;
+  return <DatePickerButton>{dayjs().format("DD/MM/YYYY")}</DatePickerButton>;
 };
 
 export const UsageWithPopover = () => {
@@ -47,10 +47,8 @@ export const UsageWithPopover = () => {
       open={datePicker.isOpen}
       onOpenChange={(open) => datePicker.toggle(open)}
     >
-      <PopoverTrigger asChild>
-        <DatePickerButton>
-          {date ? dayjs(date).format('DD/MM/YYYY') : null}
-        </DatePickerButton>
+      <PopoverTrigger render={<DatePickerButton />}>
+        {date ? dayjs(date).format("DD/MM/YYYY") : null}
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
@@ -76,20 +74,18 @@ export const UsageWithPopoverRange = () => {
     }
 
     if (isNullish(date?.to)) {
-      return dayjs(date.from).format('DD/MM/YYYY');
+      return dayjs(date.from).format("DD/MM/YYYY");
     }
 
     return `${dayjs(date.from).format(
-      'DD/MM/YYYY'
-    )} - ${dayjs(date.to).format('DD/MM/YYYY')}`;
+      "DD/MM/YYYY",
+    )} - ${dayjs(date.to).format("DD/MM/YYYY")}`;
   };
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <DatePickerButton className="max-w-[300px]">
-          {format()}
-        </DatePickerButton>
+      <PopoverTrigger render={<DatePickerButton className="max-w-75" />}>
+        {format()}
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
@@ -114,16 +110,15 @@ export const UsageWithDialog = () => {
       open={datePicker.isOpen}
       onOpenChange={(open) => datePicker.toggle(open)}
     >
-      <DialogTrigger asChild>
-        <DatePickerButton>
-          {date ? dayjs(date).format('DD/MM/YYYY') : null}
-        </DatePickerButton>
+      <DialogTrigger render={<DatePickerButton />}>
+        {date ? dayjs(date).format("DD/MM/YYYY") : null}
       </DialogTrigger>
-      <DialogContent className="h-96 w-auto">
+      <DialogContent className="w-auto" hideCloseButton>
         <DialogBody>
           <Calendar
             autoFocus
             mode="single"
+            className="p-0"
             selected={date}
             onSelect={(date) => {
               setDate(date);

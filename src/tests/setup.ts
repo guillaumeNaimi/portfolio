@@ -1,11 +1,11 @@
-import { cleanup } from '@testing-library/react';
-import ResizeObserver from 'resize-observer-polyfill';
-import { afterEach, vi } from 'vitest';
-import { expect } from 'vitest';
-import * as matchers from 'vitest-axe/matchers';
-import 'src/lib/dayjs/config';
-import '@testing-library/jest-dom/vitest';
-import 'vitest-axe/extend-expect';
+import { cleanup } from "@testing-library/react";
+import ResizeObserver from "resize-observer-polyfill";
+import { afterEach, vi } from "vitest";
+import { expect } from "vitest";
+import * as matchers from "vitest-axe/matchers";
+import "@/lib/dayjs/config";
+import "@testing-library/jest-dom/vitest";
+import "vitest-axe/extend-expect";
 
 expect.extend(matchers);
 
@@ -18,12 +18,12 @@ global.ResizeObserver = ResizeObserver;
  */
 Element.prototype.scrollTo = vi.fn();
 
-Object.defineProperty(document, 'elementFromPoint', {
+Object.defineProperty(document, "elementFromPoint", {
   writable: true,
   value: vi.fn().mockImplementation(() => null),
 });
 
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
     matches: false,

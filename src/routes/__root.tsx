@@ -1,29 +1,28 @@
-import { QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   createRootRouteWithContext,
   HeadContent,
   Outlet,
   Scripts,
-} from '@tanstack/react-router';
-import { createServerFn } from '@tanstack/react-start';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
-import { type ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+} from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
-import { getPageTitle } from 'src/lib/get-page-title';
-import i18n, { syncLanguage } from 'src/lib/i18n';
+import { getPageTitle } from "@/lib/get-page-title";
+import i18n, { syncLanguage } from "@/lib/i18n";
 
-import { PageError } from 'src/components/page-error';
-import { PageErrorBoundary } from 'src/components/page-error-boundary';
+import { PageError } from "@/components/errors/page-error";
 
-import { EnvHint } from 'src/features/devtools/env-hint';
-import { Providers } from 'src/providers';
-import { getUserLanguage } from 'src/server/utils';
-import appCss from '@/styles/app.css?url';
+import { EnvHint } from "@/features/devtools/env-hint";
+import { Providers } from "@/providers";
+import { getUserLanguage } from "@/server/utils";
+import appCss from "@/styles/app.css?url";
 
-const initSsrApp = createServerFn({ method: 'GET' }).handler(() => {
+const initSsrApp = createServerFn({ method: "GET" }).handler(() => {
   return {
     language: getUserLanguage(),
   };
@@ -39,11 +38,11 @@ export const Route = createRootRouteWithContext<{
       i18n.changeLanguage(language);
     }
   },
-  notFoundComponent: () => <PageError error="404" />,
-  errorComponent: (props) => {
+  notFoundComponent: () => <PageError type="404" />,
+  errorComponent: () => {
     return (
       <RootDocument>
-        <PageErrorBoundary {...props} />
+        <PageError type="error-boundary" />
       </RootDocument>
     );
   },
@@ -51,99 +50,99 @@ export const Route = createRootRouteWithContext<{
   head: () => ({
     meta: [
       {
-        charSet: 'utf-8',
+        charSet: "utf-8",
       },
       {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1, viewport-fit=cover',
+        name: "viewport",
+        content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
       {
         title: getPageTitle(),
       },
       {
-        name: 'description',
+        name: "description",
         content:
-          'Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.',
+          "Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.",
       },
       {
-        name: 'keywords',
+        name: "keywords",
         content:
-          'Guillaume Naimi, Front-end Developer, Web Development, React, TypeScript, Nextjs, Portfolio, CV',
+          "Guillaume Naimi, Front-end Developer, Web Development, React, TypeScript, Nextjs, Portfolio, CV",
       },
       {
-        name: 'author',
-        content: 'Guillaume Naimi',
+        name: "author",
+        content: "Guillaume Naimi",
       },
       {
-        name: 'robots',
-        content: 'index, follow',
+        name: "robots",
+        content: "index, follow",
       },
       {
-        property: 'og:title',
+        property: "og:title",
         content: getPageTitle(),
       },
       {
-        property: 'og:description',
+        property: "og:description",
         content:
-          'Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.',
+          "Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.",
       },
       {
-        property: 'og:type',
-        content: 'website',
+        property: "og:type",
+        content: "website",
       },
       {
-        property: 'og:url',
-        content: 'https://guillaumenaimi.dev',
+        property: "og:url",
+        content: "https://guillaumenaimi.dev",
       },
       {
-        property: 'og:image',
-        content: 'https://guillaumenaimi.dev/og-image.png',
+        property: "og:image",
+        content: "https://guillaumenaimi.dev/og-image.png",
       },
       {
-        name: 'twitter:card',
-        content: 'summary_large_image',
+        name: "twitter:card",
+        content: "summary_large_image",
       },
       {
-        name: 'twitter:title',
+        name: "twitter:title",
         content: getPageTitle(),
       },
       {
-        name: 'twitter:description',
+        name: "twitter:description",
         content:
-          'Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.',
+          "Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.",
       },
       {
-        name: 'apple-mobile-web-app-title',
+        name: "apple-mobile-web-app-title",
         content: getPageTitle(),
       },
       {
-        name: 'apple-mobile-web-app-status-bar-style',
-        content: 'black-translucent',
+        name: "apple-mobile-web-app-status-bar-style",
+        content: "black-translucent",
       },
       {
-        name: 'mobile-web-app-capable',
-        content: 'yes',
+        name: "mobile-web-app-capable",
+        content: "yes",
       },
     ],
     links: [
       {
-        rel: 'stylesheet',
+        rel: "stylesheet",
         href: appCss,
       },
       {
-        rel: 'icon',
-        type: 'image/png',
-        href: '/favicon-96x96.png',
-        sizes: '96x96',
+        rel: "icon",
+        type: "image/png",
+        href: "/favicon-96x96.png",
+        sizes: "96x96",
       },
-      { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-      { rel: 'shortcut icon', href: '/favicon.ico' },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "shortcut icon", href: "/favicon.ico" },
       {
-        rel: 'apple-touch-icon',
-        sizes: '180x180',
-        href: '/apple-touch-icon.png',
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png",
       },
-      { rel: 'manifest', href: '/site.webmanifest' },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
   }),
 });

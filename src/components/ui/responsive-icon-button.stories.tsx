@@ -1,10 +1,10 @@
-import type { Meta } from '@storybook/react-vite';
-import { PlusIcon } from 'lucide-react';
+import type { Meta } from "@storybook/react-vite";
+import { PlusIcon } from "lucide-react";
 
-import { ResponsiveIconButton } from 'src/components/ui/responsive-icon-button';
+import { ResponsiveIconButton } from "@/components/ui/responsive-icon-button";
 
 export default {
-  title: 'ResponsiveIconButton',
+  title: "ResponsiveIconButton",
 } satisfies Meta<typeof ResponsiveIconButton>;
 
 export function Default() {
@@ -56,12 +56,14 @@ export function Variants() {
   );
 }
 
-export function AsChild() {
+export function Render() {
   return (
-    <ResponsiveIconButton label="Add" asChild>
-      <a href="/">
-        <PlusIcon />
-      </a>
+    <ResponsiveIconButton
+      label="Add"
+      render={<a href="/" />}
+      nativeButton={false}
+    >
+      <PlusIcon />
     </ResponsiveIconButton>
   );
 }
