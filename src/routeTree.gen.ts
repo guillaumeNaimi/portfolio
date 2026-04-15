@@ -8,195 +8,164 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as LayoutRouteImport } from './routes/_layout'
-import { Route as LoginIndexRouteImport } from './routes/login/index'
-import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
-import { Route as LayoutCvRouteImport } from './routes/_layout/cv'
-import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc.$'
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
-import { Route as LayoutManagerSkillNewRouteImport } from './routes/_layout/manager/skill/new'
+import { Route as rootRouteImport } from "./routes/__root";
+import { Route as LayoutRouteImport } from "./routes/_layout";
+import { Route as LoginIndexRouteImport } from "./routes/login/index";
+import { Route as LayoutIndexRouteImport } from "./routes/_layout/index";
+import { Route as LayoutCvRouteImport } from "./routes/_layout/cv";
+import { Route as ApiRpcSplatRouteImport } from "./routes/api/rpc.$";
+import { Route as LayoutManagerSkillNewRouteImport } from "./routes/_layout/manager/skill/new";
 
 const LayoutRoute = LayoutRouteImport.update({
-  id: '/_layout',
+  id: "/_layout",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const LoginIndexRoute = LoginIndexRouteImport.update({
-  id: '/login/',
-  path: '/login/',
+  id: "/login/",
+  path: "/login/",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const LayoutIndexRoute = LayoutIndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => LayoutRoute,
-} as any)
+} as any);
 const LayoutCvRoute = LayoutCvRouteImport.update({
-  id: '/cv',
-  path: '/cv',
+  id: "/cv",
+  path: "/cv",
   getParentRoute: () => LayoutRoute,
-} as any)
+} as any);
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
-  id: '/api/rpc/$',
-  path: '/api/rpc/$',
+  id: "/api/rpc/$",
+  path: "/api/rpc/$",
   getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const LayoutManagerSkillNewRoute = LayoutManagerSkillNewRouteImport.update({
-  id: '/manager/skill/new',
-  path: '/manager/skill/new',
+  id: "/manager/skill/new",
+  path: "/manager/skill/new",
   getParentRoute: () => LayoutRoute,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof LayoutIndexRoute
-  '/cv': typeof LayoutCvRoute
-  '/login/': typeof LoginIndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/rpc/$': typeof ApiRpcSplatRoute
-  '/manager/skill/new': typeof LayoutManagerSkillNewRoute
+  "/": typeof LayoutIndexRoute;
+  "/cv": typeof LayoutCvRoute;
+  "/login/": typeof LoginIndexRoute;
+  "/api/rpc/$": typeof ApiRpcSplatRoute;
+  "/manager/skill/new": typeof LayoutManagerSkillNewRoute;
 }
 export interface FileRoutesByTo {
-  '/cv': typeof LayoutCvRoute
-  '/': typeof LayoutIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/rpc/$': typeof ApiRpcSplatRoute
-  '/manager/skill/new': typeof LayoutManagerSkillNewRoute
+  "/cv": typeof LayoutCvRoute;
+  "/": typeof LayoutIndexRoute;
+  "/login": typeof LoginIndexRoute;
+  "/api/rpc/$": typeof ApiRpcSplatRoute;
+  "/manager/skill/new": typeof LayoutManagerSkillNewRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_layout': typeof LayoutRouteWithChildren
-  '/_layout/cv': typeof LayoutCvRoute
-  '/_layout/': typeof LayoutIndexRoute
-  '/login/': typeof LoginIndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/rpc/$': typeof ApiRpcSplatRoute
-  '/_layout/manager/skill/new': typeof LayoutManagerSkillNewRoute
+  __root__: typeof rootRouteImport;
+  "/_layout": typeof LayoutRouteWithChildren;
+  "/_layout/cv": typeof LayoutCvRoute;
+  "/_layout/": typeof LayoutIndexRoute;
+  "/login/": typeof LoginIndexRoute;
+  "/api/rpc/$": typeof ApiRpcSplatRoute;
+  "/_layout/manager/skill/new": typeof LayoutManagerSkillNewRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/cv'
-    | '/login/'
-    | '/api/auth/$'
-    | '/api/rpc/$'
-    | '/manager/skill/new'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/cv'
-    | '/'
-    | '/login'
-    | '/api/auth/$'
-    | '/api/rpc/$'
-    | '/manager/skill/new'
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: "/" | "/cv" | "/login/" | "/api/rpc/$" | "/manager/skill/new";
+  fileRoutesByTo: FileRoutesByTo;
+  to: "/cv" | "/" | "/login" | "/api/rpc/$" | "/manager/skill/new";
   id:
-    | '__root__'
-    | '/_layout'
-    | '/_layout/cv'
-    | '/_layout/'
-    | '/login/'
-    | '/api/auth/$'
-    | '/api/rpc/$'
-    | '/_layout/manager/skill/new'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/_layout"
+    | "/_layout/cv"
+    | "/_layout/"
+    | "/login/"
+    | "/api/rpc/$"
+    | "/_layout/manager/skill/new";
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  LayoutRoute: typeof LayoutRouteWithChildren
-  LoginIndexRoute: typeof LoginIndexRoute
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
-  ApiRpcSplatRoute: typeof ApiRpcSplatRoute
+  LayoutRoute: typeof LayoutRouteWithChildren;
+  LoginIndexRoute: typeof LoginIndexRoute;
+  ApiRpcSplatRoute: typeof ApiRpcSplatRoute;
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/_layout': {
-      id: '/_layout'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof LayoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login/'
-      preLoaderRoute: typeof LoginIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_layout/': {
-      id: '/_layout/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof LayoutIndexRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/cv': {
-      id: '/_layout/cv'
-      path: '/cv'
-      fullPath: '/cv'
-      preLoaderRoute: typeof LayoutCvRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/api/rpc/$': {
-      id: '/api/rpc/$'
-      path: '/api/rpc/$'
-      fullPath: '/api/rpc/$'
-      preLoaderRoute: typeof ApiRpcSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_layout/manager/skill/new': {
-      id: '/_layout/manager/skill/new'
-      path: '/manager/skill/new'
-      fullPath: '/manager/skill/new'
-      preLoaderRoute: typeof LayoutManagerSkillNewRouteImport
-      parentRoute: typeof LayoutRoute
-    }
+    "/_layout": {
+      id: "/_layout";
+      path: "";
+      fullPath: "/";
+      preLoaderRoute: typeof LayoutRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/login/": {
+      id: "/login/";
+      path: "/login";
+      fullPath: "/login/";
+      preLoaderRoute: typeof LoginIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_layout/": {
+      id: "/_layout/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof LayoutIndexRouteImport;
+      parentRoute: typeof LayoutRoute;
+    };
+    "/_layout/cv": {
+      id: "/_layout/cv";
+      path: "/cv";
+      fullPath: "/cv";
+      preLoaderRoute: typeof LayoutCvRouteImport;
+      parentRoute: typeof LayoutRoute;
+    };
+    "/api/rpc/$": {
+      id: "/api/rpc/$";
+      path: "/api/rpc/$";
+      fullPath: "/api/rpc/$";
+      preLoaderRoute: typeof ApiRpcSplatRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_layout/manager/skill/new": {
+      id: "/_layout/manager/skill/new";
+      path: "/manager/skill/new";
+      fullPath: "/manager/skill/new";
+      preLoaderRoute: typeof LayoutManagerSkillNewRouteImport;
+      parentRoute: typeof LayoutRoute;
+    };
   }
 }
 
 interface LayoutRouteChildren {
-  LayoutCvRoute: typeof LayoutCvRoute
-  LayoutIndexRoute: typeof LayoutIndexRoute
-  LayoutManagerSkillNewRoute: typeof LayoutManagerSkillNewRoute
+  LayoutCvRoute: typeof LayoutCvRoute;
+  LayoutIndexRoute: typeof LayoutIndexRoute;
+  LayoutManagerSkillNewRoute: typeof LayoutManagerSkillNewRoute;
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutCvRoute: LayoutCvRoute,
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutManagerSkillNewRoute: LayoutManagerSkillNewRoute,
-}
+};
 
 const LayoutRouteWithChildren =
-  LayoutRoute._addFileChildren(LayoutRouteChildren)
+  LayoutRoute._addFileChildren(LayoutRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
   LoginIndexRoute: LoginIndexRoute,
-  ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
-}
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
+import type { getRouter } from "./router.tsx";
+import type { createStart } from "@tanstack/react-start";
+declare module "@tanstack/react-start" {
   interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
+    ssr: true;
+    router: Awaited<ReturnType<typeof getRouter>>;
   }
 }
