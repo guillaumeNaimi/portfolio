@@ -1,5 +1,5 @@
-import { createJiti } from 'jiti';
-import { fileURLToPath, URL } from 'node:url';
+import { createJiti } from "jiti";
+import { fileURLToPath, URL } from "node:url";
 
 const moduleFileUrl = import.meta.url;
 
@@ -9,7 +9,7 @@ const pathToFile = process.argv[2];
 // Allows aliases
 const jiti = createJiti(fileURLToPath(moduleFileUrl), {
   alias: {
-    '@': fileURLToPath(new URL('./app', moduleFileUrl)),
+    "@": fileURLToPath(new URL("./src", moduleFileUrl)),
   },
 });
 
