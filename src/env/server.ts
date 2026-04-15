@@ -1,9 +1,9 @@
 /* eslint-disable no-process-env */
-import { createEnv } from '@t3-oss/env-core';
-import { z } from 'zod';
+import { createEnv } from "@t3-oss/env-core";
+import { z } from "zod";
 
 const isProd = process.env.NODE_ENV
-  ? process.env.NODE_ENV === 'production'
+  ? process.env.NODE_ENV === "production"
   : import.meta.env?.PROD;
 
 export const envServer = createEnv({
@@ -11,14 +11,12 @@ export const envServer = createEnv({
     DATABASE_URL: z.string().url(),
 
     LOGGER_LEVEL: z
-      .enum(['trace', 'debug', 'info', 'warn', 'error', 'fatal'])
-      .default(isProd ? 'error' : 'info'),
+      .enum(["trace", "debug", "info", "warn", "error", "fatal"])
+      .default(isProd ? "error" : "info"),
     LOGGER_PRETTY: z
-      .enum(['true', 'false'])
-      .default(isProd ? 'false' : 'true')
-      .transform((value) => value === 'true'),
-    GITHUB_CLIENT_ID: z.string(),
-    GITHUB_CLIENT_SECRET: z.string(),
+      .enum(["true", "false"])
+      .default(isProd ? "false" : "true")
+      .transform((value) => value === "true"),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,

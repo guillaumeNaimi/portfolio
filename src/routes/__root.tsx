@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
@@ -12,6 +13,8 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import { type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
+import "@/styles/app.css";
+
 import { getPageTitle } from "@/lib/get-page-title";
 import i18n, { syncLanguage } from "@/lib/i18n";
 
@@ -20,7 +23,6 @@ import { PageError } from "@/components/errors/page-error";
 import { EnvHint } from "@/features/devtools/env-hint";
 import { Providers } from "@/providers";
 import { getUserLanguage } from "@/server/utils";
-import appCss from "@/styles/app.css?url";
 
 const initSsrApp = createServerFn({ method: "GET" }).handler(() => {
   return {
@@ -125,10 +127,6 @@ export const Route = createRootRouteWithContext<{
       },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
       {
         rel: "icon",
         type: "image/png",

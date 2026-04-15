@@ -8,6 +8,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button-link";
 import {
   Card,
   CardContent,
@@ -61,18 +62,16 @@ export const PageHome = () => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg">
-                <a href="/cv" data-testid="hero-cv-link">
-                  {t("common:hero.viewCV")}
-                  <ArrowRightIcon className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
+              <ButtonLink to="/cv" size="lg">
+                {t("common:hero.viewCV")}
+                <ArrowRightIcon className="ml-2 h-4 w-4" />
+              </ButtonLink>
               <Button variant="secondary" size="lg">
+                <MailIcon className="mr-2 h-4 w-4" />
                 <a
                   href="mailto:naimi.guillaume@gmail.com"
                   data-testid="hero-contact-link"
                 >
-                  <MailIcon className="mr-2 h-4 w-4" />
                   {t("common:hero.contact")}
                 </a>
               </Button>
