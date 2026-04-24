@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
+import { useHydrated } from "@/hooks/use-hydrated";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,6 +16,7 @@ import { SkillsRadar } from "./components/skills-radar";
 export const PageCV = () => {
   const { t } = useTranslation(["cv"]);
   const isMobile = useIsMobile();
+  const hydrated = useHydrated();
 
   return (
     <PageLayout>
@@ -23,6 +25,7 @@ export const PageCV = () => {
           id="main-content"
           className="mx-auto w-full max-w-6xl p-6"
           data-testid="cv-page"
+          data-hydrated={hydrated ? "true" : undefined}
         >
           {/* Hero Section */}
           <motion.header

@@ -1,14 +1,14 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Page } from "@playwright/test";
 
 export class TestHelpers {
   constructor(private page: Page) {}
 
   /**
-   * Wait for page to be fully loaded
+   * Wait for the document load event. Avoid `networkidle` — Vite HMR, analytics,
+   * and other long-lived connections often prevent it from ever settling.
    */
   async waitForPageLoad() {
-    await this.page.waitForLoadState('networkidle');
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForLoadState("load");
   }
 
   /**
@@ -25,16 +25,16 @@ export class TestHelpers {
   async checkForConsoleErrors() {
     const consoleErrors: string[] = [];
 
-    this.page.on('console', (msg) => {
-      if (msg.type() === 'error') {
+    this.page.on("console", (msg) => {
+      if (msg.type() === "error") {
         const errorText = msg.text();
         // Filter out known non-critical errors
         if (
-          !errorText.includes('favicon') &&
-          !errorText.includes('analytics') &&
-          !errorText.includes('speed-insights') &&
-          !errorText.includes('google') &&
-          !errorText.includes('gtag')
+          !errorText.includes("favicon") &&
+          !errorText.includes("analytics") &&
+          !errorText.includes("speed-insights") &&
+          !errorText.includes("google") &&
+          !errorText.includes("gtag")
         ) {
           consoleErrors.push(errorText);
         }
@@ -50,17 +50,17 @@ export class TestHelpers {
   async checkMetaTags() {
     // Check meta description
     await expect(this.page.locator('meta[name="description"]')).toHaveAttribute(
-      'content',
-      /Guillaume Naimi/
+      "content",
+      /Guillaume Naimi/,
     );
 
     // Check Open Graph tags
     await expect(
-      this.page.locator('meta[property="og:title"]')
-    ).toHaveAttribute('content', /Guillaume Naimi/);
+      this.page.locator('meta[property="og:title"]'),
+    ).toHaveAttribute("content", /Guillaume Naimi/);
     await expect(this.page.locator('meta[property="og:type"]')).toHaveAttribute(
-      'content',
-      'website'
+      "content",
+      "website",
     );
   }
 }

@@ -12,7 +12,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export const LocalSwitcher = (props: { iconOnly?: boolean }) => {
+export const LocalSwitcher = (props: {
+  iconOnly?: boolean;
+  "data-testid"?: string;
+}) => {
   const { i18n, t } = useTranslation(["common"]);
 
   return (
@@ -20,6 +23,7 @@ export const LocalSwitcher = (props: { iconOnly?: boolean }) => {
       <DropdownMenuTrigger
         render={
           <Button
+            data-testid={props["data-testid"]}
             variant={props.iconOnly ? "ghost" : "link"}
             size={props.iconOnly ? "icon" : "default"}
           />
@@ -35,6 +39,7 @@ export const LocalSwitcher = (props: { iconOnly?: boolean }) => {
         {AVAILABLE_LANGUAGES.map((language) => (
           <DropdownMenuItem
             key={language.key}
+            data-testid={`language-option-${language.key}`}
             onClick={() => {
               i18n.changeLanguage(language.key);
             }}

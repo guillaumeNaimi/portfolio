@@ -1,14 +1,12 @@
-import { QueryClient } from '@tanstack/react-query';
-
-const networkMode = import.meta.dev ? 'always' : undefined;
+import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      networkMode,
+      networkMode: "always",
     },
     mutations: {
-      networkMode,
+      networkMode: "always",
     },
   },
 });
