@@ -51,5 +51,8 @@ jobs:
       - name: Install deps
         run: bun install
 
+      - name: Install Playwright Browsers
+        run: bunx playwright install --with-deps chromium
+
       - name: Run tests
         run: SKIP_ENV_VALIDATION=true bun run test:ci
