@@ -22,7 +22,10 @@ import {
 
 export const themes = ["system", "light", "dark"] as const;
 
-export const ThemeSwitcher = (props: { iconOnly?: boolean }) => {
+export const ThemeSwitcher = (props: {
+  iconOnly?: boolean;
+  "data-testid"?: string;
+}) => {
   const { t } = useTranslation(["common"]);
   const { theme, setTheme } = useTheme();
   const hydrated = useHydrated();
@@ -36,6 +39,7 @@ export const ThemeSwitcher = (props: { iconOnly?: boolean }) => {
       <DropdownMenuTrigger
         render={
           <Button
+            data-testid={props["data-testid"]}
             variant={props.iconOnly ? "ghost" : "link"}
             size={props.iconOnly ? "icon" : "default"}
           />
@@ -59,6 +63,7 @@ export const ThemeSwitcher = (props: { iconOnly?: boolean }) => {
         {themes.map((item) => (
           <DropdownMenuItem
             key={item}
+            data-testid={`theme-option-${item}`}
             onClick={() => {
               setTheme(item);
             }}

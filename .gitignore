@@ -62,3 +62,10 @@ certificates
 app.config.timestamp_*.js
 .tanstack
 .nitro
+
+# Claude Code
+.claude/
+
+# Vitest browser test artifacts
+**/__screenshots__/
+.vitest-attachments/

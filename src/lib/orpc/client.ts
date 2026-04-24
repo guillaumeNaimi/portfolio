@@ -8,7 +8,12 @@ import { envClient } from "@/env/client";
 import type { Router } from "./types";
 
 const link = new RPCLink({
-  url: `${envClient.VITE_BASE_URL}/api/rpc`,
+  url: () => {
+    if (typeof window !== "undefined") {
+      return `${window.location.origin}/api/rpc`;
+    }
+    return `${envClient.VITE_BASE_URL}/api/rpc`;
+  },
 });
 
 const orpcClient: RouterClient<Router> = createORPCClient(link);

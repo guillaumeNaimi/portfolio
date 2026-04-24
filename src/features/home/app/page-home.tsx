@@ -7,6 +7,8 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+import { useHydrated } from "@/hooks/use-hydrated";
+
 import { Button } from "@/components/ui/button";
 import { ButtonLink } from "@/components/ui/button-link";
 import {
@@ -21,6 +23,7 @@ import { PageLayout, PageLayoutContent } from "@/layout/app/page-layout";
 
 export const PageHome = () => {
   const { t } = useTranslation(["common"]);
+  const hydrated = useHydrated();
 
   return (
     <PageLayout>
@@ -28,6 +31,7 @@ export const PageHome = () => {
         <main
           className="mx-auto flex max-w-4xl flex-1 flex-col gap-8"
           data-testid="home-page"
+          data-hydrated={hydrated ? "true" : undefined}
         >
           {/* Hero Section */}
           <motion.div
@@ -62,7 +66,7 @@ export const PageHome = () => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <ButtonLink to="/cv" size="lg">
+              <ButtonLink to="/cv" size="lg" data-testid="hero-cv-link">
                 {t("common:hero.viewCV")}
                 <ArrowRightIcon className="ml-2 h-4 w-4" />
               </ButtonLink>
