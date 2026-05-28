@@ -37,6 +37,10 @@
     "keyAchievements": "Key Achievements",
     "technologies": "Technologies"
   },
+  "techCloud": {
+    "title": "Stack I reach for",
+    "subtitle": "From daily drivers to occasional guests — technologies I've shipped with."
+  },
   "skills": {
     "title": "Skills & Expertise",
     "subtitle": "My technical skills across different domains",
@@ -45,6 +49,7 @@
       "design": "Design",
       "devops": "DevOps",
       "backend": "Backend",
+      "quality": "Quality",
       "other": "Other"
     }
   }

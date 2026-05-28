@@ -6,7 +6,14 @@ export const zTechnology = () =>
     name: z.string(),
     icon: z.string().optional(),
     color: z.string().optional(),
-    category: z.enum(["frontend", "backend", "devops", "design", "other"]),
+    category: z.enum([
+      "frontend",
+      "backend",
+      "devops",
+      "design",
+      "quality",
+      "other",
+    ]),
   });
 
 export const zSkill = () =>

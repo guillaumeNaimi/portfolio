@@ -37,6 +37,10 @@
     "keyAchievements": "Réalisations Clés",
     "technologies": "Technologies"
   },
+  "techCloud": {
+    "title": "Ma boîte à outils",
+    "subtitle": "Des outils du quotidien aux invités occasionnels — les technologies avec lesquelles j'ai livré."
+  },
   "skills": {
     "title": "Compétences & Expertise",
     "subtitle": "Mes compétences techniques dans différents domaines",
@@ -45,6 +49,7 @@
       "design": "Design",
       "devops": "DevOps",
       "backend": "Backend",
+      "quality": "Qualité",
       "other": "Autre"
     }
   }
