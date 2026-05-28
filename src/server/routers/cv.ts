@@ -38,6 +38,7 @@ type TechnologyCategory =
   | "backend"
   | "devops"
   | "design"
+  | "quality"
   | "other";
 type ExperienceType = "full-time" | "part-time" | "contract" | "freelance";
 

@@ -130,6 +130,41 @@ export async function createCV() {
       color: "#000000",
       icon: "SiAstro",
     },
+    {
+      name: "Node.js",
+      category: "backend" as const,
+      color: "#339933",
+      icon: "SiNodedotjs",
+    },
+    {
+      name: "Playwright",
+      category: "quality" as const,
+      color: "#2EAD33",
+      icon: "SiPlaywright",
+    },
+    {
+      name: "Vitest",
+      category: "quality" as const,
+      color: "#6E9F18",
+      icon: "SiVitest",
+    },
+    {
+      name: "CI/CD",
+      category: "devops" as const,
+      color: "#2088FF",
+      icon: "SiGithubactions",
+    },
+    {
+      name: "Helm",
+      category: "devops" as const,
+      color: "#277A9F",
+      icon: "SiHelm",
+    },
+    {
+      name: "Web Accessibility",
+      category: "other" as const,
+      color: "#005A9C",
+    },
   ];
 
   const createdTechnologies = await Promise.all(
@@ -146,15 +181,30 @@ export async function createCV() {
   console.log(`⏳ Creating skills`);
 
   const skills = [
-    { level: 95, technologyId: getTechnology("React") },
-    { level: 90, technologyId: getTechnology("TypeScript") },
-    { level: 80, technologyId: getTechnology("Next.js") },
-    { level: 70, technologyId: getTechnology("Tanstack start") },
-    { level: 90, technologyId: getTechnology("GraphQL") },
-    { level: 70, technologyId: getTechnology("Kotlin") },
-    { level: 75, technologyId: getTechnology("Docker") },
+    // Frontend
+    { level: 100, technologyId: getTechnology("React") },
+    { level: 100, technologyId: getTechnology("TypeScript") },
+    { level: 100, technologyId: getTechnology("Next.js") },
+    { level: 80, technologyId: getTechnology("Tailwind CSS") },
+    { level: 60, technologyId: getTechnology("Tanstack start") },
+    { level: 60, technologyId: getTechnology("Astro") },
+    // Backend
+    { level: 80, technologyId: getTechnology("Kotlin") },
+    { level: 80, technologyId: getTechnology("Spring Boot") },
+    { level: 60, technologyId: getTechnology("Node.js") },
+    { level: 100, technologyId: getTechnology("GraphQL") },
+    // Quality
+    { level: 80, technologyId: getTechnology("Playwright") },
+    { level: 80, technologyId: getTechnology("Vitest") },
+    // DevOps
+    { level: 80, technologyId: getTechnology("Docker") },
+    { level: 80, technologyId: getTechnology("CI/CD") },
+    { level: 60, technologyId: getTechnology("Kubernetes") },
+    { level: 60, technologyId: getTechnology("Helm") },
+    // Other
+    { level: 80, technologyId: getTechnology("Web Accessibility") },
+    { level: 60, technologyId: getTechnology("PostgreSQL") },
     { level: 60, technologyId: getTechnology("Figma") },
-    { level: 85, technologyId: getTechnology("PostgreSQL") },
   ];
 
   await Promise.all(skills.map((skill) => db.skill.create({ data: skill })));

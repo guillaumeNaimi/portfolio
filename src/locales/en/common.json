@@ -20,11 +20,21 @@
     "delete": "Delete",
     "edit": "Edit"
   },
+  "errors": {
+    "required": "This field is required"
+  },
   "hero": {
     "title": "Hello,",
-    "subtitle": "My name is Guillaume NAIMI, a front-end developer specializing in React, TypeScript, and Next.js. I enjoy creating powerful, clean, and user-centric interfaces. I'm curious, rigorous, and always looking for best practices and challenging projects.",
+    "titleAccent": "I'm Guillaume.",
+    "subtitle": "A front-end developer specializing in <strong>React, TypeScript, and Next.js</strong>. I enjoy creating powerful, clean, and user-centric interfaces. I'm curious, rigorous, and always looking for best practices and challenging projects.",
     "viewCV": "See my CV",
-    "contact": "Contact Me"
+    "contact": "Get in touch"
+  },
+  "stats": {
+    "years": "Years in front-end",
+    "companies": "Companies",
+    "tools": "Tools in the belt",
+    "languages": "Languages"
   },
   "skills": {
     "title": "Skills & Technologies"
@@ -41,5 +51,18 @@
       "description": "Connect with me professionally and see my experience",
       "button": "Connect"
     }
+  },
+  "contact": {
+    "title": "Let's build something clean.",
+    "subtitle": "I'm open to senior front-end roles and selective freelance work. If you have a project worth talking about, let's connect.",
+    "cta": {
+      "email": "Get in touch",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} Guillaume Naimi.",
+    "built": "Built with React + Tailwind."
   }
 }
