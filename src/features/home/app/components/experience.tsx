@@ -21,6 +21,8 @@ import { Separator } from "@/components/ui/separator";
 import { formatDateRange, getDuration } from "@/lib/dayjs/utils";
 
 const CARD_WIDTH = 420;
+// 220px = header block (~120px) + progress bar (~30px) + breathing room (~70px)
+const CARD_HEIGHT = "min(560px, calc(100vh - 220px))";
 const CARD_GAP = 24;
 
 type ExperienceItem = {
@@ -52,7 +54,7 @@ const ExperienceCard = ({ experience, active }: ExperienceCardProps) => {
   return (
     <div
       className={cn(
-        "relative flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-all duration-500",
+        "relative flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-[transform,opacity,box-shadow] duration-500",
         active ? "scale-100 opacity-100" : "scale-95 opacity-65",
       )}
       style={{
@@ -108,19 +110,19 @@ const ExperienceCard = ({ experience, active }: ExperienceCardProps) => {
         </div>
 
         {/* description */}
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
           {experience.description}
         </p>
         <Separator />
 
-        {/* achievements */}
+        {/* achievements — max 4 shown, each capped at 2 lines */}
         {experience.achievements.length > 0 && (
           <div className="flex flex-col gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-foreground">
               {t("cv:experience.keyAchievements")}
             </p>
             <ul className="space-y-1.5">
-              {experience.achievements.map((a) => (
+              {experience.achievements.slice(0, 4).map((a) => (
                 <li
                   key={a}
                   className="flex items-start gap-2 text-xs text-muted-foreground"
@@ -129,7 +131,7 @@ const ExperienceCard = ({ experience, active }: ExperienceCardProps) => {
                     className="mt-0.5 inline-block size-2 shrink-0 rounded-xs"
                     style={{ backgroundColor: color }}
                   />
-                  {a}
+                  <span className="line-clamp-2">{a}</span>
                 </li>
               ))}
             </ul>
@@ -197,8 +199,8 @@ const ExperienceScrollJack = ({
       style={{ height: `${total * 95}vh` }}
       className="relative"
     >
-      {/* sticky container */}
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+      {/* sticky container — no overflow-hidden here, track handles horizontal clipping */}
+      <div className="sticky top-0 flex h-screen flex-col justify-center">
         {/* section header */}
         <div className="mx-auto w-full max-w-4xl px-4 pb-6">
           <div className="mb-3 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
@@ -221,9 +223,12 @@ const ExperienceScrollJack = ({
           </div>
         </div>
 
-        {/* track */}
-        <div className="mx-auto w-full max-w-4xl overflow-hidden px-4">
-          <motion.div className="flex" style={{ gap: CARD_GAP, x: trackX }}>
+        {/* track — overflow-x-clip hides off-screen cards without clipping vertical shadow/scale */}
+        <div className="mx-auto w-full max-w-4xl overflow-x-clip px-4">
+          <motion.div
+            className="flex items-stretch"
+            style={{ gap: CARD_GAP, height: CARD_HEIGHT, x: trackX }}
+          >
             {experiences.map((exp, i) => (
               <ExperienceCard
                 key={exp.id ?? i}
