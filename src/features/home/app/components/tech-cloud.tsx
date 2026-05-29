@@ -42,7 +42,7 @@ export const TechCloud = () => {
         .match("default", ({ technologies }) => (
           <div className="space-y-8">
             <div>
-              <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground">
+              <div className="mb-4 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
                 <span className="h-px w-5 bg-current" />
                 03 · Toolbox
               </div>

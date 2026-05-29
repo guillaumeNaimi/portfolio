@@ -53,7 +53,7 @@ const ExperienceCard = ({ experience, active }: ExperienceCardProps) => {
     <div
       className={cn(
         "relative flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-all duration-500",
-        active ? "scale-100 opacity-100" : "scale-[0.96] opacity-65",
+        active ? "scale-100 opacity-100" : "scale-95 opacity-65",
       )}
       style={{
         width: CARD_WIDTH,
@@ -100,7 +100,7 @@ const ExperienceCard = ({ experience, active }: ExperienceCardProps) => {
             {formatDateRange(experience.startDate, experience.endDate)}
           </span>
           <span
-            className="rounded px-1.5 py-0.5 text-[11px] font-medium"
+            className="rounded px-1.5 py-0.5 text-2xs font-medium"
             style={{ backgroundColor: `${color}22`, color }}
           >
             {getDuration(experience.startDate, experience.endDate)}
@@ -126,7 +126,7 @@ const ExperienceCard = ({ experience, active }: ExperienceCardProps) => {
                   className="flex items-start gap-2 text-xs text-muted-foreground"
                 >
                   <span
-                    className="mt-[3px] inline-block size-2 shrink-0 rounded-[2px]"
+                    className="mt-0.5 inline-block size-2 shrink-0 rounded-xs"
                     style={{ backgroundColor: color }}
                   />
                   {a}
@@ -201,7 +201,7 @@ const ExperienceScrollJack = ({
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         {/* section header */}
         <div className="mx-auto w-full max-w-4xl px-4 pb-6">
-          <div className="mb-3 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground">
+          <div className="mb-3 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
             <span className="h-px w-5 bg-current" />
             04 · Experience
           </div>

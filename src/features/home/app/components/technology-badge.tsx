@@ -23,12 +23,12 @@ export const TechnologyBadge = ({
       {hasIcon(technology.icon) ? (
         <IconComponent
           iconName={technology.icon}
-          className="size-[14px] shrink-0"
+          className="size-3.5 shrink-0"
           style={{ color: technology.color }}
         />
       ) : (
         <span
-          className="inline-flex size-5 shrink-0 items-center justify-center rounded-full text-[9px] font-bold leading-none text-white"
+          className="inline-flex size-5 shrink-0 items-center justify-center rounded-full text-3xs font-bold leading-none text-white"
           style={{ background: technology.color ?? "#888" }}
         >
           {getTechLetters(technology.name)}

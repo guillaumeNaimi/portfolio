@@ -67,6 +67,10 @@
   --text-2xs: 0.625rem;
   --text-3xs: 0.5rem;
 
+  --tracking-eyebrow: 0.08em;
+
+  --radius-xs: 0.125rem;
+
   --breakpoint-2xs: 24rem; /* 384px */
   --breakpoint-xs: 32rem; /* 512px */
   /* Tailwind --breakpoint-sm: 40rem; (640px) */

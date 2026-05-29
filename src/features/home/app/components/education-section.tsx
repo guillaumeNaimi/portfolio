@@ -93,7 +93,7 @@ export const EducationSection = () => {
       <section id="education" className="flex flex-col gap-6">
         {/* eyebrow */}
         <div>
-          <div className="mb-2 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground">
+          <div className="mb-2 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
             <span className="h-px w-5 bg-current" />
             06 · Learning
           </div>
