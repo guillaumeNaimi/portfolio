@@ -26,7 +26,7 @@
   "hero": {
     "title": "Hello,",
     "titleAccent": "I'm Guillaume.",
-    "subtitle": "A front-end developer specializing in <strong>React, TypeScript, and Next.js</strong>. I enjoy creating powerful, clean, and user-centric interfaces. I'm curious, rigorous, and always looking for best practices and challenging projects.",
+    "subtitle": "Senior Frontend Engineer with 7 years of experience building production <strong>React, Next.js, and TypeScript</strong> applications. I've led frontend teams, shipped products used daily by thousands of users, and migrated legacy stacks toward modern architectures (App Router, Server Components). I care about code quality, accessibility (W3C certified), and the kind of small UX details that make a product feel right. Lately I've been exploring TanStack Start, Astro, and Svelte to stay close to where the ecosystem is heading.",
     "viewCV": "See my CV",
     "contact": "Get in touch"
   },

@@ -57,7 +57,7 @@ const ProjectCard = ({
 
         {project.featured && (
           <span
-            className="absolute right-3 top-3 rounded-full px-2 py-0.5 text-[11px] font-semibold"
+            className="absolute right-3 top-3 rounded-full px-2 py-0.5 text-2xs font-semibold"
             style={{ backgroundColor: `${color1}22`, color: color1 }}
           >
             {t("cv:projects.featured")}
@@ -154,7 +154,7 @@ export const ProjectShowcase = () => {
       <section id="projects" className="flex flex-col gap-6">
         {/* eyebrow */}
         <div>
-          <div className="mb-2 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground">
+          <div className="mb-2 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
             <span className="h-px w-5 bg-current" />
             05 · Selected work
           </div>

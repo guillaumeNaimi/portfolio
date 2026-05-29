@@ -76,7 +76,7 @@ export const Skills = () => {
           return (
             <div className="space-y-8">
               <div>
-                <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground">
+                <div className="mb-4 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
                   <span className="h-px w-5 bg-current" />
                   02 · Proficiency
                 </div>
@@ -102,7 +102,7 @@ export const Skills = () => {
                       key={category}
                       className="flex h-full flex-col rounded-md border border-border bg-card p-6"
                     >
-                      <div className="mb-4 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                      <div className="mb-4 flex items-center justify-between text-2xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
                         <span>{categoryLabels[category]}</span>
                         <span>{categorySkills.length} tools</span>
                       </div>
@@ -114,16 +114,16 @@ export const Skills = () => {
                             className="flex items-center justify-between border-t border-border py-2 first:border-t-0"
                             data-testid={`skill-${skill.technology.name}`}
                           >
-                            <span className="flex items-center gap-[9px] text-sm font-medium">
+                            <span className="flex items-center gap-2 text-sm font-medium">
                               {hasIcon(skill.technology.icon) ? (
                                 <IconComponent
                                   iconName={skill.technology.icon}
-                                  className="size-[14px] shrink-0"
+                                  className="size-3.5 shrink-0"
                                   style={{ color: skill.technology.color }}
                                 />
                               ) : (
                                 <span
-                                  className="inline-flex size-[14px] shrink-0 items-center justify-center rounded-[3px] text-[7.5px] font-bold leading-none text-white"
+                                  className="inline-flex size-3.5 shrink-0 items-center justify-center rounded-xs text-3xs font-bold leading-none text-white"
                                   style={{
                                     background:
                                       skill.technology.color ?? "#888",
