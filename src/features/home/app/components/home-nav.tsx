@@ -81,8 +81,8 @@ export const HomeNav = () => {
 
         {/* controls */}
         <div className="flex items-center gap-1">
-          <LocalSwitcher iconOnly />
-          <ThemeSwitcher iconOnly />
+          <LocalSwitcher iconOnly data-testid="local-switcher-home" />
+          <ThemeSwitcher iconOnly data-testid="theme-switcher-home" />
         </div>
       </div>
     </motion.header>

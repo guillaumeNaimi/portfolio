@@ -1,66 +1,46 @@
 import { expect, test } from "@playwright/test";
 
-// The home page uses its own HomeNav (no global nav links).
-// The CV page uses the standard MainNavDesktop with Home / CV links
-// and the data-testid'd theme / language switchers.
+// The /cv route no longer exists — all CV content lives in the one-pager home.
+// Navigation tests operate exclusively from the home page and its HomeNav.
 
 test.describe("Navigation", () => {
-  // ─── Home → CV ─────────────────────────────────────────────────────────────
-
-  test("should navigate to CV page via the hero CTA", async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto("/");
     await expect(page.getByTestId("home-page")).toHaveAttribute(
       "data-hydrated",
       "true",
     );
-
-    await page.getByTestId("hero-cv-link").click();
-    await expect(page).toHaveURL(/\/cv/);
-    await expect(page.getByTestId("cv-page")).toBeVisible();
   });
 
-  // ─── CV → Home ─────────────────────────────────────────────────────────────
+  // ─── HomeNav ───────────────────────────────────────────────────────────────
 
-  test("should navigate back to home via the global nav", async ({ page }) => {
-    await page.goto("/cv");
-    await expect(page.getByTestId("cv-page")).toHaveAttribute(
-      "data-hydrated",
-      "true",
-    );
+  test("should display the home nav with brand and controls", async ({
+    page,
+  }) => {
+    const homeNav = page.locator("[data-home-nav]");
+    await expect(homeNav).toBeVisible();
 
-    // The global MainNavDesktop is visible on /cv
-    const globalNav = page.getByRole("navigation").first();
-    await expect(globalNav).toBeVisible();
+    // Brand button
+    const brand = homeNav.getByRole("button").first();
+    await expect(brand).toBeVisible();
 
-    const homeLink = globalNav.getByRole("link", { name: /home/i });
-    await expect(homeLink).toBeVisible();
-    await homeLink.click();
-
-    await expect(page).toHaveURL(/\/$/);
-    await expect(page.getByTestId("home-page")).toBeVisible();
+    // Theme + language switchers
+    await expect(page.getByTestId("theme-switcher-home")).toBeVisible();
+    await expect(page.getByTestId("local-switcher-home")).toBeVisible();
   });
 
   // ─── Reload persistence ────────────────────────────────────────────────────
 
-  test("should stay on CV page after reload", async ({ page }) => {
-    await page.goto("/cv");
-    await expect(page.getByTestId("cv-page")).toBeVisible();
-
+  test("should stay on home after reload", async ({ page }) => {
     await page.reload();
-    await expect(page).toHaveURL(/\/cv/);
-    await expect(page.getByTestId("cv-page")).toBeVisible();
+    await expect(page).toHaveURL("/");
+    await expect(page.getByTestId("home-page")).toBeVisible();
   });
 
-  // ─── Theme switching (tested from /cv where global nav is visible) ─────────
+  // ─── Theme switching ───────────────────────────────────────────────────────
 
-  test("should switch theme from the CV page nav", async ({ page }) => {
-    await page.goto("/cv");
-    await expect(page.getByTestId("cv-page")).toHaveAttribute(
-      "data-hydrated",
-      "true",
-    );
-
-    const themeButton = page.getByTestId("theme-switcher-desktop");
+  test("should switch theme via the home nav", async ({ page }) => {
+    const themeButton = page.getByTestId("theme-switcher-home");
     await expect(themeButton).toBeVisible();
 
     const isDark = await page.evaluate(() =>
@@ -83,16 +63,10 @@ test.describe("Navigation", () => {
     expect(isNowDark).toBe(!isDark);
   });
 
-  // ─── Language switching (tested from /cv where global nav is visible) ──────
+  // ─── Language switching ────────────────────────────────────────────────────
 
-  test("should switch language from the CV page nav", async ({ page }) => {
-    await page.goto("/cv");
-    await expect(page.getByTestId("cv-page")).toHaveAttribute(
-      "data-hydrated",
-      "true",
-    );
-
-    const langButton = page.getByTestId("local-switcher-desktop");
+  test("should switch language via the home nav", async ({ page }) => {
+    const langButton = page.getByTestId("local-switcher-home");
     await expect(langButton).toBeVisible();
 
     const initialLang =
