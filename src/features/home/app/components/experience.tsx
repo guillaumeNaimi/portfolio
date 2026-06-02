@@ -532,7 +532,13 @@ const ExperienceScrollJack = ({
   }, [openIdx]);
 
   const handleOpen = (idx: number) => setOpenIdx(idx);
-  const handleClose = () => setOpenIdx(null);
+  const handleClose = () => {
+    // Blur before unmounting so the browser has nowhere to auto-scroll to.
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+    setOpenIdx(null);
+  };
   const handlePrev = () => setOpenIdx((i) => (i !== null && i > 0 ? i - 1 : i));
   const handleNext = () =>
     setOpenIdx((i) => (i !== null && i < total - 1 ? i + 1 : i));
