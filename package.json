@@ -2,11 +2,22 @@
   "name": "guillaume-naimi-portfolio",
   "version": "3.0.0",
   "private": true,
-  "type": "module",
   "description": "Guillaume Naimi - Front-end Developer Portfolio",
-  "engines": {
-    "node": ">=22"
+  "homepage": "https://github.com/guillaumenaimi/portfolio#readme",
+  "bugs": {
+    "url": "https://github.com/guillaumenaimi/portfolio/issues"
   },
+  "license": "MIT",
+  "author": {
+    "name": "Guillaume Naimi",
+    "email": "guillaume@naimi.dev",
+    "url": "https://github.com/guillaumenaimi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guillaumenaimi/portfolio.git"
+  },
+  "type": "module",
   "scripts": {
     "postinstall": "run-p gen:prisma gen:build-info",
     "dev": "run-p env dev:*",
@@ -151,20 +162,9 @@
     "vitest-axe": "0.1.0",
     "vitest-browser-react": "^2.1.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/guillaumenaimi/portfolio.git"
+  "engines": {
+    "node": ">=22"
   },
-  "author": {
-    "name": "Guillaume Naimi",
-    "email": "guillaume@naimi.dev",
-    "url": "https://github.com/guillaumenaimi"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/guillaumenaimi/portfolio/issues"
-  },
-  "homepage": "https://github.com/guillaumenaimi/portfolio#readme",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",

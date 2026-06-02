@@ -11,15 +11,17 @@ import { AlertCircleIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { formatDateRange, getDuration } from "@/lib/dayjs/utils";
 import { orpc } from "@/lib/orpc/client";
 import { cn } from "@/lib/tailwind/utils";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Skeleton } from "@/components/ui/skeleton";
-import { TechnologyBadge } from "./technology-badge";
 import { Separator } from "@/components/ui/separator";
-import { formatDateRange, getDuration } from "@/lib/dayjs/utils";
+import { Skeleton } from "@/components/ui/skeleton";
+
 import type { Technology } from "@/features/cv/schema";
+
+import { TechnologyBadge } from "./technology-badge";
 
 const CARD_WIDTH = 420;
 // 220px = header block (~120px) + progress bar (~30px) + breathing room (~70px)
@@ -93,7 +95,7 @@ const ExperienceCard = ({ experience, active }: ExperienceCardProps) => {
         </div>
 
         {/* role */}
-        <h3 className="text-lg font-bold leading-snug">
+        <h3 className="text-lg leading-snug font-bold">
           {experience.position}
         </h3>
 
@@ -119,7 +121,7 @@ const ExperienceCard = ({ experience, active }: ExperienceCardProps) => {
         {/* achievements — max 4 shown, each capped at 2 lines */}
         {experience.achievements.length > 0 && (
           <div className="flex flex-col gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-foreground">
+            <p className="text-xs font-semibold tracking-wide text-foreground uppercase">
               {t("cv:experience.keyAchievements")}
             </p>
             <ul className="space-y-1.5">
@@ -210,7 +212,7 @@ const ExperienceScrollJack = ({
       >
         {/* section header */}
         <div className="mx-auto w-full max-w-4xl px-4 pb-6">
-          <div className="mb-3 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
+          <div className="mb-3 inline-flex items-center gap-2 text-2xs font-medium tracking-eyebrow text-muted-foreground uppercase">
             <span className="h-px w-5 bg-current" />
             04 · {t("cv:experience.eyebrow")}
           </div>
@@ -223,7 +225,7 @@ const ExperienceScrollJack = ({
                 {t("cv:experience.subtitle")}
               </p>
             </div>
-            <span className="text-sm font-medium tabular-nums text-muted-foreground">
+            <span className="text-sm font-medium text-muted-foreground tabular-nums">
               {String(activeIndex + 1).padStart(2, "0")} /{" "}
               {String(total).padStart(2, "0")}
             </span>

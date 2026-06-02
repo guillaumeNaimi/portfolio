@@ -1,11 +1,11 @@
-import { Badge, badgeVariants } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
+
 import {
   getTechLetters,
   hasIcon,
   IconComponent,
 } from "@/features/cv/components/technology-icon";
 import { Technology } from "@/features/cv/schema";
-import { cn } from "@/lib/tailwind/utils";
 
 export const TechnologyBadge = ({
   technology,
@@ -28,7 +28,7 @@ export const TechnologyBadge = ({
         />
       ) : (
         <span
-          className="inline-flex size-5 shrink-0 items-center justify-center rounded-full text-3xs font-bold leading-none text-white"
+          className="inline-flex size-5 shrink-0 items-center justify-center rounded-full text-3xs leading-none font-bold text-white"
           style={{ background: technology.color ?? "#888" }}
         >
           {getTechLetters(technology.name)}

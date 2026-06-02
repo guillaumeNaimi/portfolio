@@ -8,11 +8,6 @@ import { orpc } from "@/lib/orpc/client";
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-import {
-  getTechLetters,
-  hasIcon,
-  IconComponent,
-} from "@/features/cv/components/technology-icon";
 import { TechnologyBadge } from "./technology-badge";
 
 export const TechCloud = () => {
@@ -42,7 +37,7 @@ export const TechCloud = () => {
         .match("default", ({ technologies }) => (
           <div className="space-y-8">
             <div>
-              <div className="mb-4 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
+              <div className="mb-4 inline-flex items-center gap-2 text-2xs font-medium tracking-eyebrow text-muted-foreground uppercase">
                 <span className="h-px w-5 bg-current" />
                 03 · {t("cv:techCloud.eyebrow")}
               </div>
