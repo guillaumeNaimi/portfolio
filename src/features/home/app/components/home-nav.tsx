@@ -12,6 +12,13 @@ const NAV_LINKS = [
   { id: "contact", key: "homeNav.contact" },
 ] as const;
 
+const scrollToTop = () => {
+  const viewport = document.querySelector<HTMLElement>(
+    '[data-slot="scroll-area-viewport"]',
+  );
+  viewport?.scrollTo({ top: 0, behavior: "smooth" });
+};
+
 const scrollToSection = (id: string) => {
   const viewport = document.querySelector<HTMLElement>(
     '[data-slot="scroll-area-viewport"]',
@@ -45,14 +52,18 @@ export const HomeNav = () => {
     >
       <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-4 px-4">
         {/* brand */}
-        <div className="flex items-center gap-2.5">
+        <button
+          type="button"
+          onClick={scrollToTop}
+          className="flex items-center gap-2.5 rounded-md transition-opacity hover:opacity-75"
+        >
           <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-foreground text-2xs font-bold tracking-tight text-background">
             GN
           </span>
           <span className="hidden text-sm font-semibold sm:block">
             Guillaume Naimi
           </span>
-        </div>
+        </button>
 
         {/* anchor links — desktop only */}
         <nav className="hidden items-center gap-0.5 md:flex">
