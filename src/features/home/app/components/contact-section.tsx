@@ -19,7 +19,7 @@ export const ContactSection = () => {
       {/* eyebrow */}
       <div className="inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
         <span className="h-px w-5 bg-current" />
-        07 · Contact
+        07 · {t("common:contact.eyebrow")}
         <span className="h-px w-5 bg-current" />
       </div>
 

@@ -8,5 +8,12 @@
     "apiDocumentation": "Documentation API",
     "openApp": "Ouvrir l'application",
     "cv": "CV"
+  },
+  "homeNav": {
+    "skills": "Compétences",
+    "stack": "Stack",
+    "experience": "Expérience",
+    "projects": "Projets",
+    "contact": "Contact"
   }
 }

@@ -26,9 +26,13 @@
   "hero": {
     "title": "Bonjour,",
     "titleAccent": "Je suis Guillaume.",
-    "subtitle": "Ingénieur frontend senior avec 7 ans d'expérience dans la création d'applications de production <strong>React, Next.js et TypeScript</strong>. \nJ'ai dirigé des équipes frontend, expédié des produits utilisés quotidiennement par des milliers d'utilisateurs et migré des piles existantes vers des architectures modernes (App Router, Server Components). \nJe me soucie de la qualité du code, de l'accessibilité (certifié W3C) et du type de petits détails UX qui permettent à un produit de se sentir bien. \nDernièrement, j'ai exploré TanStack Start, Astro et Svelte pour rester proche de la direction que prend l'écosystème.",
+    "subtitle": "Ingénieur frontend senior avec 8 ans d'expérience sur des applications <strong>React, Next.js et TypeScript</strong> en production. J'ai piloté des équipes frontend, livré des produits utilisés au quotidien par des milliers d'utilisateurs, et accompagné des migrations vers des architectures modernes (App Router, Server Components). Qualité du code, accessibilité (certifié W3C) et petits détails UX qui font qu'un produit se sent juste — voilà ce qui me tient à cœur. Ces derniers temps, j'explore TanStack Start, Astro et Svelte pour suivre l'évolution de l'écosystème.",
+    "status": "Disponible pour de nouveaux projets · Rouen, FR",
+    "location": "Rouen, France",
+    "languages": "EN · FR",
+    "yearsExperience": "8+ ans de front-end",
     "viewCV": "Voir mon CV",
-    "contact": "Entrer en contact"
+    "contact": "Me contacter"
   },
   "stats": {
     "years": "Ans en front-end",
@@ -53,6 +57,7 @@
     }
   },
   "contact": {
+    "eyebrow": "Contact",
     "title": "Construisons quelque chose de propre.",
     "subtitle": "Je suis ouvert aux postes front-end sénior et aux missions freelance sélectives. Si vous avez un projet intéressant, discutons-en.",
     "cta": {

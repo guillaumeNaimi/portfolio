@@ -147,7 +147,7 @@ export const ProjectShowcase = () => {
     .match("error", () => (
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <AlertCircleIcon className="size-4" />
-        Failed to load projects
+        {t("cv:projects.loadError")}
       </div>
     ))
     .match("default", ({ projects }) => (
@@ -156,7 +156,7 @@ export const ProjectShowcase = () => {
         <div>
           <div className="mb-2 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
             <span className="h-px w-5 bg-current" />
-            05 · Selected work
+            05 · {t("cv:projects.eyebrow")}
           </div>
           <h2 className="text-3xl font-bold tracking-tight">
             {t("cv:projects.title")}

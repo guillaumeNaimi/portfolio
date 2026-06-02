@@ -8,9 +8,11 @@
     "education": "Education"
   },
   "projects": {
+    "eyebrow": "Selected work",
     "title": "Featured Projects",
     "subtitle": "Some of my recent work and personal projects",
     "featured": "Featured",
+    "loadError": "Failed to load projects",
     "buttons": {
       "code": "Code",
       "live": "Live",
@@ -22,8 +24,10 @@
     }
   },
   "education": {
+    "eyebrow": "Learning",
     "title": "Education",
     "subtitle": "My academic background",
+    "loadError": "Failed to load education",
     "badges": {
       "academic": "Academic",
       "professional": "Professional"
@@ -31,6 +35,7 @@
     "present": "Present"
   },
   "experience": {
+    "eyebrow": "Experience",
     "title": "Professional Experience",
     "subtitle": "My journey through the tech industry",
     "present": "Present",
@@ -38,12 +43,15 @@
     "technologies": "Technologies"
   },
   "techCloud": {
+    "eyebrow": "Toolbox",
     "title": "Stack I reach for",
     "subtitle": "From daily drivers to occasional guests — technologies I've shipped with."
   },
   "skills": {
+    "eyebrow": "Proficiency",
     "title": "Skills & Expertise",
     "subtitle": "My technical skills across different domains",
+    "tools": "tools",
     "categories": {
       "frontend": "Frontend",
       "design": "Design",

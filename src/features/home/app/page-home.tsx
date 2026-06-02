@@ -1,4 +1,4 @@
-import { GithubIcon, LinkedinIcon, MailIcon } from "lucide-react";
+import { Github, Linkedin, MailIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { useHydrated } from "@/hooks/use-hydrated";
@@ -11,6 +11,7 @@ import { ContactSection } from "./components/contact-section";
 import { EducationSection } from "./components/education-section";
 import { Experience } from "./components/experience";
 import { HeroSection } from "./components/hero-section";
+import { HomeNav } from "./components/home-nav";
 import { ProjectShowcase } from "./components/project-showcase";
 import { Skills } from "./components/skills";
 import { StatStrip } from "./components/stat-strip";
@@ -34,7 +35,7 @@ const Footer = () => {
             className="transition-colors hover:text-foreground"
             aria-label="GitHub"
           >
-            <GithubIcon className="size-4" />
+            <Github className="size-4" />
           </a>
           <a
             href="https://www.linkedin.com/in/guillaume-naimi-b60737105/"
@@ -43,7 +44,7 @@ const Footer = () => {
             className="transition-colors hover:text-foreground"
             aria-label="LinkedIn"
           >
-            <LinkedinIcon className="size-4" />
+            <Linkedin className="size-4" />
           </a>
           <a
             href="mailto:guinaimi@gmail.com"
@@ -62,31 +63,40 @@ export const PageHome = () => {
   const hydrated = useHydrated();
 
   return (
-    <PageLayout>
-      <PageLayoutContent>
-        <main
-          className="mx-auto flex max-w-4xl flex-1 flex-col gap-8 pb-8"
-          data-testid="home-page"
-          data-hydrated={hydrated ? "true" : undefined}
-        >
-          <HeroSection />
-          <StatStrip />
-          <Separator />
-          <Skills />
-          <Separator />
-          <TechCloud />
-          <Separator />
-          <Experience />
-          <Separator />
-          <ProjectShowcase />
-          <Separator />
-          <EducationSection />
-          <Separator />
-          <ContactSection />
-        </main>
+    <>
+      <HomeNav />
+      <PageLayout>
+        <PageLayoutContent>
+          <main
+            className="mx-auto flex max-w-4xl flex-1 flex-col gap-8 pb-8"
+            data-testid="home-page"
+            data-hydrated={hydrated ? "true" : undefined}
+          >
+            <HeroSection />
+            <StatStrip />
+            <Separator />
+            <section id="skills">
+              <Skills />
+            </section>
+            <Separator />
+            <section id="stack">
+              <TechCloud />
+            </section>
+            <Separator />
+            <section id="experience">
+              <Experience />
+            </section>
+            <Separator />
+            <ProjectShowcase />
+            <Separator />
+            <EducationSection />
+            <Separator />
+            <ContactSection />
+          </main>
 
-        <Footer />
-      </PageLayoutContent>
-    </PageLayout>
+          <Footer />
+        </PageLayoutContent>
+      </PageLayout>
+    </>
   );
 };

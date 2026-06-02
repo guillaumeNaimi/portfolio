@@ -71,6 +71,8 @@
 
   --radius-xs: 0.125rem;
 
+  --nav-height: 3.5rem; /* 56px — home nav fixed bar */
+
   --breakpoint-2xs: 24rem; /* 384px */
   --breakpoint-xs: 32rem; /* 512px */
   /* Tailwind --breakpoint-sm: 40rem; (640px) */

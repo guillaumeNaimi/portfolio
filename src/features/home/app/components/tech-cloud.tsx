@@ -44,7 +44,7 @@ export const TechCloud = () => {
             <div>
               <div className="mb-4 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
                 <span className="h-px w-5 bg-current" />
-                03 · Toolbox
+                03 · {t("cv:techCloud.eyebrow")}
               </div>
               <h2 className="mb-2 text-3xl font-bold tracking-tight">
                 {t("cv:techCloud.title")}
