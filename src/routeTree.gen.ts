@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from "./routes/__root";
 import { Route as LayoutRouteImport } from "./routes/_layout";
 import { Route as LoginIndexRouteImport } from "./routes/login/index";
 import { Route as LayoutIndexRouteImport } from "./routes/_layout/index";
-import { Route as LayoutCvRouteImport } from "./routes/_layout/cv";
 import { Route as ApiRpcSplatRouteImport } from "./routes/api/rpc.$";
 import { Route as LayoutManagerSkillNewRouteImport } from "./routes/_layout/manager/skill/new";
 
@@ -30,11 +29,6 @@ const LayoutIndexRoute = LayoutIndexRouteImport.update({
   path: "/",
   getParentRoute: () => LayoutRoute,
 } as any);
-const LayoutCvRoute = LayoutCvRouteImport.update({
-  id: "/cv",
-  path: "/cv",
-  getParentRoute: () => LayoutRoute,
-} as any);
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: "/api/rpc/$",
   path: "/api/rpc/$",
@@ -48,13 +42,11 @@ const LayoutManagerSkillNewRoute = LayoutManagerSkillNewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   "/": typeof LayoutIndexRoute;
-  "/cv": typeof LayoutCvRoute;
   "/login/": typeof LoginIndexRoute;
   "/api/rpc/$": typeof ApiRpcSplatRoute;
   "/manager/skill/new": typeof LayoutManagerSkillNewRoute;
 }
 export interface FileRoutesByTo {
-  "/cv": typeof LayoutCvRoute;
   "/": typeof LayoutIndexRoute;
   "/login": typeof LoginIndexRoute;
   "/api/rpc/$": typeof ApiRpcSplatRoute;
@@ -63,7 +55,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/_layout": typeof LayoutRouteWithChildren;
-  "/_layout/cv": typeof LayoutCvRoute;
   "/_layout/": typeof LayoutIndexRoute;
   "/login/": typeof LoginIndexRoute;
   "/api/rpc/$": typeof ApiRpcSplatRoute;
@@ -71,13 +62,12 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/cv" | "/login/" | "/api/rpc/$" | "/manager/skill/new";
+  fullPaths: "/" | "/login/" | "/api/rpc/$" | "/manager/skill/new";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/cv" | "/" | "/login" | "/api/rpc/$" | "/manager/skill/new";
+  to: "/" | "/login" | "/api/rpc/$" | "/manager/skill/new";
   id:
     | "__root__"
     | "/_layout"
-    | "/_layout/cv"
     | "/_layout/"
     | "/login/"
     | "/api/rpc/$"
@@ -113,13 +103,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof LayoutIndexRouteImport;
       parentRoute: typeof LayoutRoute;
     };
-    "/_layout/cv": {
-      id: "/_layout/cv";
-      path: "/cv";
-      fullPath: "/cv";
-      preLoaderRoute: typeof LayoutCvRouteImport;
-      parentRoute: typeof LayoutRoute;
-    };
     "/api/rpc/$": {
       id: "/api/rpc/$";
       path: "/api/rpc/$";
@@ -138,13 +121,11 @@ declare module "@tanstack/react-router" {
 }
 
 interface LayoutRouteChildren {
-  LayoutCvRoute: typeof LayoutCvRoute;
   LayoutIndexRoute: typeof LayoutIndexRoute;
   LayoutManagerSkillNewRoute: typeof LayoutManagerSkillNewRoute;
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutCvRoute: LayoutCvRoute,
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutManagerSkillNewRoute: LayoutManagerSkillNewRoute,
 };
