@@ -17,7 +17,7 @@ export const ContactSection = () => {
       className="flex flex-col items-center gap-6 rounded-2xl border bg-card px-6 py-14 text-center"
     >
       {/* eyebrow */}
-      <div className="inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
+      <div className="inline-flex items-center gap-2 text-2xs font-medium tracking-eyebrow text-muted-foreground uppercase">
         <span className="h-px w-5 bg-current" />
         07 · {t("common:contact.eyebrow")}
         <span className="h-px w-5 bg-current" />

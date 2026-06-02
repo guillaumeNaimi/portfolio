@@ -12,14 +12,11 @@ export const StatStrip = () => {
   ];
 
   return (
-    <div
-      className="grid grid-cols-4 divide-x divide-border        
-  rounded-lg border"
-    >
+    <div className="grid grid-cols-4 divide-x divide-border rounded-lg border">
       {stats.map(({ num, label }) => (
         <div key={label} className="flex flex-col gap-1 bg-card px-4 py-5">
           <span className="text-2xl font-bold tracking-tight">{num}</span>
-          <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
             {label}
           </span>
         </div>

@@ -19,7 +19,7 @@ const badgeVariants = cva(
         positive:
           "bg-positive-100 text-positive-800 dark:bg-positive-500/25 dark:text-positive-100 [a&]:hover:bg-positive-200 dark:[a&]:hover:bg-positive-500/35",
         outline:
-          "border-border bg-background text-foreground shadow-xs hover:bg-accent hover:text-accent-foreground dark:[a&]:hover:bg-accent dark:[a&]:hover:text-accent-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground dark:[button:hover_&]:bg-accent dark:[button:hover_&]:text-accent-foreground",
+          "border-border bg-background text-foreground shadow-xs hover:bg-accent hover:text-accent-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground dark:[a&]:hover:bg-accent dark:[a&]:hover:text-accent-foreground dark:[button:hover_&]:bg-accent dark:[button:hover_&]:text-accent-foreground",
       },
       size: {
         default: "h-6 px-2 text-xs",

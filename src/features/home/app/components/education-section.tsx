@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { AlertCircleIcon, GraduationCapIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+import { formatDateRange } from "@/lib/dayjs/utils";
 import { orpc } from "@/lib/orpc/client";
 
 import { Skeleton } from "@/components/ui/skeleton";
 
 import type { Education } from "@/features/cv/schema";
-import { formatDateRange } from "@/lib/dayjs/utils";
 
 const EducationCard = ({ edu, index }: { edu: Education; index: number }) => {
   return (
@@ -25,7 +25,7 @@ const EducationCard = ({ edu, index }: { edu: Education; index: number }) => {
           <GraduationCapIcon className="size-4 text-muted-foreground" />
         </div>
         <div className="min-w-0">
-          <p className="font-semibold leading-snug">{edu.degree}</p>
+          <p className="leading-snug font-semibold">{edu.degree}</p>
           <p className="truncate text-sm text-muted-foreground">
             {edu.institution}
           </p>
@@ -34,7 +34,7 @@ const EducationCard = ({ edu, index }: { edu: Education; index: number }) => {
 
       {/* field + description */}
       <div className="flex flex-col gap-1.5">
-        <span className="text-xs font-semibold uppercase tracking-wide text-foreground">
+        <span className="text-xs font-semibold tracking-wide text-foreground uppercase">
           {edu.field}
         </span>
         {edu.description && (
@@ -83,7 +83,7 @@ export const EducationSection = () => {
       <section id="education" className="flex flex-col gap-6">
         {/* eyebrow */}
         <div>
-          <div className="mb-2 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
+          <div className="mb-2 inline-flex items-center gap-2 text-2xs font-medium tracking-eyebrow text-muted-foreground uppercase">
             <span className="h-px w-5 bg-current" />
             06 · {t("cv:education.eyebrow")}
           </div>

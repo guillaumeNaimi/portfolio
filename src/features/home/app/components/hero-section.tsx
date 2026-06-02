@@ -20,7 +20,7 @@ export const HeroSection = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="pb-6 pt-20"
+      className="pt-20 pb-6"
     >
       <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_auto] md:gap-14">
         <div className="flex flex-col gap-7">
@@ -34,7 +34,7 @@ export const HeroSection = () => {
           </div>
 
           {/* headline */}
-          <h1 className="text-5xl font-bold leading-none tracking-tight md:text-6xl">
+          <h1 className="text-5xl leading-none font-bold tracking-tight md:text-6xl">
             {t("hero.title")}{" "}
             <span className="font-normal text-muted-foreground">
               {t("hero.titleAccent")}

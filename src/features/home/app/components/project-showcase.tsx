@@ -49,7 +49,7 @@ const ProjectCard = ({
         }}
       >
         <span
-          className="select-none text-6xl font-black tracking-tighter"
+          className="text-6xl font-black tracking-tighter select-none"
           style={{ color: color1 }}
         >
           {getInitials(project.title)}
@@ -57,7 +57,7 @@ const ProjectCard = ({
 
         {project.featured && (
           <span
-            className="absolute right-3 top-3 rounded-full px-2 py-0.5 text-2xs font-semibold"
+            className="absolute top-3 right-3 rounded-full px-2 py-0.5 text-2xs font-semibold"
             style={{ backgroundColor: `${color1}22`, color: color1 }}
           >
             {t("cv:projects.featured")}
@@ -67,7 +67,7 @@ const ProjectCard = ({
 
       {/* body */}
       <div className="flex flex-1 flex-col gap-3 p-5">
-        <h3 className="text-base font-bold leading-snug">{project.title}</h3>
+        <h3 className="text-base leading-snug font-bold">{project.title}</h3>
 
         <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
           {project.description}
@@ -154,7 +154,7 @@ export const ProjectShowcase = () => {
       <section id="projects" className="flex flex-col gap-6">
         {/* eyebrow */}
         <div>
-          <div className="mb-2 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
+          <div className="mb-2 inline-flex items-center gap-2 text-2xs font-medium tracking-eyebrow text-muted-foreground uppercase">
             <span className="h-px w-5 bg-current" />
             05 · {t("cv:projects.eyebrow")}
           </div>
