@@ -1,180 +1,118 @@
 import { expect, test } from "@playwright/test";
 
+// The home page uses its own HomeNav (no global nav links).
+// The CV page uses the standard MainNavDesktop with Home / CV links
+// and the data-testid'd theme / language switchers.
+
 test.describe("Navigation", () => {
-  test.beforeEach(async ({ page }) => {
+  // ─── Home → CV ─────────────────────────────────────────────────────────────
+
+  test("should navigate to CV page via the hero CTA", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByTestId("home-page")).toHaveAttribute(
       "data-hydrated",
       "true",
     );
-  });
 
-  test("should display main navigation", async ({ page }) => {
-    // Wait for navigation to be ready
-    const navigation = page.getByRole("navigation");
-    await expect(navigation).toBeVisible();
-
-    // Wait for main navigation links to be visible
-    await expect(navigation.getByRole("link", { name: /home/i })).toBeVisible();
-    await expect(navigation.getByRole("link", { name: /cv/i })).toBeVisible();
-  });
-
-  test("should navigate to CV page", async ({ page }) => {
-    // Wait for navigation to be ready
-    const navigation = page.getByRole("navigation");
-    await expect(navigation).toBeVisible();
-
-    // Wait for CV link to be visible and clickable
-    const cvLink = navigation.getByRole("link", { name: /cv/i });
-    await expect(cvLink).toBeVisible();
-    await cvLink.click();
-
-    // Wait for navigation to complete
+    await page.getByTestId("hero-cv-link").click();
     await expect(page).toHaveURL(/\/cv/);
-
-    // Wait for CV page content to load
     await expect(page.getByTestId("cv-page")).toBeVisible();
   });
 
-  test("should navigate back to home", async ({ page }) => {
-    // Wait for navigation to be ready
-    const navigation = page.getByRole("navigation");
-    await expect(navigation).toBeVisible();
+  // ─── CV → Home ─────────────────────────────────────────────────────────────
 
-    // Go to CV page first
-    const cvLink = navigation.getByRole("link", { name: /cv/i });
-    await expect(cvLink).toBeVisible();
-    await cvLink.click();
-    await expect(page).toHaveURL(/\/cv/);
-
-    // Wait for CV page to hydrate before clicking back
+  test("should navigate back to home via the global nav", async ({ page }) => {
+    await page.goto("/cv");
     await expect(page.getByTestId("cv-page")).toHaveAttribute(
       "data-hydrated",
       "true",
     );
 
-    // Navigate back to home
-    const homeLink = navigation.getByRole("link", { name: /home/i });
+    // The global MainNavDesktop is visible on /cv
+    const globalNav = page.getByRole("navigation").first();
+    await expect(globalNav).toBeVisible();
+
+    const homeLink = globalNav.getByRole("link", { name: /home/i });
     await expect(homeLink).toBeVisible();
     await homeLink.click();
 
-    // Wait for navigation to complete
     await expect(page).toHaveURL(/\/$/);
-
-    // Verify we're back on home page
-    await expect(page.getByRole("main")).toBeVisible();
+    await expect(page.getByTestId("home-page")).toBeVisible();
   });
 
-  test("should have working mobile navigation", async ({ page }) => {
-    // Set mobile viewport
-    await page.setViewportSize({ width: 375, height: 667 });
+  // ─── Reload persistence ────────────────────────────────────────────────────
 
-    // Wait for layout to adjust
-    await page.waitForTimeout(500);
-
-    // Wait for mobile navigation to be ready
-    const mobileMenu = page.getByRole("navigation");
-    await expect(mobileMenu).toBeVisible();
-
-    // Check if mobile menu items are visible
-    await expect(mobileMenu.getByRole("link", { name: /home/i })).toBeVisible();
-    await expect(mobileMenu.getByRole("link", { name: /cv/i })).toBeVisible();
-  });
-
-  test("should maintain navigation state after page refresh", async ({
-    page,
-  }) => {
-    // Wait for navigation to be ready
-    const navigation = page.getByRole("navigation");
-    await expect(navigation).toBeVisible();
-
-    // Navigate to CV page
-    const cvLink = navigation.getByRole("link", { name: /cv/i });
-    await expect(cvLink).toBeVisible();
-    await cvLink.click();
-    await expect(page).toHaveURL(/\/cv/);
-
-    // Wait for CV page to load
+  test("should stay on CV page after reload", async ({ page }) => {
+    await page.goto("/cv");
     await expect(page.getByTestId("cv-page")).toBeVisible();
 
     await page.reload();
-
-    // Verify we're still on CV page
     await expect(page).toHaveURL(/\/cv/);
     await expect(page.getByTestId("cv-page")).toBeVisible();
   });
 
-  test("should handle theme switching", async ({ page }) => {
-    // Wait for theme switcher to be ready
+  // ─── Theme switching (tested from /cv where global nav is visible) ─────────
+
+  test("should switch theme from the CV page nav", async ({ page }) => {
+    await page.goto("/cv");
+    await expect(page.getByTestId("cv-page")).toHaveAttribute(
+      "data-hydrated",
+      "true",
+    );
+
     const themeButton = page.getByTestId("theme-switcher-desktop");
     await expect(themeButton).toBeVisible();
 
-    // Get initial theme
-    const initialTheme = await page.evaluate(() =>
-      document.documentElement.getAttribute("data-theme") ||
-      document.documentElement.classList.contains("dark")
-        ? "dark"
-        : "light",
+    const isDark = await page.evaluate(() =>
+      document.documentElement.classList.contains("dark"),
     );
 
-    // Click theme toggle
     await themeButton.click();
+    await page.waitForTimeout(200);
 
-    // Wait for dropdown to appear
+    const targetOption = page.getByTestId(
+      `theme-option-${isDark ? "light" : "dark"}`,
+    );
+    await expect(targetOption).toBeVisible();
+    await targetOption.click();
     await page.waitForTimeout(300);
 
-    const themeOption = page.getByTestId(
-      `theme-option-${initialTheme === "dark" ? "light" : "dark"}`,
+    const isNowDark = await page.evaluate(() =>
+      document.documentElement.classList.contains("dark"),
     );
-    await expect(themeOption).toBeVisible();
-
-    await themeOption.click();
-
-    // Wait for theme change
-    await page.waitForTimeout(500);
-
-    // Check if theme changed
-    const newTheme = await page.evaluate(() =>
-      document.documentElement.getAttribute("data-theme") ||
-      document.documentElement.classList.contains("dark")
-        ? "dark"
-        : "light",
-    );
-
-    expect(newTheme).not.toBe(initialTheme);
+    expect(isNowDark).toBe(!isDark);
   });
 
-  test("should handle language switching", async ({ page }) => {
-    // Wait for language switcher to be ready
-    const languageButton = page.getByTestId("local-switcher-desktop");
-    await expect(languageButton).toBeVisible();
+  // ─── Language switching (tested from /cv where global nav is visible) ──────
 
-    // Get initial language
-    const initialLang = await page.evaluate(
-      () => document.documentElement.getAttribute("lang") || "en",
+  test("should switch language from the CV page nav", async ({ page }) => {
+    await page.goto("/cv");
+    await expect(page.getByTestId("cv-page")).toHaveAttribute(
+      "data-hydrated",
+      "true",
     );
 
-    // Click to open dropdown
-    await languageButton.click();
+    const langButton = page.getByTestId("local-switcher-desktop");
+    await expect(langButton).toBeVisible();
 
-    // Wait for dropdown to appear
-    await page.waitForTimeout(300);
+    const initialLang =
+      (await page.evaluate(() =>
+        document.documentElement.getAttribute("lang"),
+      )) ?? "en";
 
-    // Select the other language (if current is 'en', select 'fr', vice versa)
+    await langButton.click();
+    await page.waitForTimeout(200);
+
     const targetLang = initialLang === "en" ? "fr" : "en";
-    const languageOption = page.getByTestId(`language-option-${targetLang}`);
+    const langOption = page.getByTestId(`language-option-${targetLang}`);
+    await expect(langOption).toBeVisible();
+    await langOption.click();
+    await page.waitForTimeout(500);
 
-    await expect(languageOption).toBeVisible();
-    await languageOption.click();
-
-    // Wait for language change
-    await page.waitForTimeout(1000);
-
-    // Check if language changed
-    const newLang = await page.evaluate(
-      () => document.documentElement.getAttribute("lang") || "en",
-    );
-
+    const newLang =
+      (await page.evaluate(() =>
+        document.documentElement.getAttribute("lang"),
+      )) ?? "en";
     expect(newLang).toBe(targetLang);
   });
 });

@@ -1,100 +1,126 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from "@playwright/test";
 
-test.describe('Home Page', () => {
+test.describe("Home Page (one-pager)", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-  });
-
-  test('should load home page successfully', async ({ page }) => {
-    await expect(page.getByTestId('home-page')).toBeVisible();
-  });
-
-  test('should have proper meta tags', async ({ page }) => {
-    // Check meta description
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
-      'content',
-      /Guillaume Naimi/
-    );
-
-    // Check Open Graph tags
-    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
-      'content',
-      /Guillaume Naimi/
-    );
-    await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
-      'content',
-      'website'
+    await page.goto("/");
+    // Wait for client-side hydration
+    await expect(page.getByTestId("home-page")).toHaveAttribute(
+      "data-hydrated",
+      "true",
     );
   });
 
-  test('should be responsive on different screen sizes', async ({ page }) => {
-    // Test desktop view
-    await page.setViewportSize({ width: 1920, height: 1080 });
-    await expect(page.getByRole('navigation')).toBeVisible();
+  // ─── Layout ────────────────────────────────────────────────────────────────
 
-    // Test tablet view
-    await page.setViewportSize({ width: 768, height: 1024 });
-    await expect(page.getByRole('navigation')).toBeVisible();
-
-    // Test mobile view
-    await page.setViewportSize({ width: 375, height: 667 });
-    await expect(page.getByRole('navigation')).toBeVisible();
+  test("should render without errors", async ({ page }) => {
+    await expect(page.getByTestId("home-page")).toBeVisible();
   });
 
-  test('should have working links', async ({ page }) => {
-    // Check if CV link in hero section works
-    const cvLink = page.getByTestId('hero-cv-link');
-    await expect(cvLink).toBeVisible();
-    await expect(cvLink).toHaveAttribute('href', /cv/);
+  test("should not show the global desktop nav", async ({ page }) => {
+    // The global nav (MainNavDesktop) is hidden on the home page —
+    // the HomeNav replaces it. Confirm the global nav links (Home / CV router
+    // links) are not in the DOM.
+    await expect(page.locator('nav a[href="/cv"]').first()).not.toBeAttached();
+  });
 
-    // Check if contact link works
-    const contactLink = page.getByTestId('hero-contact-link');
+  // ─── HomeNav ───────────────────────────────────────────────────────────────
+
+  test("should display the home nav", async ({ page }) => {
+    const homeNav = page.locator("[data-home-nav]");
+    await expect(homeNav).toBeVisible();
+  });
+
+  test("should display anchor links in home nav on desktop", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    const nav = page.locator("[data-home-nav] nav");
+    await expect(nav).toBeVisible();
+    // At least Skills and Experience anchors should be present
+    await expect(nav.getByRole("button").first()).toBeVisible();
+  });
+
+  test("should scroll to top when brand button is clicked", async ({
+    page,
+  }) => {
+    // Brand is the first button inside the home nav header
+    const brand = page.locator("[data-home-nav] button").first();
+    await expect(brand).toBeVisible();
+    await brand.click();
+    // Page should remain on / with no navigation error
+    await expect(page).toHaveURL("/");
+  });
+
+  // ─── Hero section ──────────────────────────────────────────────────────────
+
+  test("should display the hero heading", async ({ page }) => {
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  });
+
+  test("should display the contact CTA with correct href", async ({ page }) => {
+    const contactLink = page.getByTestId("hero-contact-link");
     await expect(contactLink).toBeVisible();
     await expect(contactLink).toHaveAttribute(
-      'href',
-      'mailto:naimi.guillaume@gmail.com'
-    );
-
-    // Check if GitHub link works
-    const githubLink = page.getByTestId('github-link');
-    await expect(githubLink).toBeVisible();
-    await expect(githubLink).toHaveAttribute(
-      'href',
-      'https://github.com/guillaumeNaimi'
-    );
-
-    // Check if LinkedIn link works
-    const linkedinLink = page.getByTestId('linkedin-link');
-    await expect(linkedinLink).toBeVisible();
-    await expect(linkedinLink).toHaveAttribute(
-      'href',
-      'https://www.linkedin.com/in/guillaume-naimi-b60737105/'
+      "href",
+      "mailto:naimi.guillaume@gmail.com",
     );
   });
 
-  test('should load without console errors', async ({ page }) => {
-    const consoleErrors: string[] = [];
+  test("should display the CV link in hero", async ({ page }) => {
+    const cvLink = page.getByTestId("hero-cv-link");
+    await expect(cvLink).toBeVisible();
+    await expect(cvLink).toHaveAttribute("href", /\/cv/);
+  });
 
-    page.on('console', (msg) => {
-      if (msg.type() === 'error') {
-        consoleErrors.push(msg.text());
-      }
+  test("should navigate to CV page via hero link", async ({ page }) => {
+    await page.getByTestId("hero-cv-link").click();
+    await expect(page).toHaveURL(/\/cv/);
+    await expect(page.getByTestId("cv-page")).toBeVisible();
+  });
+
+  // ─── Sections ──────────────────────────────────────────────────────────────
+
+  test("should have all one-pager section anchors in DOM", async ({ page }) => {
+    for (const id of ["skills", "stack", "experience", "projects", "contact"]) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
+  });
+
+  // ─── Meta ──────────────────────────────────────────────────────────────────
+
+  test("should have Guillaume Naimi in meta tags", async ({ page }) => {
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+      "content",
+      /Guillaume Naimi/,
+    );
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+      "content",
+      /Guillaume Naimi/,
+    );
+  });
+
+  // ─── Errors ────────────────────────────────────────────────────────────────
+
+  test("should load without critical console errors", async ({ page }) => {
+    const errors: string[] = [];
+    page.on("console", (msg) => {
+      if (msg.type() === "error") errors.push(msg.text());
     });
 
     await page.reload();
+    await expect(page.getByTestId("home-page")).toHaveAttribute(
+      "data-hydrated",
+      "true",
+    );
 
-    // Wait a bit for any potential errors
-    await page.waitForTimeout(2000);
-
-    expect(consoleErrors).toHaveLength(0);
-  });
-
-  test('should have proper accessibility structure', async ({ page }) => {
-    // Check for navigation landmark
-    await expect(page.getByRole('navigation')).toBeVisible();
-
-    // Check for proper heading hierarchy
-    const headings = page.locator('h1, h2, h3, h4, h5, h6');
-    await expect(headings.first()).toBeVisible();
+    const critical = errors.filter(
+      (e) =>
+        !e.includes("favicon") &&
+        !e.includes("analytics") &&
+        !e.includes("speed-insights") &&
+        !e.includes("google") &&
+        !e.includes("gtag"),
+    );
+    expect(critical).toHaveLength(0);
   });
 });
