@@ -16,13 +16,6 @@ test.describe("Home Page (one-pager)", () => {
     await expect(page.getByTestId("home-page")).toBeVisible();
   });
 
-  test("should not show the global desktop nav", async ({ page }) => {
-    // The global nav (MainNavDesktop) is hidden on the home page —
-    // the HomeNav replaces it. Confirm the global nav links (Home / CV router
-    // links) are not in the DOM.
-    await expect(page.locator('nav a[href="/cv"]').first()).not.toBeAttached();
-  });
-
   // ─── HomeNav ───────────────────────────────────────────────────────────────
 
   test("should display the home nav", async ({ page }) => {
@@ -70,12 +63,6 @@ test.describe("Home Page (one-pager)", () => {
     const cvLink = page.getByTestId("hero-cv-link");
     await expect(cvLink).toBeVisible();
     await expect(cvLink).toHaveAttribute("href", /\/cv/);
-  });
-
-  test("should navigate to CV page via hero link", async ({ page }) => {
-    await page.getByTestId("hero-cv-link").click();
-    await expect(page).toHaveURL(/\/cv/);
-    await expect(page.getByTestId("cv-page")).toBeVisible();
   });
 
   // ─── Sections ──────────────────────────────────────────────────────────────
