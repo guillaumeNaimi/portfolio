@@ -59,10 +59,12 @@ test.describe("Home Page (one-pager)", () => {
     );
   });
 
-  test("should display the CV link in hero", async ({ page }) => {
+  test("should display the experience anchor link in hero", async ({
+    page,
+  }) => {
     const cvLink = page.getByTestId("hero-cv-link");
     await expect(cvLink).toBeVisible();
-    await expect(cvLink).toHaveAttribute("href", /\/cv/);
+    await expect(cvLink).toHaveAttribute("href", "#experience");
   });
 
   // ─── Sections ──────────────────────────────────────────────────────────────
