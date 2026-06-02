@@ -37,10 +37,18 @@
   "experience": {
     "eyebrow": "Experience",
     "title": "Professional Experience",
-    "subtitle": "My journey through the tech industry",
+    "subtitle": "Scroll to move through time — click any role for the full story.",
     "present": "Present",
     "keyAchievements": "Key Achievements",
-    "technologies": "Technologies"
+    "technologies": "Technologies",
+    "viewDetails": "View full details",
+    "overview": "Overview",
+    "stackAndTools": "Stack & tools",
+    "scrollHint": "Scroll to advance",
+    "moreAchievements": "+{{count}} more",
+    "close": "Close",
+    "previousRole": "Previous",
+    "nextRole": "Next"
   },
   "techCloud": {
     "eyebrow": "Toolbox",

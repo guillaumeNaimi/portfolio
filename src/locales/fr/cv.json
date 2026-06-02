@@ -37,10 +37,18 @@
   "experience": {
     "eyebrow": "Expérience",
     "title": "Expérience Professionnelle",
-    "subtitle": "Mon parcours dans le monde de la tech",
+    "subtitle": "Faites défiler pour remonter le temps — cliquez sur un poste pour l'histoire complète.",
     "present": "Présent",
     "keyAchievements": "Réalisations Clés",
-    "technologies": "Technologies"
+    "technologies": "Technologies",
+    "viewDetails": "Voir les détails",
+    "overview": "Aperçu",
+    "stackAndTools": "Stack & outils",
+    "scrollHint": "Défiler pour avancer",
+    "moreAchievements": "+{{count}} de plus",
+    "close": "Fermer",
+    "previousRole": "Précédent",
+    "nextRole": "Suivant"
   },
   "techCloud": {
     "eyebrow": "Boîte à outils",
