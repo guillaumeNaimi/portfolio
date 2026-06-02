@@ -518,18 +518,10 @@ const ExperienceScrollJack = ({
     setActiveIndex(Math.min(total - 1, Math.round(p * (total - 1))));
   });
 
-  // Lock scroll area viewport while panel is open.
-  // Guard: only run when panel is actually open — don't touch the viewport on
-  // mount, as Radix sets its own inline overflow styles that we must not clear.
-  useEffect(() => {
-    if (openIdx === null) return;
-    const viewport = scrollContainerRef.current;
-    if (!viewport) return;
-    viewport.style.overflow = "hidden";
-    return () => {
-      viewport.style.removeProperty("overflow");
-    };
-  }, [openIdx]);
+  // No scroll-lock needed: the fixed backdrop (z-80, inset-0) sits above the
+  // scroll-area viewport in the DOM, so wheel/touch events bubble to <body>
+  // and never reach the viewport. Manipulating overflow on the viewport would
+  // reset its scroll position on restoration, breaking the scroll-jack.
 
   const handleOpen = (idx: number) => setOpenIdx(idx);
   const handleClose = () => {
