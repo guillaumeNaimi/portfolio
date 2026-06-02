@@ -339,6 +339,9 @@ const ExperienceCard = ({
     <button
       type="button"
       onClick={onClick}
+      // Prevent the browser from auto-scrolling the viewport to focus this
+      // button on click — that would reset the scroll-jack position to top.
+      onMouseDown={(e) => e.preventDefault()}
       className={cn(
         "group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border bg-card text-left transition-[transform,opacity,box-shadow,border-color] duration-500",
         active ? "scale-100 opacity-100" : "scale-95 opacity-65",
@@ -515,17 +518,16 @@ const ExperienceScrollJack = ({
     setActiveIndex(Math.min(total - 1, Math.round(p * (total - 1))));
   });
 
-  // Lock scroll area viewport while panel is open
+  // Lock scroll area viewport while panel is open.
+  // Guard: only run when panel is actually open — don't touch the viewport on
+  // mount, as Radix sets its own inline overflow styles that we must not clear.
   useEffect(() => {
+    if (openIdx === null) return;
     const viewport = scrollContainerRef.current;
     if (!viewport) return;
-    if (openIdx !== null) {
-      viewport.style.overflow = "hidden";
-    } else {
-      viewport.style.overflow = "";
-    }
+    viewport.style.overflow = "hidden";
     return () => {
-      viewport.style.overflow = "";
+      viewport.style.removeProperty("overflow");
     };
   }, [openIdx]);
 

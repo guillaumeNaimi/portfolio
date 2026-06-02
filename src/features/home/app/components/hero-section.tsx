@@ -11,7 +11,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { cn } from "@/lib/tailwind/utils";
 
 import { buttonVariants } from "@/components/ui/button";
-import { ButtonLink } from "@/components/ui/button-link";
 
 export const HeroSection = () => {
   const { t } = useTranslation("common");
@@ -62,15 +61,17 @@ export const HeroSection = () => {
               <MailIcon className="size-4" />
               {t("hero.contact")}
             </a>
-            <ButtonLink
-              to="/cv"
-              variant="secondary"
-              size="lg"
+            <a
+              href="#experience"
               data-testid="hero-cv-link"
+              className={cn(
+                buttonVariants({ variant: "secondary", size: "lg" }),
+                "gap-2",
+              )}
             >
               {t("hero.viewCV")}
               <ArrowRightIcon className="size-4" />
-            </ButtonLink>
+            </a>
           </div>
 
           {/* meta row */}
