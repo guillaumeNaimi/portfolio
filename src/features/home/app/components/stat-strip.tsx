@@ -17,7 +17,7 @@ export const StatStrip = () => {
   rounded-lg border"
     >
       {stats.map(({ num, label }) => (
-        <div key={label} className="flex flex-col gap-1 px-4 py-5 bg-white">
+        <div key={label} className="flex flex-col gap-1 bg-card px-4 py-5">
           <span className="text-2xl font-bold tracking-tight">{num}</span>
           <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
             {label}

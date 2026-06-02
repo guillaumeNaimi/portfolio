@@ -11,17 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import type { Education } from "@/features/cv/schema";
 import { formatDateRange } from "@/lib/dayjs/utils";
 
-const EducationCard = ({
-  edu,
-  index,
-  locale,
-}: {
-  edu: Education;
-  index: number;
-  locale: string;
-}) => {
-  const { t } = useTranslation(["cv"]);
-
+const EducationCard = ({ edu, index }: { edu: Education; index: number }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -86,7 +76,7 @@ export const EducationSection = () => {
     .match("error", () => (
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <AlertCircleIcon className="size-4" />
-        Failed to load education
+        {t("cv:education.loadError")}
       </div>
     ))
     .match("default", ({ education }) => (
@@ -95,7 +85,7 @@ export const EducationSection = () => {
         <div>
           <div className="mb-2 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
             <span className="h-px w-5 bg-current" />
-            06 · Learning
+            06 · {t("cv:education.eyebrow")}
           </div>
           <h2 className="text-3xl font-bold tracking-tight">
             {t("cv:education.title")}
@@ -105,12 +95,7 @@ export const EducationSection = () => {
 
         <div className="grid gap-4 sm:grid-cols-2">
           {education.map((edu, i) => (
-            <EducationCard
-              key={edu.id ?? i}
-              edu={edu}
-              index={i}
-              locale={locale}
-            />
+            <EducationCard key={edu.id ?? i} edu={edu} index={i} />
           ))}
         </div>
       </section>

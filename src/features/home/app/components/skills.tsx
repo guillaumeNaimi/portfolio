@@ -78,7 +78,7 @@ export const Skills = () => {
               <div>
                 <div className="mb-4 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
                   <span className="h-px w-5 bg-current" />
-                  02 · Proficiency
+                  02 · {t("cv:skills.eyebrow")}
                 </div>
                 <h2 className="mb-2 text-3xl font-bold tracking-tight">
                   {t("cv:skills.title")}
@@ -104,7 +104,9 @@ export const Skills = () => {
                     >
                       <div className="mb-4 flex items-center justify-between text-2xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
                         <span>{categoryLabels[category]}</span>
-                        <span>{categorySkills.length} tools</span>
+                        <span>
+                          {categorySkills.length} {t("cv:skills.tools")}
+                        </span>
                       </div>
 
                       <ul className="flex flex-col">

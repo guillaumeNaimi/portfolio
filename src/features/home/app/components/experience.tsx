@@ -19,10 +19,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { TechnologyBadge } from "./technology-badge";
 import { Separator } from "@/components/ui/separator";
 import { formatDateRange, getDuration } from "@/lib/dayjs/utils";
+import type { Technology } from "@/features/cv/schema";
 
 const CARD_WIDTH = 420;
 // 220px = header block (~120px) + progress bar (~30px) + breathing room (~70px)
-const CARD_HEIGHT = "min(560px, calc(100vh - 220px))";
+const CARD_HEIGHT = "min(560px, calc(100vh - var(--nav-height) - 220px))";
 const CARD_GAP = 24;
 
 type ExperienceItem = {
@@ -33,7 +34,7 @@ type ExperienceItem = {
   endDate?: string | null;
   description: string;
   achievements: string[];
-  technologies: { id?: string; name: string; color?: string }[];
+  technologies: Technology[];
   location?: string | null;
   image?: string;
   primaryColor?: string;
@@ -200,12 +201,18 @@ const ExperienceScrollJack = ({
       className="relative"
     >
       {/* sticky container — no overflow-hidden here, track handles horizontal clipping */}
-      <div className="sticky top-0 flex h-screen flex-col justify-center">
+      <div
+        className="sticky flex flex-col justify-center"
+        style={{
+          top: "var(--nav-height)",
+          height: "calc(100vh - var(--nav-height))",
+        }}
+      >
         {/* section header */}
         <div className="mx-auto w-full max-w-4xl px-4 pb-6">
           <div className="mb-3 inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
             <span className="h-px w-5 bg-current" />
-            04 · Experience
+            04 · {t("cv:experience.eyebrow")}
           </div>
           <div className="flex items-end justify-between">
             <div>

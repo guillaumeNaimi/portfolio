@@ -30,7 +30,7 @@ export const HeroSection = () => {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-positive-400 opacity-75" />
               <span className="relative inline-flex size-2 rounded-full bg-positive-500" />
             </span>
-            Available for new projects · Rouen, FR
+            {t("hero.status")}
           </div>
 
           {/* headline */}
@@ -77,15 +77,15 @@ export const HeroSection = () => {
           <div className="flex flex-wrap gap-x-7 gap-y-2 text-sm text-muted-foreground">
             <span className="flex items-center gap-2">
               <MapPinIcon className="size-4 shrink-0" />
-              Rouen, France
+              {t("hero.location")}
             </span>
             <span className="flex items-center gap-2">
               <GlobeIcon className="size-4 shrink-0" />
-              EN · FR
+              {t("hero.languages")}
             </span>
             <span className="flex items-center gap-2">
               <CalendarIcon className="size-4 shrink-0" />
-              10+ years building UI
+              {t("hero.yearsExperience")}
             </span>
           </div>
         </div>
