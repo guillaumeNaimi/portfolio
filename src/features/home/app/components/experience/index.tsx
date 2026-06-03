@@ -17,14 +17,14 @@ import { orpc } from "@/lib/orpc/client";
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { ExperienceCard } from "./experience-card";
-import { ExperienceDetail } from "./experience-detail";
+import { ExperienceCard } from "./card";
+import { ExperienceDetail } from "./detail";
 import {
   CARD_GAP,
   CARD_HEIGHT,
   CARD_WIDTH,
   type ExperienceItem,
-} from "./experience-types";
+} from "./types";
 
 // ─── Scroll-jack container ───────────────────────────────────────────────────
 

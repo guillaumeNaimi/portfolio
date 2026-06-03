@@ -8,8 +8,8 @@ import { formatDateRange, getDuration } from "@/lib/dayjs/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 
-import type { ExperienceItem } from "./experience-types";
-import { TechnologyBadge } from "./technology-badge";
+import type { ExperienceItem } from "./types";
+import { TechnologyBadge } from "../technology-badge";
 
 type Props = {
   experience: ExperienceItem;

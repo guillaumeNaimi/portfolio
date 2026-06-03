@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { AlertCircleIcon, ExternalLinkIcon, GithubIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import { cn } from "@/lib/tailwind/utils";
 import { orpc } from "@/lib/orpc/client";
+import { cn } from "@/lib/tailwind/utils";
 
 import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";

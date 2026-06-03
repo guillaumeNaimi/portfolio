@@ -2,8 +2,9 @@ import { motion } from "framer-motion";
 import { ExternalLinkIcon, GithubIcon, MailIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/tailwind/utils";
+
+import { buttonVariants } from "@/components/ui/button";
 
 export const ContactSection = () => {
   const { t } = useTranslation(["common"]);

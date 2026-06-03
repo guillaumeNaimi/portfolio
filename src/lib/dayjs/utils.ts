@@ -9,7 +9,7 @@ export function formatDateRange(startDate: string, endDate?: string | null) {
 }
 
 export function getDuration(startDate: string, endDate?: string | null) {
-  const duration = dayjs(endDate).diff(dayjs(startDate), "month");
+  const duration = dayjs(endDate ?? undefined).diff(dayjs(startDate), "month");
   const years = Math.floor(duration / 12);
   const months = duration % 12;
   if (years === 0) return `${months}mo`;
