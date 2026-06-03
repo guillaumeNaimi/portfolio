@@ -135,7 +135,6 @@ const ExperienceScrollJack = ({
                 key={exp.id ?? i}
                 experience={exp}
                 active={i === activeIndex}
-                index={i}
                 onClick={() => handleOpen(i)}
               />
             ))}
@@ -178,7 +177,15 @@ const ExperienceScrollJack = ({
 // ─── Public export ───────────────────────────────────────────────────────────
 
 export const Experience = () => {
-  const experiencesQuery = useQuery(orpc.cv.getExperiences.queryOptions());
+  const { i18n } = useTranslation(["cv"]);
+  const locale = (i18n.language ?? "en") as "en" | "fr";
+  const experiencesQuery = useQuery(
+    orpc.cv.getExperiences.queryOptions({
+      input: {
+        locale,
+      },
+    }),
+  );
 
   const ui = getUiState((set) => {
     if (experiencesQuery.status === "pending") return set("pending");
