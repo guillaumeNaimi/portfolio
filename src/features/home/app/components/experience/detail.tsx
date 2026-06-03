@@ -106,7 +106,7 @@ export const ExperienceDetail = ({
             backdropFilter: "blur(8px)",
           }}
         >
-          <span className="text-xs font-medium tabular-nums text-muted-foreground">
+          <span className="text-xs font-medium text-muted-foreground tabular-nums">
             {String(index + 1).padStart(2, "0")} /{" "}
             {String(total).padStart(2, "0")}
           </span>
