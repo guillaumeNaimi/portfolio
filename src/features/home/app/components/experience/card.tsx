@@ -7,18 +7,13 @@ import { cn } from "@/lib/tailwind/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 
-import type { ExperienceItem } from "./experience-types";
-import {
-  CARD_WIDTH,
-  PREVIEW_ACHIEVEMENTS,
-  PREVIEW_TECHS,
-} from "./experience-types";
-import { TechnologyBadge } from "./technology-badge";
+import type { ExperienceItem } from "./types";
+import { CARD_WIDTH, PREVIEW_ACHIEVEMENTS, PREVIEW_TECHS } from "./types";
+import { TechnologyBadge } from "../technology-badge";
 
 type Props = {
   experience: ExperienceItem;
   active: boolean;
-  index: number;
   onClick: () => void;
 };
 

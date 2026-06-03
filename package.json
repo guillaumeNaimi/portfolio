@@ -153,6 +153,7 @@
     "oxlint": "^1.57.0",
     "prisma": "6.17.0",
     "resize-observer-polyfill": "1.5.1",
+    "shadcn": "^4.10.0",
     "storybook": "10.3.3",
     "ts-plugin-sort-import-suggestions": "1.0.4",
     "typescript": "5.9.3",

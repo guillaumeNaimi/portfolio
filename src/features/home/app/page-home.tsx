@@ -38,7 +38,7 @@ const Footer = () => {
             <Github className="size-4" />
           </a>
           <a
-            href="https://www.linkedin.com/in/guillaume-naimi-b60737105/"
+            href="https://www.linkedin.com/in/guillaume-naimi/"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-foreground"
