@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ExternalLinkIcon, GithubIcon, MailIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 export const ContactSection = () => {
   const { t } = useTranslation(["common"]);
@@ -17,7 +17,7 @@ export const ContactSection = () => {
       className="flex flex-col items-center gap-6 rounded-2xl border bg-card px-6 py-14 text-center"
     >
       {/* eyebrow */}
-      <div className="inline-flex items-center gap-2 text-2xs font-medium tracking-eyebrow text-muted-foreground uppercase">
+      <div className="inline-flex items-center gap-2 text-2xs font-medium uppercase tracking-eyebrow text-muted-foreground">
         <span className="h-px w-5 bg-current" />
         07 · {t("common:contact.eyebrow")}
         <span className="h-px w-5 bg-current" />
@@ -35,39 +35,33 @@ export const ContactSection = () => {
 
       {/* CTAs */}
       <div className="flex flex-wrap justify-center gap-3">
-        <Button className="gap-2">
-          <a
-            href="mailto:naimi.guillaume@gmail.com"
-            className="flex items-center gap-2"
-          >
-            <MailIcon className="size-4" />
-            {t("common:contact.cta.email")}
-          </a>
-        </Button>
+        <a
+          href="mailto:naimi.guillaume@gmail.com"
+          className={buttonVariants({ variant: "default" })}
+        >
+          <MailIcon className="size-4" />
+          {t("common:contact.cta.email")}
+        </a>
 
-        <Button variant="secondary" className="gap-2">
-          <a
-            href="https://github.com/guillaumeNaimi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2"
-          >
-            <GithubIcon className="size-4" />
-            {t("common:contact.cta.github")}
-          </a>
-        </Button>
+        <a
+          href="https://github.com/guillaumeNaimi"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={buttonVariants({ variant: "secondary" })}
+        >
+          <GithubIcon className="size-4" />
+          {t("common:contact.cta.github")}
+        </a>
 
-        <Button variant="secondary" className="gap-2">
-          <a
-            href="https://www.linkedin.com/in/guillaume-naimi/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2"
-          >
-            <ExternalLinkIcon className="size-4" />
-            {t("common:contact.cta.linkedin")}
-          </a>
-        </Button>
+        <a
+          href="https://www.linkedin.com/in/guillaume-naimi/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={buttonVariants({ variant: "secondary" })}
+        >
+          <ExternalLinkIcon className="size-4" />
+          {t("common:contact.cta.linkedin")}
+        </a>
       </div>
     </motion.section>
   );
