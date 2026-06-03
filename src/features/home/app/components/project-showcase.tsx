@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import { AlertCircleIcon, ExternalLinkIcon, GithubIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+import { cn } from "@/lib/tailwind/utils";
 import { orpc } from "@/lib/orpc/client";
 
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import type { Project } from "@/features/cv/schema";
@@ -90,30 +91,32 @@ const ProjectCard = ({
         {(project.githubUrl ?? project.liveUrl) && (
           <div className="mt-auto flex gap-2 pt-1">
             {project.githubUrl && (
-              <Button size="sm" variant="secondary" className="gap-1.5">
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5"
-                >
-                  <GithubIcon className="size-3.5" />
-                  {t("cv:projects.buttons.code")}
-                </a>
-              </Button>
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                className={cn(
+                  buttonVariants({ variant: "secondary", size: "sm" }),
+                  "gap-1.5",
+                )}
+                rel="noopener noreferrer"
+              >
+                <GithubIcon className="size-3.5" />
+                {t("cv:projects.buttons.code")}
+              </a>
             )}
             {project.liveUrl && (
-              <Button size="sm" variant="secondary" className="gap-1.5">
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5"
-                >
-                  <ExternalLinkIcon className="size-3.5" />
-                  {t("cv:projects.buttons.live")}
-                </a>
-              </Button>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "secondary", size: "sm" }),
+                  "gap-1.5",
+                )}
+              >
+                <ExternalLinkIcon className="size-3.5" />
+                {t("cv:projects.buttons.live")}
+              </a>
             )}
           </div>
         )}

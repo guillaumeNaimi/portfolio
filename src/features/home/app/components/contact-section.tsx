@@ -3,6 +3,7 @@ import { ExternalLinkIcon, GithubIcon, MailIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/tailwind/utils";
 
 export const ContactSection = () => {
   const { t } = useTranslation(["common"]);
@@ -37,7 +38,7 @@ export const ContactSection = () => {
       <div className="flex flex-wrap justify-center gap-3">
         <a
           href="mailto:naimi.guillaume@gmail.com"
-          className={buttonVariants({ variant: "default" })}
+          className={cn(buttonVariants({ variant: "default" }), "gap-2")}
         >
           <MailIcon className="size-4" />
           {t("common:contact.cta.email")}
@@ -47,7 +48,7 @@ export const ContactSection = () => {
           href="https://github.com/guillaumeNaimi"
           target="_blank"
           rel="noopener noreferrer"
-          className={buttonVariants({ variant: "secondary" })}
+          className={cn(buttonVariants({ variant: "secondary" }), "gap-2")}
         >
           <GithubIcon className="size-4" />
           {t("common:contact.cta.github")}
@@ -57,7 +58,7 @@ export const ContactSection = () => {
           href="https://www.linkedin.com/in/guillaume-naimi/"
           target="_blank"
           rel="noopener noreferrer"
-          className={buttonVariants({ variant: "secondary" })}
+          className={cn(buttonVariants({ variant: "secondary" }), "gap-2")}
         >
           <ExternalLinkIcon className="size-4" />
           {t("common:contact.cta.linkedin")}
