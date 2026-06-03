@@ -59,12 +59,13 @@ test.describe("Home Page (one-pager)", () => {
     );
   });
 
-  test("should display the experience anchor link in hero", async ({
+  test("should scroll to experience section when hero CTA is clicked", async ({
     page,
   }) => {
     const cvLink = page.getByTestId("hero-cv-link");
     await expect(cvLink).toBeVisible();
-    await expect(cvLink).toHaveAttribute("href", "#experience");
+    await cvLink.click();
+    await expect(page.locator("#experience")).toBeInViewport();
   });
 
   // ─── Sections ──────────────────────────────────────────────────────────────
