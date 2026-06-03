@@ -12,6 +12,8 @@ import { cn } from "@/lib/tailwind/utils";
 
 import { buttonVariants } from "@/components/ui/button";
 
+import { scrollToSection } from "@/features/home/app/scroll-to-section";
+
 export const HeroSection = () => {
   const { t } = useTranslation("common");
 
@@ -61,9 +63,10 @@ export const HeroSection = () => {
               <MailIcon className="size-4" />
               {t("hero.contact")}
             </a>
-            <a
-              href="#experience"
+            <button
+              type="button"
               data-testid="hero-cv-link"
+              onClick={() => scrollToSection("experience")}
               className={cn(
                 buttonVariants({ variant: "secondary", size: "lg" }),
                 "gap-2",
@@ -71,7 +74,7 @@ export const HeroSection = () => {
             >
               {t("hero.viewCV")}
               <ArrowRightIcon className="size-4" />
-            </a>
+            </button>
           </div>
 
           {/* meta row */}

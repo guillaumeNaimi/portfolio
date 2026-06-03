@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { LocalSwitcher } from "@/components/ui/local-switcher";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 
+import { scrollToSection } from "@/features/home/app/scroll-to-section";
+
 const NAV_LINKS = [
   { id: "skills", key: "homeNav.skills" },
   { id: "stack", key: "homeNav.stack" },
@@ -17,25 +19,6 @@ const scrollToTop = () => {
     '[data-slot="scroll-area-viewport"]',
   );
   viewport?.scrollTo({ top: 0, behavior: "smooth" });
-};
-
-const scrollToSection = (id: string) => {
-  const viewport = document.querySelector<HTMLElement>(
-    '[data-slot="scroll-area-viewport"]',
-  );
-  const target = document.getElementById(id);
-  if (!viewport || !target) return;
-
-  const nav = document.querySelector<HTMLElement>("[data-home-nav]");
-  const navHeight = nav?.offsetHeight ?? 56;
-
-  const containerTop = viewport.getBoundingClientRect().top;
-  const targetTop = target.getBoundingClientRect().top;
-
-  viewport.scrollTo({
-    top: viewport.scrollTop + (targetTop - containerTop) - navHeight,
-    behavior: "smooth",
-  });
 };
 
 export const HomeNav = () => {
