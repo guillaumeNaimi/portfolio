@@ -154,10 +154,7 @@ export const ExperienceCard = ({ experience, active, onClick }: Props) => {
       </div>
 
       {/* CTA strip */}
-      <div
-        className="flex items-center gap-1.5 border-t border-border px-5 py-3.5 text-xs font-semibold"
-        style={{ color }}
-      >
+      <div className="flex items-center gap-1.5 border-t border-border px-5 py-3.5 text-xs font-semibold text-foreground">
         <span className="mr-auto">{t("cv:experience.viewDetails")}</span>
         <ArrowRightIcon
           className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
