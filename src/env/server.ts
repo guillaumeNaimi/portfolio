@@ -9,6 +9,7 @@ const isProd = process.env.NODE_ENV
 export const envServer = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
+    CV_PHONE: z.string().optional(),
 
     LOGGER_LEVEL: z
       .enum(["trace", "debug", "info", "warn", "error", "fatal"])
