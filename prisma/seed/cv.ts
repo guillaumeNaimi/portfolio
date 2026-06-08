@@ -165,6 +165,12 @@ export async function createCV() {
       category: "other" as const,
       color: "#005A9C",
     },
+    {
+      name: "Svelte",
+      category: "frontend" as const,
+      color: "#FF3E00",
+      icon: "SiSvelte",
+    },
   ];
 
   const createdTechnologies = await Promise.all(
@@ -221,6 +227,52 @@ export async function createCV() {
   console.log(`⏳ Creating experiences`);
 
   const experiences = [
+    {
+      company: "Independent",
+      position: "Independent Developer & Continuous Learning",
+      positionEn: "Independent Developer & Continuous Learning",
+      positionFr: "Développeur Indépendant & Formation Continue",
+      startDate: new Date("2025-08-01"),
+      endDate: null,
+      description:
+        "Period of technical exploration and continuous learning during my job search.",
+      descriptionEn:
+        "Period of technical exploration and continuous learning during my job search.",
+      descriptionFr:
+        "Période d'exploration technique et de formation continue dans le cadre d'une recherche d'emploi.",
+      achievements: [
+        "Developed 3 personal projects across different stacks to explore the modern ecosystem: personal portfolio (TanStack Start), dog club website (Astro), sports notification app (Kotlin + Svelte, in progress).",
+        "Earned the W3C certification (Introduction to Web Accessibility, WAI 0.1x), applying WCAG standards.",
+        "Sustained algorithmic practice (LeetCode) and structured upskilling via roadmap.sh on system design, advanced frontend, and DevOps topics.",
+        "Daily tech watch on React ecosystem, edge computing, and web performance via daily.dev.",
+      ],
+      achievementsEn: [
+        "Developed 3 personal projects across different stacks to explore the modern ecosystem: personal portfolio (TanStack Start), dog club website (Astro), sports notification app (Kotlin + Svelte, in progress).",
+        "Earned the W3C certification (Introduction to Web Accessibility, WAI 0.1x), applying WCAG standards.",
+        "Sustained algorithmic practice (LeetCode) and structured upskilling via roadmap.sh on system design, advanced frontend, and DevOps topics.",
+        "Daily tech watch on React ecosystem, edge computing, and web performance via daily.dev.",
+      ],
+      achievementsFr: [
+        "Développé 3 projets personnels sur différentes stacks pour explorer l'écosystème moderne : portfolio personnel (TanStack Start), site web de club canin (Astro), application de notifications sportives (Kotlin + Svelte, en cours).",
+        "Obtenu la certification W3C (Introduction à l'accessibilité web, WAI 0.1x), en appliquant les standards WCAG.",
+        "Pratique algorithmique régulière (LeetCode) et formation structurée via roadmap.sh sur la conception de systèmes, le frontend avancé et les sujets DevOps.",
+        "Veille technologique quotidienne sur l'écosystème React, l'edge computing et les performances web via daily.dev.",
+      ],
+      technologies: getTechnologies([
+        "Tanstack start",
+        "Astro",
+        "Kotlin",
+        "Svelte",
+        "Web Accessibility",
+      ]),
+      location: "Remote",
+      locationEn: "Remote",
+      locationFr: "À distance",
+      type: "freelance" as const,
+      image: "/companies/me.jpg",
+      primaryColor: "#0f172a",
+      secondaryColor: "#6366f180",
+    },
     {
       company: "Hipli",
       position: "Frontend Engineer — Lead",
