@@ -102,6 +102,10 @@ Vitest runs two projects:
 
 E2E tests are in `e2e/` using Playwright directly, not Vitest.
 
+### Styling Conventions
+
+Prefer Tailwind design tokens over arbitrary values. Use spacing (`p-4`, `gap-2`), color (`text-muted-foreground`, `bg-primary`), and typography (`text-sm`, `font-semibold`) tokens wherever a token exists. Only reach for arbitrary values (`px-[13px]`, `#3d3d3d`) when no token fits — and never use raw hex colors when a CSS variable or Tailwind color token covers the intent.
+
 ### Linting Rules Worth Knowing
 
 - Filenames must be `kebab-case` (enforced by oxlint unicorn rule)
