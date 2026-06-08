@@ -43,7 +43,7 @@ export async function createCV() {
     {
       name: "Kotlin",
       category: "backend" as const,
-      color: "#3776AB",
+      color: "#7F52FF",
       icon: "SiKotlin",
     },
     {
@@ -218,9 +218,11 @@ export async function createCV() {
   console.log(`✅ Created ${skills.length} skills`);
 
   const getTechnologies = (techNames: string[]) => {
-    return createdTechnologies
-      .filter((tech) => techNames.includes(tech.name))
-      .map((tech) => tech.id);
+    return techNames.map((name) => {
+      const tech = createdTechnologies.find((t) => t.name === name);
+      if (!tech) throw new Error(`Unknown technology: "${name}"`);
+      return tech.id;
+    });
   };
 
   // Create experiences
@@ -234,6 +236,7 @@ export async function createCV() {
       positionFr: "Développeur Indépendant & Formation Continue",
       startDate: new Date("2025-08-01"),
       endDate: null,
+      // bare `description`/`achievements` are the EN fallback for non-i18n paths
       description:
         "Period of technical exploration and continuous learning during my job search.",
       descriptionEn:
@@ -364,6 +367,8 @@ export async function createCV() {
         "Quarkus",
       ]),
       location: "Isneauville, France",
+      locationEn: "Isneauville, France",
+      locationFr: "Isneauville, France",
       type: "full_time" as const,
       image: "/companies/odigo.png",
       primaryColor: "#2A3045",
