@@ -155,7 +155,7 @@ export const ExperienceDetail = ({
               <AvatarFallback variant="boring" name={experience.company} />
             </Avatar>
             <div className="min-w-0">
-              <p className="text-sm font-semibold" style={{ color }}>
+              <p className="text-sm font-semibold text-foreground">
                 {experience.company}
               </p>
               {experience.location && (
@@ -178,8 +178,8 @@ export const ExperienceDetail = ({
               {formatDateRange(experience.startDate, experience.endDate)}
             </span>
             <span
-              className="rounded px-1.5 py-0.5 text-2xs font-medium"
-              style={{ backgroundColor: `${color}22`, color }}
+              className="rounded px-1.5 py-0.5 text-2xs font-medium text-foreground"
+              style={{ backgroundColor: color2 }}
             >
               {getDuration(experience.startDate, experience.endDate)}
             </span>
@@ -225,7 +225,7 @@ export const ExperienceDetail = ({
                   >
                     <span
                       className="mt-1.5 inline-block size-2 shrink-0 rounded-xs"
-                      style={{ backgroundColor: color }}
+                      style={{ backgroundColor: color2 }}
                     />
                     <span>{a}</span>
                   </li>
