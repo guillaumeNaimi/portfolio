@@ -43,7 +43,7 @@ export async function createCV() {
     {
       name: "Kotlin",
       category: "backend" as const,
-      color: "#7F52FF",
+      color: "#7F52FF", // official Kotlin brand violet
       icon: "SiKotlin",
     },
     {
@@ -79,7 +79,7 @@ export async function createCV() {
     {
       name: "Quarkus",
       category: "backend" as const,
-      color: "#3776AB",
+      color: "#4695EB", // official Quarkus brand blue
       icon: "SiQuarkus",
     },
     {
@@ -178,7 +178,9 @@ export async function createCV() {
   );
 
   const getTechnology = (name: string) => {
-    return createdTechnologies.find((tech) => tech.name === name)?.id ?? "";
+    const tech = createdTechnologies.find((t) => t.name === name);
+    if (!tech) throw new Error(`Unknown technology: "${name}"`);
+    return tech.id;
   };
 
   console.log(`✅ Created ${createdTechnologies.length} technologies`);
@@ -271,10 +273,11 @@ export async function createCV() {
       location: "Remote",
       locationEn: "Remote",
       locationFr: "À distance",
-      type: "freelance" as const,
+      // closest available type — no "personal" enum value exists
+      type: "contract" as const,
       image: "/companies/me.jpg",
-      primaryColor: "#0f172a",
-      secondaryColor: "#6366f180",
+      primaryColor: "#6366f1",
+      secondaryColor: "#6366f1",
     },
     {
       company: "Hipli",
