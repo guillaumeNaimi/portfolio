@@ -64,7 +64,7 @@ export const ExperienceCard = ({ experience, active, onClick }: Props) => {
             <AvatarFallback variant="boring" name={experience.company} />
           </Avatar>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold" style={{ color }}>
+            <p className="truncate text-sm font-semibold text-foreground">
               {experience.company}
             </p>
             {experience.location && (
@@ -86,8 +86,8 @@ export const ExperienceCard = ({ experience, active, onClick }: Props) => {
             {formatDateRange(experience.startDate, experience.endDate)}
           </span>
           <span
-            className="rounded px-1.5 py-0.5 text-2xs font-medium"
-            style={{ backgroundColor: `${color}22`, color }}
+            className="rounded px-1.5 py-0.5 text-2xs font-medium text-foreground"
+            style={{ backgroundColor: color2 }}
           >
             {getDuration(experience.startDate, experience.endDate)}
           </span>
@@ -116,7 +116,7 @@ export const ExperienceCard = ({ experience, active, onClick }: Props) => {
                   >
                     <span
                       className="mt-0.5 inline-block size-2 shrink-0 rounded-xs"
-                      style={{ backgroundColor: color }}
+                      style={{ backgroundColor: color2 }}
                     />
                     <span className="line-clamp-2">{a}</span>
                   </li>
