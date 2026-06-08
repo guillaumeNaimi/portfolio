@@ -8,6 +8,7 @@ import { formatDateRange, getDuration } from "@/lib/dayjs/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 
+import { renderBold } from "./render-bold";
 import type { ExperienceItem } from "./types";
 import { TechnologyBadge } from "../technology-badge";
 
@@ -227,7 +228,7 @@ export const ExperienceDetail = ({
                       className="mt-1.5 inline-block size-2 shrink-0 rounded-xs"
                       style={{ backgroundColor: color2 }}
                     />
-                    <span>{a}</span>
+                    <span>{renderBold(a)}</span>
                   </li>
                 ))}
               </ul>

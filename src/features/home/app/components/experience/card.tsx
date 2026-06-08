@@ -7,6 +7,7 @@ import { cn } from "@/lib/tailwind/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 
+import { renderBold } from "./render-bold";
 import type { ExperienceItem } from "./types";
 import { CARD_WIDTH, PREVIEW_ACHIEVEMENTS, PREVIEW_TECHS } from "./types";
 import { TechnologyBadge } from "../technology-badge";
@@ -118,7 +119,7 @@ export const ExperienceCard = ({ experience, active, onClick }: Props) => {
                       className="mt-0.5 inline-block size-2 shrink-0 rounded-xs"
                       style={{ backgroundColor: color2 }}
                     />
-                    <span className="line-clamp-2">{a}</span>
+                    <span className="line-clamp-2">{renderBold(a)}</span>
                   </li>
                 ))}
             </ul>

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import {
   ArrowRightIcon,
   CalendarIcon,
+  DownloadIcon,
   GlobeIcon,
   MailIcon,
   MapPinIcon,
@@ -15,7 +16,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { scrollToSection } from "@/features/home/app/scroll-to-section";
 
 export const HeroSection = () => {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
 
   return (
     <motion.div
@@ -75,6 +76,18 @@ export const HeroSection = () => {
               {t("hero.viewCV")}
               <ArrowRightIcon className="size-4" />
             </button>
+            <a
+              href={`/api/cv-pdf?locale=${i18n.language}`}
+              download
+              data-testid="hero-download-cv-link"
+              className={cn(
+                buttonVariants({ variant: "secondary", size: "lg" }),
+                "gap-2",
+              )}
+            >
+              <DownloadIcon className="size-4" />
+              {t("hero.downloadCV")}
+            </a>
           </div>
 
           {/* meta row */}

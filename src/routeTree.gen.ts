@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from "./routes/__root";
 import { Route as LayoutRouteImport } from "./routes/_layout";
 import { Route as LoginIndexRouteImport } from "./routes/login/index";
 import { Route as LayoutIndexRouteImport } from "./routes/_layout/index";
+import { Route as ApiCvPdfRouteImport } from "./routes/api/cv-pdf";
 import { Route as ApiRpcSplatRouteImport } from "./routes/api/rpc.$";
 import { Route as LayoutManagerSkillNewRouteImport } from "./routes/_layout/manager/skill/new";
 
@@ -29,6 +30,11 @@ const LayoutIndexRoute = LayoutIndexRouteImport.update({
   path: "/",
   getParentRoute: () => LayoutRoute,
 } as any);
+const ApiCvPdfRoute = ApiCvPdfRouteImport.update({
+  id: "/api/cv-pdf",
+  path: "/api/cv-pdf",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: "/api/rpc/$",
   path: "/api/rpc/$",
@@ -42,11 +48,13 @@ const LayoutManagerSkillNewRoute = LayoutManagerSkillNewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   "/": typeof LayoutIndexRoute;
+  "/api/cv-pdf": typeof ApiCvPdfRoute;
   "/login/": typeof LoginIndexRoute;
   "/api/rpc/$": typeof ApiRpcSplatRoute;
   "/manager/skill/new": typeof LayoutManagerSkillNewRoute;
 }
 export interface FileRoutesByTo {
+  "/api/cv-pdf": typeof ApiCvPdfRoute;
   "/": typeof LayoutIndexRoute;
   "/login": typeof LoginIndexRoute;
   "/api/rpc/$": typeof ApiRpcSplatRoute;
@@ -55,6 +63,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/_layout": typeof LayoutRouteWithChildren;
+  "/api/cv-pdf": typeof ApiCvPdfRoute;
   "/_layout/": typeof LayoutIndexRoute;
   "/login/": typeof LoginIndexRoute;
   "/api/rpc/$": typeof ApiRpcSplatRoute;
@@ -62,12 +71,18 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/login/" | "/api/rpc/$" | "/manager/skill/new";
+  fullPaths:
+    | "/"
+    | "/api/cv-pdf"
+    | "/login/"
+    | "/api/rpc/$"
+    | "/manager/skill/new";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/login" | "/api/rpc/$" | "/manager/skill/new";
+  to: "/api/cv-pdf" | "/" | "/login" | "/api/rpc/$" | "/manager/skill/new";
   id:
     | "__root__"
     | "/_layout"
+    | "/api/cv-pdf"
     | "/_layout/"
     | "/login/"
     | "/api/rpc/$"
@@ -76,6 +91,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   LayoutRoute: typeof LayoutRouteWithChildren;
+  ApiCvPdfRoute: typeof ApiCvPdfRoute;
   LoginIndexRoute: typeof LoginIndexRoute;
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute;
 }
@@ -102,6 +118,13 @@ declare module "@tanstack/react-router" {
       fullPath: "/";
       preLoaderRoute: typeof LayoutIndexRouteImport;
       parentRoute: typeof LayoutRoute;
+    };
+    "/api/cv-pdf": {
+      id: "/api/cv-pdf";
+      path: "/api/cv-pdf";
+      fullPath: "/api/cv-pdf";
+      preLoaderRoute: typeof ApiCvPdfRouteImport;
+      parentRoute: typeof rootRouteImport;
     };
     "/api/rpc/$": {
       id: "/api/rpc/$";
@@ -135,6 +158,7 @@ const LayoutRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
+  ApiCvPdfRoute: ApiCvPdfRoute,
   LoginIndexRoute: LoginIndexRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
 };
