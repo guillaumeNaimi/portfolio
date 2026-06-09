@@ -4,11 +4,11 @@ import { toast } from "sonner";
 
 import { scrollToSection } from "@/features/home/app/scroll-to-section";
 
-const isTypingTarget = (el: Element | null): boolean => {
+export const isTypingTarget = (el: Element | null): boolean => {
   if (!el) return false;
-  const tag = (el as HTMLElement).tagName;
+  const tag = el.tagName;
   if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return true;
-  return (el as HTMLElement).isContentEditable;
+  return el instanceof HTMLElement && el.isContentEditable;
 };
 
 export const useKeyboardShortcuts = () => {
@@ -20,16 +20,17 @@ export const useKeyboardShortcuts = () => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (isTypingTarget(document.activeElement)) return;
 
-      const key = e.key;
+      const key = e.key.toLowerCase();
 
-      if (key === "c" || key === "C") {
+      if (key === "c") {
         navigator.clipboard
           .writeText("naimi.guillaume@gmail.com")
-          .then(() => toast.success(t("shortcuts.copied")));
+          .then(() => toast.success(t("shortcuts.copied")))
+          .catch(() => toast.error(t("shortcuts.copyFailed")));
         return;
       }
 
-      if (key === "d" || key === "D") {
+      if (key === "d") {
         const a = document.createElement("a");
         a.href = `/api/cv-pdf?locale=${i18n.language}`;
         a.download = "";
@@ -37,12 +38,12 @@ export const useKeyboardShortcuts = () => {
         return;
       }
 
-      if (key === "e" || key === "E") {
+      if (key === "e") {
         scrollToSection("experience");
         return;
       }
 
-      if (key === "?") {
+      if (e.key === "?") {
         setIsHelpOpen((prev) => !prev);
       }
     };

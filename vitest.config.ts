@@ -7,6 +7,9 @@ const resolve = (filePath: string) => path.resolve(__dirname, filePath);
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ["@base-ui/react/dialog"],
+  },
   test: {
     projects: [
       {
