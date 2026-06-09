@@ -2,12 +2,12 @@ import { ArrowRightIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { formatDateRange, getDuration } from "@/lib/dayjs/utils";
+import { renderBold } from "@/lib/render-bold";
 import { cn } from "@/lib/tailwind/utils";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 
-import { renderBold } from "./render-bold";
 import type { ExperienceItem } from "./types";
 import { CARD_WIDTH, PREVIEW_ACHIEVEMENTS, PREVIEW_TECHS } from "./types";
 import { TechnologyBadge } from "../technology-badge";
