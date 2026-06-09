@@ -81,7 +81,7 @@ export const HeroSection = () => {
               download
               data-testid="hero-download-cv-link"
               className={cn(
-                buttonVariants({ variant: "secondary", size: "lg" }),
+                buttonVariants({ variant: "ghost", size: "lg" }),
                 "gap-2",
               )}
             >
