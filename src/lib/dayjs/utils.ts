@@ -1,5 +1,14 @@
 import dayjs from "dayjs";
 
+export function formatDateRangeLocale(
+  startDate: string,
+  endDate?: string | null,
+  locale: "en" | "fr" = "en",
+) {
+  const present = locale === "fr" ? "Présent" : "Present";
+  return `${dayjs(startDate).format("MMM YYYY")} – ${endDate ? dayjs(endDate).format("MMM YYYY") : present}`;
+}
+
 export function formatDateRange(startDate: string, endDate?: string | null) {
   return (
     dayjs(startDate).format("MMM YYYY") +

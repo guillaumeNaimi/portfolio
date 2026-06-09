@@ -66,9 +66,25 @@ Exit plan mode and implement the approved plan. Follow the project's conventions
 
 Work methodically through each step in the plan. If you discover something unexpected that would change the approach, pause and explain the situation rather than improvising silently.
 
-## Step 5 — Verify
+## Step 5 — Write tests
 
-Run linting and tests once implementation is complete:
+After implementation, write tests for any new behaviour introduced. Use the conventions from CLAUDE.md:
+
+- **Unit tests** (`*.unit.spec.tsx`) — pure logic with no DOM dependency (utility functions, data transforms, parsers). Run in Node.
+- **Browser/component tests** (`*.browser.spec.tsx`) — components that need rendering (interactions, visual states). Run in Chromium via Playwright + vitest-browser-react.
+- **E2E tests** (`e2e/*.spec.ts`) — user-visible flows (button present, navigation, form submission). Use `data-testid` selectors and Playwright.
+
+Decide per-feature which types apply:
+- New pure utility → unit test
+- New UI component or significant interaction → browser test
+- New visible feature (CTA, page, route) → E2E test
+- New API route → E2E or integration test against the running server
+
+Write the minimum tests that give real coverage of the happy path and one or two edge cases. Don't write tests for internal implementation details.
+
+## Step 6 — Verify
+
+Run linting and tests once implementation and tests are complete:
 
 ```bash
 bun run lint

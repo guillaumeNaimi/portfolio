@@ -68,6 +68,18 @@ test.describe("Home Page (one-pager)", () => {
     await expect(page.locator("#experience")).toBeInViewport();
   });
 
+  test("should display the Download CV button with correct href", async ({
+    page,
+  }) => {
+    const downloadLink = page.getByTestId("hero-download-cv-link");
+    await expect(downloadLink).toBeVisible();
+    await expect(downloadLink).toHaveAttribute(
+      "href",
+      /\/api\/cv-pdf\?locale=/,
+    );
+    await expect(downloadLink).toHaveAttribute("download");
+  });
+
   // ─── Sections ──────────────────────────────────────────────────────────────
 
   test("should have all one-pager section anchors in DOM", async ({ page }) => {

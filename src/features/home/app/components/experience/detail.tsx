@@ -4,11 +4,11 @@ import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import { formatDateRange, getDuration } from "@/lib/dayjs/utils";
+import { renderBold } from "@/lib/render-bold";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 
-import { renderBold } from "./render-bold";
 import type { ExperienceItem } from "./types";
 import { TechnologyBadge } from "../technology-badge";
 

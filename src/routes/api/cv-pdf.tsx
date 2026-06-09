@@ -6,10 +6,9 @@ import { CvDocument } from "@/features/cv/pdf/cv-document";
 import { db } from "@/server/db";
 
 type Locale = "en" | "fr";
-type DataRecord = Record<string, unknown>;
 
 function getLocalizedField(
-  data: DataRecord,
+  data: Record<string, unknown>,
   fieldName: string,
   locale: Locale,
 ): string | string[] | undefined {
@@ -25,7 +24,8 @@ function getLocalizedField(
 
 async function handleGet({ request }: { request: Request }): Promise<Response> {
   const url = new URL(request.url);
-  const locale = (url.searchParams.get("locale") ?? "en") as Locale;
+  const rawLocale = url.searchParams.get("locale");
+  const locale: Locale = rawLocale === "fr" ? "fr" : "en";
 
   const [experiences, skills, education] = await Promise.all([
     db.experience.findMany({
@@ -39,39 +39,27 @@ async function handleGet({ request }: { request: Request }): Promise<Response> {
     db.education.findMany({ orderBy: { startDate: "desc" } }),
   ]);
 
-  const mappedExperiences = experiences.map((exp) => ({
-    company: exp.company,
-    position: getLocalizedField(
-      exp as unknown as DataRecord,
-      "position",
-      locale,
-    ) as string,
-    startDate: exp.startDate.toISOString().split("T")[0]!,
-    endDate: exp.endDate?.toISOString().split("T")[0],
-    location:
-      (getLocalizedField(
-        exp as unknown as DataRecord,
-        "location",
-        locale,
-      ) as string) || undefined,
-    description: getLocalizedField(
-      exp as unknown as DataRecord,
-      "description",
-      locale,
-    ) as string,
-    achievements:
-      (getLocalizedField(
-        exp as unknown as DataRecord,
-        "achievements",
-        locale,
-      ) as string[]) ?? [],
-    technologies: exp.technologies.map((et) => ({
-      name: et.technology.name,
-      category: et.technology.category,
-    })),
-  }));
+  const mappedExperiences = experiences.map((exp) => {
+    const r = exp as unknown as Record<string, unknown>;
+    return {
+      company: exp.company,
+      position: getLocalizedField(r, "position", locale) as string,
+      startDate: exp.startDate.toISOString().split("T")[0]!,
+      endDate: exp.endDate?.toISOString().split("T")[0],
+      location:
+        (getLocalizedField(r, "location", locale) as string) || undefined,
+      description: getLocalizedField(r, "description", locale) as string,
+      achievements:
+        (getLocalizedField(r, "achievements", locale) as string[]) ?? [],
+      technologies: exp.technologies.map((et) => ({
+        name: et.technology.name,
+        category: et.technology.category,
+      })),
+    };
+  });
 
   const mappedSkills = skills.map((s) => ({
+    id: s.id,
     level: s.level,
     technology: {
       name: s.technology.name,
@@ -79,48 +67,43 @@ async function handleGet({ request }: { request: Request }): Promise<Response> {
     },
   }));
 
-  const mappedEducation = education.map((edu) => ({
-    institution: getLocalizedField(
-      edu as unknown as DataRecord,
-      "institution",
-      locale,
-    ) as string,
-    degree: getLocalizedField(
-      edu as unknown as DataRecord,
-      "degree",
-      locale,
-    ) as string,
-    field: getLocalizedField(
-      edu as unknown as DataRecord,
-      "field",
-      locale,
-    ) as string,
-    startDate: edu.startDate.toISOString().split("T")[0]!,
-    endDate: edu.endDate?.toISOString().split("T")[0],
-    description:
-      (getLocalizedField(
-        edu as unknown as DataRecord,
-        "description",
-        locale,
-      ) as string) || undefined,
-  }));
-
-  const buffer = await renderToBuffer(
-    <CvDocument
-      experiences={mappedExperiences}
-      skills={mappedSkills}
-      education={mappedEducation}
-      locale={locale}
-      phone={envServer.CV_PHONE}
-    />,
-  );
-
-  return new Response(new Uint8Array(buffer), {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": 'attachment; filename="cv-guillaume-naimi.pdf"',
-    },
+  const mappedEducation = education.map((edu) => {
+    const r = edu as unknown as Record<string, unknown>;
+    return {
+      institution: getLocalizedField(r, "institution", locale) as string,
+      degree: getLocalizedField(r, "degree", locale) as string,
+      field: getLocalizedField(r, "field", locale) as string,
+      startDate: edu.startDate.toISOString().split("T")[0]!,
+      endDate: edu.endDate?.toISOString().split("T")[0],
+      description:
+        (getLocalizedField(r, "description", locale) as string) || undefined,
+    };
   });
+
+  try {
+    const buffer = await renderToBuffer(
+      <CvDocument
+        experiences={mappedExperiences}
+        skills={mappedSkills}
+        education={mappedEducation}
+        locale={locale}
+        phone={envServer.CV_PHONE}
+      />,
+    );
+
+    return new Response(new Uint8Array(buffer), {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": 'attachment; filename="cv-guillaume-naimi.pdf"',
+      },
+    });
+  } catch (err) {
+    console.error("[cv-pdf] PDF generation failed:", err);
+    return new Response(JSON.stringify({ error: "PDF generation failed" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 }
 
 export const Route = createFileRoute("/api/cv-pdf")({

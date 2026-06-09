@@ -7,35 +7,16 @@ import {
   View,
 } from "@react-pdf/renderer";
 
-type Technology = { name: string; category: string };
+import { formatDateRangeLocale } from "@/lib/dayjs/utils";
+import { parseBoldParts } from "@/lib/render-bold";
 
-type Experience = {
-  company: string;
-  position: string;
-  startDate: string;
-  endDate?: string;
-  location?: string;
-  description: string;
-  achievements: string[];
-  technologies: Technology[];
-};
+import type { Education, Experience, Skill } from "@/features/cv/schema";
 
-type Skill = {
-  level: number;
-  technology: { name: string; category: string };
-};
-
-type Education = {
-  institution: string;
-  degree: string;
-  field: string;
-  startDate: string;
-  endDate?: string;
-  description?: string;
-};
+// `type` is a Prisma enum with different casing than the zod schema; omit it since the PDF doesn't use it
+type PdfExperience = Omit<Experience, "type">;
 
 type Props = {
-  experiences: Experience[];
+  experiences: PdfExperience[];
   skills: Skill[];
   education: Education[];
   locale?: "en" | "fr";
@@ -258,8 +239,7 @@ const CATEGORY_ORDER = [
 ];
 
 function parseBold(text: string) {
-  const parts = text.split(/\*\*(.*?)\*\*/);
-  return parts.map((part, i) =>
+  return parseBoldParts(text).map((part, i) =>
     i % 2 === 1 ? (
       <Text key={i} style={{ fontFamily: "Helvetica-Bold", color: black }}>
         {part}
@@ -268,23 +248,6 @@ function parseBold(text: string) {
       part
     ),
   );
-}
-
-function formatDate(dateStr: string, locale: string): string {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
-    month: "short",
-    year: "numeric",
-  });
-}
-
-function formatRange(start: string, end: string | undefined, locale: string) {
-  const endLabel = end
-    ? formatDate(end, locale)
-    : locale === "fr"
-      ? "Présent"
-      : "Present";
-  return `${formatDate(start, locale)} – ${endLabel}`;
 }
 
 export const CvDocument = ({
@@ -372,7 +335,7 @@ export const CvDocument = ({
               </Text>
               <Text style={s.expMeta}>
                 {exp.location ? `${exp.location} · ` : ""}
-                {formatRange(exp.startDate, exp.endDate, locale)}
+                {formatDateRangeLocale(exp.startDate, exp.endDate, locale)}
               </Text>
               {exp.description && (
                 <Text style={s.expDescription}>{exp.description}</Text>
@@ -431,7 +394,7 @@ export const CvDocument = ({
                     {" — "}
                     {edu.institution}
                     {" · "}
-                    {formatRange(edu.startDate, edu.endDate, locale)}
+                    {formatDateRangeLocale(edu.startDate, edu.endDate, locale)}
                   </Text>
                 </Text>
               </View>
