@@ -93,6 +93,10 @@ export const Route = createRootRouteWithContext<{
         content: "website",
       },
       {
+        property: "og:site_name",
+        content: "Guillaume Naimi",
+      },
+      {
         property: "og:url",
         content: "https://guillaumenaimi.dev",
       },
