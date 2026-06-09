@@ -70,5 +70,14 @@
   "footer": {
     "copyright": "© {{year}} Guillaume Naimi.",
     "built": "Construit avec React + Tailwind."
+  },
+  "shortcuts": {
+    "title": "Raccourcis clavier",
+    "hint": "Appuyez sur ? pour les raccourcis",
+    "copied": "Email copié dans le presse-papier",
+    "copy": "Copier l'adresse e-mail",
+    "download": "Télécharger le CV",
+    "experience": "Aller à l'expérience",
+    "help": "Ouvrir ce panneau d'aide"
   }
 }
