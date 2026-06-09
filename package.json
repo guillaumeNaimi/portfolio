@@ -36,7 +36,7 @@
     "gen:prisma": "prisma generate --no-hints",
     "gen:build-info": "dotenv -- node ./run-jiti ./src/features/build-info/script-to-generate-json.ts",
     "gen:icons": "svgr --config-file src/components/icons/svgr.config.cjs src/components/icons/svg-sources && oxfmt src/components/icons/generated",
-    "gen:og-image": "node scripts/generate-og-image.mjs",
+    "gen:og-image": "dotenv -- node scripts/generate-og-image.mjs",
     "test": "vitest --browser.headless",
     "test:ci": "vitest run",
     "test:ui": "vitest",

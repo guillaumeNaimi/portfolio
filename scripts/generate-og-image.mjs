@@ -2,6 +2,10 @@
  * Generates public/og-image.png at 1200×630 using Playwright.
  * Run: node scripts/generate-og-image.mjs
  */
+/**
+ * Optional post-step: run `pngquant --quality=80-90 --force --ext .png public/og-image.png`
+ * or `oxipng -o 3 public/og-image.png` to reduce file size by ~60–80%.
+ */
 import { chromium } from "@playwright/test";
 import { readFileSync, writeFileSync } from "fs";
 import { dirname, resolve } from "path";
@@ -161,14 +165,18 @@ const html = `<!DOCTYPE html>
 </body>
 </html>`;
 
+const outPath = resolve(root, "public/og-image.png");
 const browser = await chromium.launch();
-const page = await browser.newPage();
-await page.setViewportSize({ width: 1200, height: 630 });
-await page.setContent(html, { waitUntil: "networkidle" });
 
-const buffer = await page.screenshot({ type: "png" });
-writeFileSync(resolve(root, "public/og-image.png"), buffer);
+try {
+  const page = await browser.newPage();
+  await page.setViewportSize({ width: 1200, height: 630 });
+  await page.setContent(html, { waitUntil: "networkidle" });
 
-await browser.close();
-
-console.log("Generated public/og-image.png (1200×630)");
+  const buffer = await page.screenshot({ type: "png" });
+  writeFileSync(outPath, buffer);
+  const kb = Math.round(buffer.byteLength / 1024);
+  console.log(`Generated public/og-image.png (1200×630, ${kb} KB)`);
+} finally {
+  await browser.close();
+}

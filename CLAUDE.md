@@ -32,6 +32,7 @@ bun run db:ui        # Open Prisma Studio
 
 # Code generation
 bun run gen:icons    # Regenerate icon components from SVG sources
+bun run gen:og-image # Regenerate public/og-image.png (1200×630 social preview)
 ```
 
 Git hooks (via lefthook): `format` runs on pre-commit, `lint` runs on pre-push.
