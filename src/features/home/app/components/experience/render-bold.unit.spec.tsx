@@ -3,6 +3,10 @@ import { describe, expect, it } from "vitest";
 
 import { renderBold } from "./render-bold";
 
+type StrongEl = React.ReactElement<{ children: string }>;
+
+const asStrong = (el: unknown) => el as StrongEl;
+
 describe("renderBold", () => {
   it("returns a single-element array for text with no markers", () => {
     expect(renderBold("plain text")).toEqual(["plain text"]);
@@ -17,7 +21,7 @@ describe("renderBold", () => {
     expect(parts).toHaveLength(3);
     expect(parts[0]).toBe("hello ");
     expect(React.isValidElement(parts[1])).toBe(true);
-    const el = parts[1] as React.ReactElement;
+    const el = asStrong(parts[1]);
     expect(el.type).toBe("strong");
     expect(el.props.children).toBe("world");
     expect(parts[2]).toBe(" today");
@@ -27,7 +31,7 @@ describe("renderBold", () => {
     const parts = renderBold("**bold** suffix");
     expect(parts).toHaveLength(3);
     expect(parts[0]).toBe("");
-    const el = parts[1] as React.ReactElement;
+    const el = asStrong(parts[1]);
     expect(el.type).toBe("strong");
     expect(el.props.children).toBe("bold");
     expect(parts[2]).toBe(" suffix");
@@ -37,7 +41,7 @@ describe("renderBold", () => {
     const parts = renderBold("prefix **bold**");
     expect(parts).toHaveLength(3);
     expect(parts[0]).toBe("prefix ");
-    expect((parts[1] as React.ReactElement).props.children).toBe("bold");
+    expect(asStrong(parts[1]).props.children).toBe("bold");
     expect(parts[2]).toBe("");
   });
 
@@ -45,15 +49,14 @@ describe("renderBold", () => {
     const parts = renderBold("**a** and **b**");
     expect(parts).toHaveLength(5);
     expect(parts[0]).toBe("");
-    expect((parts[1] as React.ReactElement).props.children).toBe("a");
+    expect(asStrong(parts[1]).props.children).toBe("a");
     expect(parts[2]).toBe(" and ");
-    expect((parts[3] as React.ReactElement).props.children).toBe("b");
+    expect(asStrong(parts[3]).props.children).toBe("b");
     expect(parts[4]).toBe("");
   });
 
   it("assigns a stable key to each element", () => {
     const parts = renderBold("foo **bar** baz");
-    const el = parts[1] as React.ReactElement;
-    expect(el.key).toBe("1");
+    expect(asStrong(parts[1]).key).toBe("1");
   });
 });
