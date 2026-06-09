@@ -114,6 +114,10 @@ export const Route = createRootRouteWithContext<{
           "Guillaume Naimi - Front-end Developer Portfolio. Explore my projects, experience, and skills in web development.",
       },
       {
+        name: "twitter:image",
+        content: "https://guillaumenaimi.dev/og-image.png",
+      },
+      {
         name: "apple-mobile-web-app-title",
         content: getPageTitle(),
       },
