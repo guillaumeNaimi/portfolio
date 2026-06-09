@@ -12,10 +12,12 @@ import { EducationSection } from "./components/education-section";
 import { Experience } from "./components/experience";
 import { HeroSection } from "./components/hero-section";
 import { HomeNav } from "./components/home-nav";
+import { KeyboardShortcutsPanel } from "./components/keyboard-shortcuts-panel";
 import { ProjectShowcase } from "./components/project-showcase";
 import { Skills } from "./components/skills";
 import { StatStrip } from "./components/stat-strip";
 import { TechCloud } from "./components/tech-cloud";
+import { useKeyboardShortcuts } from "./hooks/use-keyboard-shortcuts";
 
 const Footer = () => {
   const { t } = useTranslation(["common"]);
@@ -61,10 +63,12 @@ const Footer = () => {
 
 export const PageHome = () => {
   const hydrated = useHydrated();
+  const { isHelpOpen, setIsHelpOpen } = useKeyboardShortcuts();
 
   return (
     <>
       <HomeNav />
+      <KeyboardShortcutsPanel open={isHelpOpen} onOpenChange={setIsHelpOpen} />
       <PageLayout>
         <PageLayoutContent>
           <main
