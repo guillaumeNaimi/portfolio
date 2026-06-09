@@ -73,8 +73,9 @@
   },
   "shortcuts": {
     "title": "Keyboard Shortcuts",
-    "hint": "Press ? for keyboard shortcuts",
+    "hint": "Press ? for shortcuts",
     "copied": "Email copied to clipboard",
+    "copyFailed": "Could not copy to clipboard",
     "copy": "Copy email address",
     "download": "Download CV",
     "experience": "Scroll to experience",

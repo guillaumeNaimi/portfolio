@@ -28,6 +28,8 @@ const Footer = () => {
       <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-4 px-4 text-xs text-muted-foreground sm:flex-row">
         <p>
           {t("common:footer.copyright", { year })} {t("common:footer.built")}
+          {" · "}
+          <span className="opacity-60">{t("common:shortcuts.hint")}</span>
         </p>
         <div className="flex items-center gap-4">
           <a

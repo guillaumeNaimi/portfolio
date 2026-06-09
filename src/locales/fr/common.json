@@ -75,6 +75,7 @@
     "title": "Raccourcis clavier",
     "hint": "Appuyez sur ? pour les raccourcis",
     "copied": "Email copié dans le presse-papier",
+    "copyFailed": "Impossible de copier dans le presse-papier",
     "copy": "Copier l'adresse e-mail",
     "download": "Télécharger le CV",
     "experience": "Aller à l'expérience",
