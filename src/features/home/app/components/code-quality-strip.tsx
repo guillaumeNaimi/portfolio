@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import codeQuality from "@/features/code-quality/code-quality.gen.json";
+import { PORTFOLIO_REPO_URL } from "@/lib/constants";
 
-const REPO_URL = "https://github.com/guillaumeNaimi/portfolio";
+import codeQuality from "@/features/code-quality/code-quality.gen.json";
 
 const VerifiedBadge = () => (
   <span className="flex size-4 items-center justify-center rounded-full bg-positive-500/15 text-positive-600 dark:text-positive-400">
@@ -70,9 +70,9 @@ const fmtBundle = (kb: number): string => {
 
 export const CodeQualityStrip = () => {
   const { t } = useTranslation("common");
-  const { tests, bundleKb, generatedAt } = codeQuality;
+  const { tests, bundleKb, lintErrors, generatedAt } = codeQuality;
 
-  const lastRun = generatedAt ? dayjs(generatedAt).format("MMM D, YYYY") : null;
+  const lastRun = generatedAt ? dayjs(generatedAt).format("LL") : null;
 
   const bundleValue = fmtBundle(bundleKb);
 
@@ -84,7 +84,7 @@ export const CodeQualityStrip = () => {
         </span>
         <span className="h-px flex-1 bg-border" />
         <a
-          href={REPO_URL}
+          href={PORTFOLIO_REPO_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground whitespace-nowrap transition-colors hover:text-foreground"
@@ -94,11 +94,11 @@ export const CodeQualityStrip = () => {
         </a>
       </div>
 
-      <p className="mb-3.5 flex items-baseline gap-4 text-sm leading-relaxed text-muted-foreground">
+      <div className="mb-3.5 flex items-baseline gap-4 text-sm leading-relaxed text-muted-foreground">
         <span className="min-w-0 flex-1">
           {t("codeQuality.subtitleStart")}
           <a
-            href={REPO_URL}
+            href={PORTFOLIO_REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="border-b border-border text-foreground no-underline transition-colors hover:border-foreground"
@@ -113,7 +113,7 @@ export const CodeQualityStrip = () => {
             {t("codeQuality.lastRun", { date: lastRun })}
           </span>
         )}
-      </p>
+      </div>
 
       <div className="grid grid-cols-2 divide-x divide-y divide-border overflow-hidden rounded-lg border sm:grid-cols-4 sm:divide-y-0">
         <StatCell
@@ -124,7 +124,7 @@ export const CodeQualityStrip = () => {
         />
         <StatCell
           icon={ShieldCheck}
-          value="0"
+          value={String(lintErrors)}
           label={t("codeQuality.lintLabel")}
           verified
         />

@@ -19,7 +19,7 @@
   },
   "type": "module",
   "scripts": {
-    "postinstall": "run-p gen:prisma gen:build-info gen:code-quality",
+    "postinstall": "run-p gen:prisma gen:build-info",
     "dev": "run-p env dev:*",
     "dev:app": "bun run gen:build-info && vite dev",
     "build": "cross-env NODE_ENV=production run-p env gen:build-info gen:code-quality && vite build",
