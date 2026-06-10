@@ -31,15 +31,11 @@ If the branch already exists locally, switch to it instead (`git checkout <gitBr
 
 Look at the issue title, description, and labels. If the issue involves any UI, visual, frontend, or component work, ask the user:
 
-> "This looks like a UI change — should I fetch the latest design from Claude Design?"
+> "This looks like a UI change — the Claude Design URL changes with each version. Please share the current URL so I can fetch the latest spec."
 
-If yes (or if the user says "yes" / "go ahead"), fetch the design file:
+Wait for the user to provide the URL. Once provided, fetch it and use the returned content as design context throughout planning and implementation — it is the source of truth for layout, spacing, tokens, and component behaviour. Update the Claude Design URL in memory with the URL the user provides.
 
-```
-https://api.anthropic.com/v1/design/h/1swkKXSGBqAPzZXxHadJTQ?open_file=Portfolio+One-Pager.html
-```
-
-Use the returned content as design context throughout planning and implementation — it is the source of truth for layout, spacing, tokens, and component behaviour. If the issue clearly has no visual scope (e.g. a pure backend/data fix), skip this step silently.
+If the issue clearly has no visual scope (e.g. a pure backend/data fix), skip this step silently.
 
 ## Step 2 — Assess clarity
 

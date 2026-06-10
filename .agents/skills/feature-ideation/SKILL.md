@@ -85,6 +85,7 @@ For each confirmed feature (not Dropped, not 🟢 unless kept), create a Linear 
   - **Why** — the recruiter use case in one sentence
   - **Acceptance criteria** — 2–4 checkboxes covering the happy path
   - **Effort estimate** — S / M / L / XL with a brief rationale
+  - **Claude Design** — `**Required**` if the feature involves new or modified UI visible on the site (with a one-line note on what needs speccing); `**Not required**` if it's a README, config, or pure backend change
 - **priority**: mapped from the score:
   - 🔴 Must → `2` (High)
   - 🟠 High → `2` (High)
