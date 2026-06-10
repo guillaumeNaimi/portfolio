@@ -10,7 +10,7 @@
 
   [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript)](tsconfig.json)
   [![Lint](https://img.shields.io/badge/lint-0_errors-brightgreen?style=flat-square)](https://github.com/guillaumeNaimi/portfolio/actions/workflows/code-quality.yml)
-  [![Tests](https://img.shields.io/badge/tests-24_passing-brightgreen?style=flat-square)](https://github.com/guillaumeNaimi/portfolio/actions/workflows/code-quality.yml)
+  [![Tests](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fguillaumenaimi.dev%2Fcode-quality.json&query=%24.tests&label=tests&suffix=%20passing&style=flat-square&color=brightgreen)](https://github.com/guillaumeNaimi/portfolio/actions/workflows/code-quality.yml)
   [![Bundle](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fguillaumenaimi.dev%2Fcode-quality.json&query=%24.bundleKb&label=bundle&suffix=%20kB%20gz&style=flat-square&color=blue)](https://github.com/guillaumeNaimi/portfolio/actions/workflows/code-quality.yml)
 </div>
 

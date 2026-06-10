@@ -32,9 +32,11 @@ const getCommitShort = () => {
 
 const generateCodeQualityStats = () => {
   try {
-    const existing = JSON.parse(fs.readFileSync(generatedPath, "utf-8")) as {
-      bundleKb: number;
-    };
+    const existing = (
+      fs.existsSync(generatedPath)
+        ? JSON.parse(fs.readFileSync(generatedPath, "utf-8"))
+        : {}
+    ) as { bundleKb?: number };
 
     const content = {
       tests: countTestCases(),

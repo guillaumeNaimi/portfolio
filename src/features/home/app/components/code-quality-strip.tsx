@@ -14,14 +14,14 @@ import codeQuality from "@/features/code-quality/code-quality.gen.json";
 const REPO_URL = "https://github.com/guillaumeNaimi/portfolio";
 
 const VerifiedBadge = () => (
-  <span className="flex size-[17px] items-center justify-center rounded-full bg-green-500/15 text-green-700 dark:text-green-400">
+  <span className="flex size-[17px] items-center justify-center rounded-full bg-positive-500/15 text-positive-600 dark:text-positive-400">
     <Check className="size-[11px]" />
   </span>
 );
 
-const LivePill = () => (
+const LivePill = ({ label }: { label: string }) => (
   <span className="ml-auto rounded-full border border-border px-1.5 py-0.5 text-[9.5px] font-bold tracking-widest text-muted-foreground uppercase">
-    live
+    {label}
   </span>
 );
 
@@ -31,7 +31,7 @@ type StatCellProps = {
   unit?: string;
   label: string;
   verified?: boolean;
-  live?: boolean;
+  liveLabel?: string;
 };
 
 const StatCell = ({
@@ -40,13 +40,13 @@ const StatCell = ({
   unit,
   label,
   verified,
-  live,
+  liveLabel,
 }: StatCellProps) => (
   <div className="flex flex-col gap-2.5 bg-card px-4 py-5">
     <div className="flex items-center gap-2">
       <Icon className="size-4 text-muted-foreground" />
       {verified && <VerifiedBadge />}
-      {live && <LivePill />}
+      {liveLabel && <LivePill label={liveLabel} />}
     </div>
     <div className="flex items-baseline">
       <span className="text-2xl font-bold tracking-tight">{value}</span>
@@ -63,16 +63,16 @@ const StatCell = ({
 );
 
 const fmtBundle = (kb: number): string => {
-  if (!isFinite(kb) || kb === 0) return "";
+  if (!isFinite(kb) || kb <= 0) return "";
   return kb >= 100 ? String(Math.round(kb)) : kb.toFixed(1);
 };
 
 export const CodeQualityStrip = () => {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const { tests, bundleKb, generatedAt } = codeQuality;
 
   const lastRun = generatedAt
-    ? new Date(generatedAt).toLocaleDateString("en", {
+    ? new Date(generatedAt).toLocaleDateString(i18n.language, {
         month: "short",
         day: "numeric",
         year: "numeric",
@@ -113,7 +113,7 @@ export const CodeQualityStrip = () => {
           {t("codeQuality.subtitleEnd")}
         </span>
         {lastRun && (
-          <span className="ml-auto flex items-center gap-1 font-semibold text-green-600 whitespace-nowrap dark:text-green-400">
+          <span className="ml-auto flex items-center gap-1 font-semibold text-positive-600 whitespace-nowrap dark:text-positive-400">
             <Check className="size-3" />
             {t("codeQuality.lastRun", { date: lastRun })}
           </span>
@@ -137,14 +137,14 @@ export const CodeQualityStrip = () => {
           icon={FlaskConical}
           value={String(tests)}
           label={t("codeQuality.testsLabel")}
-          live
+          liveLabel={t("codeQuality.livePill")}
         />
         <StatCell
           icon={Package}
           value={bundleValue || t("codeQuality.bundlePending")}
           unit={bundleValue ? t("codeQuality.bundleUnit") : undefined}
           label={t("codeQuality.bundleLabel")}
-          live
+          liveLabel={t("codeQuality.livePill")}
         />
       </div>
     </section>

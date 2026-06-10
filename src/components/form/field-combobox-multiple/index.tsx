@@ -71,23 +71,18 @@ export const FieldComboboxMultiple = <TItem extends Item>(
         items={items}
         disabled={field.disabled}
         value={items?.filter((item) => field.value?.includes(item.value)) ?? []}
-        isItemEqualToValue={
-          ((item: TItem, selectedValue: TItem) =>
-            item.value === selectedValue.value) as TODO
+        isItemEqualToValue={(item: unknown, selectedValue: unknown) =>
+          (item as TItem).value === (selectedValue as TItem).value
         }
-        itemToStringLabel={
-          ((item: TItem) => item.label?.toString() ?? "") as TODO
+        itemToStringLabel={(item: unknown) =>
+          (item as TItem).label?.toString() ?? ""
         }
-        itemToStringValue={((item: TItem) => item.value) as TODO}
-        onValueChange={
-          ((items: TItem[], event: unknown) => {
-            field.onChange(items?.map((i) => i.value) ?? [], event as TODO);
-            rest.onValueChange?.(
-              items?.map((i) => i.value) ?? [],
-              event as TODO,
-            );
-          }) as TODO
-        }
+        itemToStringValue={(item: unknown) => (item as TItem).value}
+        onValueChange={(items: unknown[], event) => {
+          const typedItems = items as TItem[];
+          field.onChange(typedItems?.map((i) => i.value) ?? []);
+          rest.onValueChange?.(typedItems?.map((i) => i.value) ?? [], event);
+        }}
         inputRef={field.ref}
       >
         <ComboboxChips ref={anchor}>
