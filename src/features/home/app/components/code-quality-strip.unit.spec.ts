@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-const fmtBundle = (kb: number): string => {
-  if (!isFinite(kb) || kb <= 0) return "";
-  return kb >= 100 ? String(Math.round(kb)) : kb.toFixed(1);
-};
+import { fmtBundle } from "./code-quality-strip";
 
 describe("fmtBundle", () => {
   it("returns empty string for 0", () => {

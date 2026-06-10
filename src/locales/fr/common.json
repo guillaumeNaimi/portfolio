@@ -44,9 +44,7 @@
   "codeQuality": {
     "eyebrow": "Qualité du code",
     "viewSource": "Voir le code",
-    "subtitleStart": "Mesuré sur ",
-    "subtitleRepoLink": "ce dépôt",
-    "subtitleEnd": ", automatiquement à chaque build CI.",
+    "subtitle": "Mesuré sur <repo>ce dépôt</repo>, automatiquement à chaque build CI.",
     "lastRun": "dernière exécution {{date}}",
     "tsLabel": "Mode TypeScript",
     "tsValue": "Strict",
