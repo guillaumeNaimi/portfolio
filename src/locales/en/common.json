@@ -54,7 +54,8 @@
     "testsLabel": "Tests passing",
     "bundleLabel": "Bundle · gzip",
     "bundleUnit": "kB",
-    "bundlePending": "—"
+    "bundlePending": "—",
+    "livePill": "live"
   },
   "skills": {
     "title": "Skills & Technologies"

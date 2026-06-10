@@ -61,20 +61,18 @@ export const FieldCombobox = <TItem extends Item>(
         items={items}
         disabled={field.disabled}
         value={items.find((item) => item.value === field.value) ?? null}
-        isItemEqualToValue={
-          ((item: TItem, selectedValue: TItem) =>
-            item.value === selectedValue.value) as TODO
+        isItemEqualToValue={(item: unknown, selectedValue: unknown) =>
+          (item as TItem).value === (selectedValue as TItem).value
         }
-        itemToStringLabel={
-          ((item: TItem) => item.label?.toString() ?? "") as TODO
+        itemToStringLabel={(item: unknown) =>
+          (item as TItem).label?.toString() ?? ""
         }
-        itemToStringValue={((item: TItem) => item.value) as TODO}
-        onValueChange={
-          ((item: TItem, event: unknown) => {
-            field.onChange(item?.value ?? null, event as TODO);
-            rest.onValueChange?.(item?.value ?? null, event as TODO);
-          }) as TODO
-        }
+        itemToStringValue={(item: unknown) => (item as TItem).value}
+        onValueChange={(item: unknown, event) => {
+          const typedItem = item as TItem | null;
+          field.onChange(typedItem?.value ?? null);
+          rest.onValueChange?.(typedItem?.value ?? null, event);
+        }}
         inputRef={field.ref}
       >
         <ComboboxInput

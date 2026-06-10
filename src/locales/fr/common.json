@@ -54,7 +54,8 @@
     "testsLabel": "Tests passants",
     "bundleLabel": "Bundle · gzip",
     "bundleUnit": "kB",
-    "bundlePending": "—"
+    "bundlePending": "—",
+    "livePill": "en direct"
   },
   "skills": {
     "title": "Compétences & Technologies"

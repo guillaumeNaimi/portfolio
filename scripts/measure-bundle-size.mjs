@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { gzipSync } from "node:zlib";
 
-const buildDir = ".output/public/_build";
+const buildDir = ".output/public/assets";
 const codeQualityPath = "./src/features/code-quality/code-quality.gen.json";
 const publicOutputPath = "./public/code-quality.json";
 
