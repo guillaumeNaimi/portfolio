@@ -41,6 +41,21 @@
     "tools": "Tools in the belt",
     "languages": "Languages"
   },
+  "codeQuality": {
+    "eyebrow": "Engineering quality",
+    "viewSource": "View source",
+    "subtitleStart": "Measured on ",
+    "subtitleRepoLink": "this portfolio's own repository",
+    "subtitleEnd": ", automatically on every CI build.",
+    "lastRun": "last run {{date}}",
+    "tsLabel": "TypeScript mode",
+    "tsValue": "Strict",
+    "lintLabel": "Lint errors",
+    "testsLabel": "Tests passing",
+    "bundleLabel": "Bundle · gzip",
+    "bundleUnit": "kB",
+    "bundlePending": "—"
+  },
   "skills": {
     "title": "Skills & Technologies"
   },

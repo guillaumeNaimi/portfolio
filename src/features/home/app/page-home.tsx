@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 
 import { PageLayout, PageLayoutContent } from "@/layout/app/page-layout";
 
+import { CodeQualityStrip } from "./components/code-quality-strip";
 import { ContactSection } from "./components/contact-section";
 import { EducationSection } from "./components/education-section";
 import { Experience } from "./components/experience";
@@ -94,6 +95,8 @@ export const PageHome = () => {
             </section>
             <Separator />
             <ProjectShowcase />
+            <Separator />
+            <CodeQualityStrip />
             <Separator />
             <EducationSection />
             <Separator />
