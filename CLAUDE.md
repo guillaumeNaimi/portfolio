@@ -107,6 +107,10 @@ E2E tests are in `e2e/` using Playwright directly, not Vitest.
 
 Prefer Tailwind design tokens over arbitrary values. Use spacing (`p-4`, `gap-2`), color (`text-muted-foreground`, `bg-primary`), and typography (`text-sm`, `font-semibold`) tokens wherever a token exists. Only reach for arbitrary values (`px-[13px]`, `#3d3d3d`) when no token fits — and never use raw hex colors when a CSS variable or Tailwind color token covers the intent.
 
+### Date Formatting
+
+Always use `dayjs` for date formatting — never `new Date().toLocaleDateString(...)` or other native Date methods for display. Utilities live in `src/lib/dayjs/utils.ts`; add shared helpers there rather than inline formatting.
+
 ### Linting Rules Worth Knowing
 
 - Filenames must be `kebab-case` (enforced by oxlint unicorn rule)
