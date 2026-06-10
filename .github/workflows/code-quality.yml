@@ -100,7 +100,7 @@ jobs:
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
           git add public/code-quality.json src/features/code-quality/code-quality.gen.json
           git diff --staged --quiet || git commit -m "chore: update code quality stats [skip ci]"
           git push
