@@ -18,6 +18,21 @@ const countTestCases = () => {
   }
 };
 
+const countLintErrors = () => {
+  try {
+    const output = childProcess
+      // eslint-disable-next-line sonarjs/no-os-command-from-path
+      .execSync("oxlint .", { encoding: "utf8", stdio: "pipe" });
+    const match = output.match(/Found \d+ warnings and (\d+) errors/);
+    return match ? parseInt(match[1], 10) : 0;
+  } catch (err) {
+    const error = err as { stdout?: string };
+    const output = error.stdout ?? "";
+    const match = output.match(/Found \d+ warnings and (\d+) errors/);
+    return match ? parseInt(match[1], 10) : 0;
+  }
+};
+
 const getCommitShort = () => {
   try {
     // eslint-disable-next-line sonarjs/no-os-command-from-path
@@ -41,7 +56,7 @@ const generateCodeQualityStats = () => {
     const content = {
       tests: countTestCases(),
       bundleKb: existing.bundleKb ?? 0,
-      lintErrors: 0,
+      lintErrors: countLintErrors(),
       typescript: "strict",
       generatedAt: new Date().toISOString(),
       commit: getCommitShort(),
