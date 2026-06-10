@@ -18,18 +18,26 @@ const countTestCases = () => {
   }
 };
 
-const countLintErrors = () => {
+const countLintErrors = (): number | null => {
+  const parse = (output: string): number | null => {
+    const match = output.match(/Found \d+ warnings and (\d+) errors/);
+    if (!match?.[1]) {
+      console.warn(
+        "⚠️ Could not parse oxlint output — lint error count unknown",
+      );
+      return null;
+    }
+    return parseInt(match[1], 10);
+  };
+
   try {
     const output = childProcess
       // eslint-disable-next-line sonarjs/no-os-command-from-path
       .execSync("oxlint .", { encoding: "utf8", stdio: "pipe" });
-    const match = output.match(/Found \d+ warnings and (\d+) errors/);
-    return match?.[1] ? parseInt(match[1], 10) : 0;
+    return parse(output);
   } catch (err) {
     const error = err as { stdout?: string };
-    const output = error.stdout ?? "";
-    const match = output.match(/Found \d+ warnings and (\d+) errors/);
-    return match?.[1] ? parseInt(match[1], 10) : 0;
+    return parse(error.stdout ?? "");
   }
 };
 
