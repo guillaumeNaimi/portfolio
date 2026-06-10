@@ -89,7 +89,6 @@ export const PageHome = () => {
             </section>
             <Separator />
             <ProjectShowcase />
-            <Separator />
             <CodeQualityStrip />
             <Separator />
             <EducationSection />
