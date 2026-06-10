@@ -24,12 +24,12 @@ const countLintErrors = () => {
       // eslint-disable-next-line sonarjs/no-os-command-from-path
       .execSync("oxlint .", { encoding: "utf8", stdio: "pipe" });
     const match = output.match(/Found \d+ warnings and (\d+) errors/);
-    return match ? parseInt(match[1], 10) : 0;
+    return match?.[1] ? parseInt(match[1], 10) : 0;
   } catch (err) {
     const error = err as { stdout?: string };
     const output = error.stdout ?? "";
     const match = output.match(/Found \d+ warnings and (\d+) errors/);
-    return match ? parseInt(match[1], 10) : 0;
+    return match?.[1] ? parseInt(match[1], 10) : 0;
   }
 };
 
