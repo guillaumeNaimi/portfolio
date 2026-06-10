@@ -44,9 +44,7 @@
   "codeQuality": {
     "eyebrow": "Engineering quality",
     "viewSource": "View source",
-    "subtitleStart": "Measured on ",
-    "subtitleRepoLink": "this portfolio's own repository",
-    "subtitleEnd": ", automatically on every CI build.",
+    "subtitle": "Measured on <repo>this portfolio's own repository</repo>, automatically on every CI build.",
     "lastRun": "last run {{date}}",
     "tsLabel": "TypeScript mode",
     "tsValue": "Strict",

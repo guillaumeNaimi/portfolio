@@ -8,7 +8,7 @@ import {
   Package,
   ShieldCheck,
 } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { PORTFOLIO_REPO_URL } from "@/lib/constants";
 
@@ -63,7 +63,7 @@ const StatCell = ({
   </div>
 );
 
-const fmtBundle = (kb: number): string => {
+export const fmtBundle = (kb: number): string => {
   if (!isFinite(kb) || kb <= 0) return "";
   return kb >= 100 ? String(Math.round(kb)) : kb.toFixed(1);
 };
@@ -96,16 +96,20 @@ export const CodeQualityStrip = () => {
 
       <div className="mb-3.5 flex items-baseline gap-4 text-sm leading-relaxed text-muted-foreground">
         <span className="min-w-0 flex-1">
-          {t("codeQuality.subtitleStart")}
-          <a
-            href={PORTFOLIO_REPO_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-b border-border text-foreground no-underline transition-colors hover:border-foreground"
-          >
-            {t("codeQuality.subtitleRepoLink")}
-          </a>
-          {t("codeQuality.subtitleEnd")}
+          <Trans
+            i18nKey="codeQuality.subtitle"
+            ns="common"
+            components={{
+              repo: (
+                <a
+                  href={PORTFOLIO_REPO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-b border-border text-foreground no-underline transition-colors hover:border-foreground"
+                />
+              ),
+            }}
+          />
         </span>
         {lastRun && (
           <span className="ml-auto flex items-center gap-1 font-semibold text-positive-600 whitespace-nowrap dark:text-positive-400">
