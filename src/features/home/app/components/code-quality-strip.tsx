@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import type { LucideIcon } from "lucide-react";
 import {
   Check,
@@ -14,13 +15,13 @@ import codeQuality from "@/features/code-quality/code-quality.gen.json";
 const REPO_URL = "https://github.com/guillaumeNaimi/portfolio";
 
 const VerifiedBadge = () => (
-  <span className="flex size-[17px] items-center justify-center rounded-full bg-positive-500/15 text-positive-600 dark:text-positive-400">
-    <Check className="size-[11px]" />
+  <span className="flex size-4 items-center justify-center rounded-full bg-positive-500/15 text-positive-600 dark:text-positive-400">
+    <Check className="size-3" />
   </span>
 );
 
 const LivePill = ({ label }: { label: string }) => (
-  <span className="ml-auto rounded-full border border-border px-1.5 py-0.5 text-[9.5px] font-bold tracking-widest text-muted-foreground uppercase">
+  <span className="ml-auto rounded-full border border-border px-1.5 py-0.5 text-xs font-bold tracking-widest text-muted-foreground uppercase">
     {label}
   </span>
 );
@@ -68,23 +69,17 @@ const fmtBundle = (kb: number): string => {
 };
 
 export const CodeQualityStrip = () => {
-  const { t, i18n } = useTranslation("common");
+  const { t } = useTranslation("common");
   const { tests, bundleKb, generatedAt } = codeQuality;
 
-  const lastRun = generatedAt
-    ? new Date(generatedAt).toLocaleDateString(i18n.language, {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })
-    : null;
+  const lastRun = generatedAt ? dayjs(generatedAt).format("MMM D, YYYY") : null;
 
   const bundleValue = fmtBundle(bundleKb);
 
   return (
     <section id="quality">
       <div className="mb-2.5 flex items-center gap-3.5">
-        <span className="text-[11px] font-bold tracking-[0.14em] text-muted-foreground uppercase whitespace-nowrap">
+        <span className="text-xs font-bold tracking-widest text-muted-foreground uppercase whitespace-nowrap">
           {t("codeQuality.eyebrow")}
         </span>
         <span className="h-px flex-1 bg-border" />
@@ -94,7 +89,7 @@ export const CodeQualityStrip = () => {
           rel="noopener noreferrer"
           className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground whitespace-nowrap transition-colors hover:text-foreground"
         >
-          <Github className="size-[13px]" />
+          <Github className="size-3.5" />
           {t("codeQuality.viewSource")}
         </a>
       </div>
