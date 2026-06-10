@@ -128,7 +128,11 @@ export const CodeQualityStrip = () => {
         />
         <StatCell
           icon={ShieldCheck}
-          value={String(lintErrors)}
+          value={
+            lintErrors != null
+              ? String(lintErrors)
+              : t("codeQuality.bundlePending")
+          }
           label={t("codeQuality.lintLabel")}
           verified
         />
