@@ -78,8 +78,11 @@ export const FieldComboboxMultiple = <TItem extends Item>(
         itemToStringValue={(item) => (item as TItem).value}
         onValueChange={(items, event) => {
           const typedItems = items as TItem[];
-          field.onChange(typedItems?.map((i) => i.value) ?? []);
-          rest.onValueChange?.(typedItems?.map((i) => i.value) ?? [], event);
+          field.onChange(typedItems.map((i) => i.value));
+          rest.onValueChange?.(
+            typedItems.map((i) => i.value),
+            event,
+          );
         }}
         inputRef={field.ref}
       >
