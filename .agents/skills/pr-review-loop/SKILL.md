@@ -119,10 +119,9 @@ Fix any lint or test failures before continuing. Report what was fixed in a shor
 
 ## Step 5 — Loop or finish
 
-After fixes (or if there were no issues), ask: **"Want me to run another review pass?"**
-
-- If yes: go back to Step 2. Accumulate all findings across passes in memory.
-- If no: go to Step 6.
+- If fixes were applied in Step 4: automatically go back to Step 2 for another pass. Tell the user "Running another pass to check for anything new or introduced by the fixes." Accumulate all findings across passes in memory.
+- If the review found **no issues** (Step 3 was skipped): go to Step 6.
+- If findings were presented but the user declined all of them (e.g. `none`): go to Step 6 and mark those items as `Skipped` in the summary.
 
 ## Step 6 — Post summary comment
 
