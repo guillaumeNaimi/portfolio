@@ -8,6 +8,9 @@
   [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat-square&logo=github)](https://github.com/guillaumeNaimi)
   [![Email](https://img.shields.io/badge/Email-Contact-red?style=flat-square&logo=gmail)](mailto:naimi.guillaume@gmail.com)
 
+  [![Code Quality](https://github.com/guillaumeNaimi/portfolio/actions/workflows/code-quality.yml/badge.svg?branch=main)](https://github.com/guillaumeNaimi/portfolio/actions/workflows/code-quality.yml)
+  [![E2E Tests](https://github.com/guillaumeNaimi/portfolio/actions/workflows/e2e-tests.yml/badge.svg?branch=main)](https://github.com/guillaumeNaimi/portfolio/actions/workflows/e2e-tests.yml)
+
   [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript)](tsconfig.json)
   [![Lint](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fguillaumenaimi.dev%2Fcode-quality.json&query=%24.lintErrors&label=lint+errors&style=flat-square&color=brightgreen)](https://github.com/guillaumeNaimi/portfolio/actions/workflows/code-quality.yml)
   <!-- shields.io dynamic badges don't support conditional colors — badge is always green; CI is the real gate -->
